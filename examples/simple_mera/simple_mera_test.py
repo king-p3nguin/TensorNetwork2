@@ -34,7 +34,7 @@ def test_descend(random_tensors):
     assert np.isclose(np.trace(smat), 1.0)
     assert np.isclose(np.linalg.norm(smat - np.conj(np.transpose(smat))), 0.0)
     spec, _ = np.linalg.eigh(smat)
-    assert np.alltrue(spec >= 0.0)
+    assert np.all(spec >= 0.0)
 
 
 def test_ascend(random_tensors):
