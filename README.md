@@ -5,6 +5,9 @@
 
 A tensor network wrapper for TensorFlow, JAX, PyTorch, and Numpy.
 
+This project is a fork of Google's [TensorNetwork](https://github.com/google/TensorNetwork) package, which has not been updated since 2021.
+It is maintained to be compatible with the backends' latest API.
+
 For an overview of tensor networks please see the following:
 
 - [Matrices as Tensor Network Diagrams](https://www.math3ma.com/blog/matrices-as-tensor-network-diagrams)
@@ -29,8 +32,8 @@ More information can be found in our TensorNetwork papers:
 
 ## Installation
 
-```
-pip3 install tensornetwork
+```bash
+pip install git+https://github.com/king-p3nguin/TensorNetwork2.git@master
 ```
 
 ## Documentation
