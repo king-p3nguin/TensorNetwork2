@@ -1,0 +1,7 @@
+tensorflow
+pytest
+pytest-xdist
+torch
+jax
+jaxlib
+pylint
