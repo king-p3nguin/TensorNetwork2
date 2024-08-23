@@ -24,7 +24,7 @@ jobs:
       run: |
         python -m pip install --upgrade pip
         pip install -r requirements.txt
-        pip install -r requirements_travis.txt
+        pip install -r requirements-dev.txt
         pip install pylint pytest-cov codecov
     # - name: Linting with pylint
     #   run: |
