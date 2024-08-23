@@ -12,14 +12,15 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+from typing import BinaryIO, List, Union
+
 import h5py
 import numpy as np
 
-from tensornetwork.component_factory import get_component
 import tensornetwork.network_components as network_components
-from tensornetwork.network_components import Edge, AbstractNode, Node
-from tensornetwork.network_operations import reachable, get_all_edges
-from typing import List, Union, BinaryIO
+from tensornetwork.component_factory import get_component
+from tensornetwork.network_components import AbstractNode, Edge, Node
+from tensornetwork.network_operations import get_all_edges, reachable
 
 STRING_ENCODING = network_components.STRING_ENCODING
 string_type = network_components.string_type

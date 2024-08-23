@@ -1,13 +1,14 @@
 # pylint: disable=no-name-in-module
-import tensorflow as tf
-from tensorflow.keras.layers import Layer  # type: ignore
-from tensorflow.keras import activations
-from tensorflow.keras import initializers
+import math
 from typing import List, Optional, Text, Tuple
+
+import numpy as np
+import tensorflow as tf
+from tensorflow.keras import activations, initializers
+from tensorflow.keras.layers import Layer  # type: ignore
+
 import tensornetwork as tn
 from tensornetwork.network_components import Node
-import numpy as np
-import math
 
 
 # pytype: disable=module-attr

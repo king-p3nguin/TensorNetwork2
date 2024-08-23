@@ -12,10 +12,11 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-import pytest
 import numpy as np
-import tensornetwork as tn
+import pytest
 import quantum as qu
+
+import tensornetwork as tn
 
 
 def test_constructor(backend):

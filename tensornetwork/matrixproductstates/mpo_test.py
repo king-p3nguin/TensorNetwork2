@@ -1,19 +1,16 @@
-import pytest
-import numpy as np
-import tensorflow as tf
 import jax
+import numpy as np
+import pytest
+import tensorflow as tf
 import torch
-from tensornetwork.backends import backend_factory
 
-# pylint: disable=line-too-long
-from tensornetwork.matrixproductstates.mpo import (
-    FiniteMPO,
-    BaseMPO,
-    InfiniteMPO,
-    FiniteFreeFermion2D,
-)
-from tensornetwork.matrixproductstates.finite_mps import FiniteMPS
+from tensornetwork.backends import backend_factory
 from tensornetwork.matrixproductstates.dmrg import FiniteDMRG
+from tensornetwork.matrixproductstates.finite_mps import FiniteMPS
+# pylint: disable=line-too-long
+from tensornetwork.matrixproductstates.mpo import (BaseMPO,
+                                                   FiniteFreeFermion2D,
+                                                   FiniteMPO, InfiniteMPO)
 
 
 @pytest.fixture(

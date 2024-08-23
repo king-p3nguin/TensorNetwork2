@@ -1,6 +1,7 @@
 import numpy as np
-import tensorflow as tf
 import pytest
+import tensorflow as tf
+
 from tensornetwork.backends.tensorflow import tensorflow_backend
 
 tf_randn_dtypes = [tf.float32, tf.float16, tf.float64]

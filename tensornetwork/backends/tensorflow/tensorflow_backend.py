@@ -12,16 +12,16 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 # pylint: disable=line-too-long
-from typing import Optional, Any, Sequence, Tuple, Type, Callable, List
-from typing import Union
-from tensornetwork.backends import abstract_backend
-from tensornetwork.backends.tensorflow import decompositions
 import functools as fct
 import operator as op
+from typing import Any, Callable, List, Optional, Sequence, Tuple, Type, Union
 
 # This might seem bad, but pytype treats tf.Tensor as Any anyway, so
 # we don't actually lose anything by doing this.
 import numpy as np
+
+from tensornetwork.backends import abstract_backend
+from tensornetwork.backends.tensorflow import decompositions
 
 Tensor = Any
 

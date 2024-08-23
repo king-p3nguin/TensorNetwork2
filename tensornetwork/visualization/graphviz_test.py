@@ -14,9 +14,10 @@
 """Test of TensorNetwork Graphviz visualization."""
 
 import graphviz
-from tensornetwork.visualization.graphviz import to_graphviz
-from tensornetwork import connect, Node
 import numpy as np
+
+from tensornetwork import Node, connect
+from tensornetwork.visualization.graphviz import to_graphviz
 
 
 def test_sanity_check():

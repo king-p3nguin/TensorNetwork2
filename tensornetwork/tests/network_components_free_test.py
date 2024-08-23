@@ -1,25 +1,22 @@
 # pylint: disable=no-member
+import re
+from collections import namedtuple
+from typing import Dict
+from unittest.mock import patch
+
+import h5py
 import numpy as np
+import pytest
 import tensorflow as tf
 import torch
-import pytest
-from unittest.mock import patch
-from collections import namedtuple
-import h5py
-import re
-import tensornetwork.network_components as network_components
-from tensornetwork.network_components import (
-    Node,
-    CopyNode,
-    Edge,
-    NodeCollection,
-    AbstractNode,
-    _remove_trace_edge,
-    _remove_edges,
-)
+
 import tensornetwork as tn
+import tensornetwork.network_components as network_components
 from tensornetwork.backends.abstract_backend import AbstractBackend
-from typing import Dict
+from tensornetwork.network_components import (AbstractNode, CopyNode, Edge,
+                                              Node, NodeCollection,
+                                              _remove_edges,
+                                              _remove_trace_edge)
 
 string_type = network_components.string_type
 ENCODING = network_components.STRING_ENCODING

@@ -21,10 +21,10 @@ import torch
 import tensornetwork as tn
 from tensornetwork.backend_contextmanager import _default_backend_stack
 from tensornetwork.backends.abstract_backend import AbstractBackend
-from tensornetwork.block_sparse import BaseCharge, BlockSparseTensor, Index, U1Charge
-from tensornetwork.block_sparse.blocksparse_utils import (  # pylint: disable=line-too-long
-    _find_diagonal_sparse_blocks,
-)
+from tensornetwork.block_sparse import (BaseCharge, BlockSparseTensor, Index,
+                                        U1Charge)
+from tensornetwork.block_sparse.blocksparse_utils import \
+    _find_diagonal_sparse_blocks  # pylint: disable=line-too-long
 
 np_dtypes = [np.float32, np.float64, np.complex64, np.complex128, np.int32]
 tf_dtypes = [tf.float32, tf.float64, tf.complex64, tf.complex128, tf.int32]

@@ -13,30 +13,18 @@
 # limitations under the License.
 """Implementation of Network Components."""
 
-from typing import (
-    Any,
-    Dict,
-    List,
-    Optional,
-    Set,
-    Text,
-    Tuple,
-    Type,
-    Union,
-    overload,
-    Sequence,
-    Iterable,
-)
-import numpy as np
-from abc import ABC
-from abc import abstractmethod
+from abc import ABC, abstractmethod
+from typing import (Any, Dict, Iterable, List, Optional, Sequence, Set, Text,
+                    Tuple, Type, Union, overload)
+
 import h5py
+import numpy as np
 
 # pylint: disable=useless-import-alias
 from tensornetwork import ops
+from tensornetwork.backend_contextmanager import get_default_backend
 from tensornetwork.backends import backend_factory
 from tensornetwork.backends.abstract_backend import AbstractBackend
-from tensornetwork.backend_contextmanager import get_default_backend
 
 STRING_ENCODING = "utf-8"
 string_type = h5py.string_dtype(encoding=STRING_ENCODING)

@@ -11,12 +11,13 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-import tensornetwork as tn
-import pytest
+import jax
 import numpy as np
+import pytest
 import tensorflow as tf
 import torch
-import jax
+
+import tensornetwork as tn
 
 np_dtypes = [np.float32, np.float64, np.complex64, np.complex128, np.int32]
 tf_dtypes = [tf.float32, tf.float64, tf.complex64, tf.complex128, tf.int32]

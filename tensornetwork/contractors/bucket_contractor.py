@@ -13,9 +13,10 @@
 # limitations under the License.
 """Network contractor which exploits copy tensors."""
 
-from typing import Sequence, Iterable
-from tensornetwork.network_components import AbstractNode, contract_copy_node
+from typing import Iterable, Sequence
+
 from tensornetwork import network_components
+from tensornetwork.network_components import AbstractNode, contract_copy_node
 
 
 def bucket(

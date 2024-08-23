@@ -11,18 +11,20 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
+import warnings
+from functools import partial
+from typing import Any, Dict, List, Optional, Sequence, Text, Type, Union
+
 import numpy as np
+
+import tensornetwork.ncon_interface as ncon
+from tensornetwork.backend_contextmanager import get_default_backend
+from tensornetwork.backends import backend_factory
+from tensornetwork.backends.abstract_backend import AbstractBackend
+from tensornetwork.backends.decorators import jit
+from tensornetwork.linalg.node_linalg import conj
 from tensornetwork.network_components import Node, contract_between
 from tensornetwork.network_operations import split_node_full_svd
-from tensornetwork.linalg.node_linalg import conj
-from tensornetwork.backends import backend_factory
-from functools import partial
-from tensornetwork.backends.decorators import jit
-import warnings
-from tensornetwork.backend_contextmanager import get_default_backend
-from tensornetwork.backends.abstract_backend import AbstractBackend
-from typing import Any, List, Optional, Text, Type, Union, Dict, Sequence
-import tensornetwork.ncon_interface as ncon
 
 Tensor = Any
 

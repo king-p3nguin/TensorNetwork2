@@ -17,9 +17,8 @@ from typing import Tuple
 
 import numpy as np
 
-from tensornetwork import network_components, CopyNode, Node
-from tensornetwork.contractors import bucket_contractor
-from tensornetwork.contractors import greedy
+from tensornetwork import CopyNode, Node, network_components
+from tensornetwork.contractors import bucket_contractor, greedy
 
 bucket = bucket_contractor.bucket
 

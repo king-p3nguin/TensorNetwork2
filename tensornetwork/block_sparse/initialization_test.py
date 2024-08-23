@@ -1,19 +1,15 @@
 import numpy as np
 import pytest
-from tensornetwork.block_sparse.charge import U1Charge, charge_equal, BaseCharge
-from tensornetwork.block_sparse.index import Index
+
 from tensornetwork.block_sparse.blocksparsetensor import BlockSparseTensor
-from tensornetwork.block_sparse.initialization import (
-    zeros,
-    ones,
-    randn,
-    random,
-    ones_like,
-    zeros_like,
-    empty_like,
-    randn_like,
-    random_like,
-)
+from tensornetwork.block_sparse.charge import (BaseCharge, U1Charge,
+                                               charge_equal)
+from tensornetwork.block_sparse.index import Index
+from tensornetwork.block_sparse.initialization import (empty_like, ones,
+                                                       ones_like, randn,
+                                                       randn_like, random,
+                                                       random_like, zeros,
+                                                       zeros_like)
 
 np_dtypes = [np.float64, np.complex128]
 

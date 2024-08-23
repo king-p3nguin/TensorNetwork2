@@ -14,12 +14,13 @@
 """Functions to initialize Tensor using a NumPy-like syntax."""
 
 import warnings
-from typing import Optional, Sequence, Tuple, Any, Union, Type, Callable, List
-from typing import Text
+from typing import (Any, Callable, List, Optional, Sequence, Text, Tuple, Type,
+                    Union)
+
 import numpy as np
+
+from tensornetwork import backend_contextmanager, backends
 from tensornetwork.backends import abstract_backend
-from tensornetwork import backend_contextmanager
-from tensornetwork import backends
 from tensornetwork.tensor import Tensor
 
 AbstractBackend = abstract_backend.AbstractBackend

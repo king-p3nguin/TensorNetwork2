@@ -13,6 +13,7 @@
 # limitations under the License.
 
 from typing import Optional, Tuple
+
 from tensornetwork.tensor import Tensor
 
 

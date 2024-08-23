@@ -1,12 +1,14 @@
 """Tests for decorators."""
 
-import pytest
-import numpy as np
 import functools
-from tensornetwork.backends.abstract_backend import AbstractBackend
-from tensornetwork.backends import backend_factory
-from tensornetwork import backends
+
+import numpy as np
+import pytest
+
 import tensornetwork
+from tensornetwork import backends
+from tensornetwork.backends import backend_factory
+from tensornetwork.backends.abstract_backend import AbstractBackend
 
 
 def jittest_init(backend):

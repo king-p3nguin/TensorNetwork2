@@ -12,28 +12,20 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+from typing import Any, List, Optional, Sequence, Text, Tuple, Type, Union
+
 import numpy as np
-from tensornetwork.block_sparse.index import Index
-from tensornetwork.block_sparse.blocksparsetensor import (
-    BlockSparseTensor,
-    ChargeArray,
-    tensordot,
-)
-from tensornetwork.block_sparse.utils import (
-    intersect,
-    flatten,
-    get_real_dtype,
-    _randn,
-    _random,
-)
+
 from tensornetwork.block_sparse.blocksparse_utils import (
-    _find_transposed_diagonal_sparse_blocks,
-    _find_diagonal_sparse_blocks,
-    compute_num_nonzero,
-    compute_sparse_lookup,
-)
-from typing import List, Union, Any, Tuple, Type, Optional, Text, Sequence
+    _find_diagonal_sparse_blocks, _find_transposed_diagonal_sparse_blocks,
+    compute_num_nonzero, compute_sparse_lookup)
+from tensornetwork.block_sparse.blocksparsetensor import (BlockSparseTensor,
+                                                          ChargeArray,
+                                                          tensordot)
+from tensornetwork.block_sparse.index import Index
 from tensornetwork.block_sparse.initialization import empty_like
+from tensornetwork.block_sparse.utils import (_randn, _random, flatten,
+                                              get_real_dtype, intersect)
 
 
 def norm(tensor: BlockSparseTensor) -> float:

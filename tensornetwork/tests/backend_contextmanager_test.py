@@ -1,7 +1,8 @@
+import numpy as np
+import pytest
+
 import tensornetwork as tn
 from tensornetwork.backend_contextmanager import _default_backend_stack
-import pytest
-import numpy as np
 
 
 def test_contextmanager_simple():

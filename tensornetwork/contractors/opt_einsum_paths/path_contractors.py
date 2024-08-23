@@ -15,23 +15,20 @@
 """Contractors based on `opt_einsum`'s path algorithms."""
 
 import functools
-import opt_einsum
-from tensornetwork.network_operations import (
-    check_connected,
-    get_all_edges,
-    get_subgraph_dangling,
-    contract_trace_edges,
-    redirect_edge,
-)
+from typing import Any, Iterable, List, Optional, Sequence, Text, Tuple
 
-from tensornetwork.network_components import (
-    get_all_nondangling,
-    contract_parallel,
-    contract_between,
-)
-from tensornetwork.network_components import Edge, AbstractNode
+import opt_einsum
+
 from tensornetwork.contractors.opt_einsum_paths import utils
-from typing import Any, Optional, Sequence, Iterable, Text, Tuple, List
+from tensornetwork.network_components import (AbstractNode, Edge,
+                                              contract_between,
+                                              contract_parallel,
+                                              get_all_nondangling)
+from tensornetwork.network_operations import (check_connected,
+                                              contract_trace_edges,
+                                              get_all_edges,
+                                              get_subgraph_dangling,
+                                              redirect_edge)
 
 # TODO (martin): add return types of functions back once TensorNetwork is gone
 #               remove _base_network

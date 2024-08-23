@@ -13,8 +13,10 @@
 # limitations under the License.
 """Implementation of TensorNetwork Graphviz visualization."""
 
+from typing import Iterable, Optional, Text
+
 import graphviz
-from typing import Optional, Text, Iterable
+
 from tensornetwork.network_components import AbstractNode
 
 

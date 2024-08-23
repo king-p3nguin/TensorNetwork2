@@ -13,8 +13,10 @@
 # limitations under the License.
 
 import math
+
 import numpy as np
 import torch
+
 from tensornetwork.backends.pytorch import decompositions
 
 

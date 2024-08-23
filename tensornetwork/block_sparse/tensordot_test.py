@@ -2,12 +2,11 @@ import numpy as np
 import pytest
 
 from tensornetwork import ncon
-from tensornetwork.block_sparse.blocksparsetensor import (
-    BlockSparseTensor,
-    outerproduct,
-    tensordot,
-)
-from tensornetwork.block_sparse.charge import BaseCharge, U1Charge, charge_equal
+from tensornetwork.block_sparse.blocksparsetensor import (BlockSparseTensor,
+                                                          outerproduct,
+                                                          tensordot)
+from tensornetwork.block_sparse.charge import (BaseCharge, U1Charge,
+                                               charge_equal)
 from tensornetwork.block_sparse.index import Index
 
 np_dtypes = [np.float64, np.complex128]

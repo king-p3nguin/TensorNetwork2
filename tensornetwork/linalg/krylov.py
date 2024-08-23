@@ -11,10 +11,12 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-from typing import Optional, Tuple, Any, Union, Type, Callable, List, Text
+from typing import Any, Callable, List, Optional, Text, Tuple, Type, Union
+
 import numpy as np
-import tensornetwork.tensor
+
 import tensornetwork.backends.abstract_backend as abstract_backend
+import tensornetwork.tensor
 from tensornetwork import backends
 
 AbstractBackend = abstract_backend.AbstractBackend

@@ -17,9 +17,8 @@ from typing import List, Optional, Tuple, Union
 import numpy as np
 
 # pylint: disable=line-too-long
-from tensornetwork.contractors.custom_path_solvers.pathsolvers import (
-    full_solve_complete,
-)
+from tensornetwork.contractors.custom_path_solvers.pathsolvers import \
+    full_solve_complete
 
 
 def ncon_solver(

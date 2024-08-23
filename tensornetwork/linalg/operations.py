@@ -12,9 +12,10 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-from typing import Text, Union, Optional, Sequence, Tuple
-from tensornetwork.tensor import Tensor
+from typing import Optional, Sequence, Text, Tuple, Union
+
 from tensornetwork import ncon_interface
+from tensornetwork.tensor import Tensor
 
 
 def _check_backends(tensors: Sequence[Tensor], fname: str) -> Tuple[bool, str]:

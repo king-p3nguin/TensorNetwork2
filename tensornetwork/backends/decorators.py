@@ -15,11 +15,12 @@
 """
 Decorator functions that depend on the backend.
 """
-from typing import Union, Iterable, Optional, Text, Callable
 import functools
-import tensornetwork.backends.abstract_backend as abstract_backend
-import tensornetwork.backends as backends
+from typing import Callable, Iterable, Optional, Text, Union
+
 import tensornetwork.backend_contextmanager as backend_contextmanager
+import tensornetwork.backends as backends
+import tensornetwork.backends.abstract_backend as abstract_backend
 
 AbstractBackend = abstract_backend.AbstractBackend
 

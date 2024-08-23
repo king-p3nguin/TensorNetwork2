@@ -3,40 +3,19 @@ import pytest
 
 from tensornetwork.backends.numpy import numpy_backend
 from tensornetwork.backends.symmetric import symmetric_backend
-from tensornetwork.block_sparse.blocksparse_utils import (  # pylint: disable=line-too-long
-    _find_diagonal_sparse_blocks,
-)
-from tensornetwork.block_sparse.blocksparsetensor import (
-    BlockSparseTensor,
-    ChargeArray,
-    tensordot,
-)
+from tensornetwork.block_sparse.blocksparse_utils import \
+    _find_diagonal_sparse_blocks  # pylint: disable=line-too-long
+from tensornetwork.block_sparse.blocksparsetensor import (BlockSparseTensor,
+                                                          ChargeArray,
+                                                          tensordot)
 from tensornetwork.block_sparse.caching import get_cacher, get_caching_status
-from tensornetwork.block_sparse.charge import (
-    BaseCharge,
-    U1Charge,
-    charge_equal,
-    fuse_charges,
-)
+from tensornetwork.block_sparse.charge import (BaseCharge, U1Charge,
+                                               charge_equal, fuse_charges)
 from tensornetwork.block_sparse.index import Index
-from tensornetwork.block_sparse.initialization import (
-    ones,
-    randn,
-    randn_like,
-    random,
-    zeros,
-)
-from tensornetwork.block_sparse.linalg import (
-    diag,
-    eig,
-    eigh,
-    eye,
-    inv,
-    norm,
-    sqrt,
-    trace,
-    transpose,
-)
+from tensornetwork.block_sparse.initialization import (ones, randn, randn_like,
+                                                       random, zeros)
+from tensornetwork.block_sparse.linalg import (diag, eig, eigh, eye, inv, norm,
+                                               sqrt, trace, transpose)
 from tensornetwork.block_sparse.utils import unique
 from tensornetwork.matrixproductstates.finite_mps import FiniteMPS
 from tensornetwork.ncon_interface import ncon

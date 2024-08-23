@@ -12,11 +12,13 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+from typing import Optional, Sequence, Tuple, Type
+
 import numpy as np
+
+from tensornetwork.block_sparse.blocksparsetensor import (BlockSparseTensor,
+                                                          _randn, _random)
 from tensornetwork.block_sparse.index import Index
-from tensornetwork.block_sparse.blocksparsetensor import _randn, _random
-from tensornetwork.block_sparse.blocksparsetensor import BlockSparseTensor
-from typing import Tuple, Type, Optional, Sequence
 
 
 def ones(

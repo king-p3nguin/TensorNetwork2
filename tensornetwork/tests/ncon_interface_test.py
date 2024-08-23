@@ -11,18 +11,16 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-import pytest
 import numpy as np
-from tensornetwork.tensor import Tensor
-from tensornetwork import ncon_interface
+import pytest
 
-from tensornetwork.ncon_interface import (
-    _get_cont_out_labels,
-    _canonicalize_network_structure,
-)
+from tensornetwork import ncon_interface
 from tensornetwork.backends.backend_factory import get_backend
 from tensornetwork.backends.jax.jax_backend import JaxBackend
 from tensornetwork.contractors import greedy
+from tensornetwork.ncon_interface import (_canonicalize_network_structure,
+                                          _get_cont_out_labels)
+from tensornetwork.tensor import Tensor
 
 
 @pytest.fixture(

@@ -4,29 +4,16 @@ import numpy as np
 import pytest
 
 from tensornetwork.block_sparse.blocksparse_utils import (
-    _find_diagonal_sparse_blocks,
-    _find_transposed_diagonal_sparse_blocks,
-    _to_string,
-    compute_fused_charge_degeneracies,
-    compute_num_nonzero,
-    compute_sparse_lookup,
-    compute_unique_fused_charges,
-    get_flat_meta_data,
-    reduce_charges,
-)
-from tensornetwork.block_sparse.charge import (
-    BaseCharge,
-    U1Charge,
-    charge_equal,
-    fuse_ndarray_charges,
-)
+    _find_diagonal_sparse_blocks, _find_transposed_diagonal_sparse_blocks,
+    _to_string, compute_fused_charge_degeneracies, compute_num_nonzero,
+    compute_sparse_lookup, compute_unique_fused_charges, get_flat_meta_data,
+    reduce_charges)
+from tensornetwork.block_sparse.charge import (BaseCharge, U1Charge,
+                                               charge_equal,
+                                               fuse_ndarray_charges)
 from tensornetwork.block_sparse.index import Index
-from tensornetwork.block_sparse.utils import (
-    _get_strides,
-    fuse_ndarrays,
-    fuse_stride_arrays,
-    unique,
-)
+from tensornetwork.block_sparse.utils import (_get_strides, fuse_ndarrays,
+                                              fuse_stride_arrays, unique)
 
 np_dtypes = [np.float64, np.complex128]
 np_tensordot_dtypes = [np.float64, np.complex128]

@@ -1,21 +1,15 @@
+import itertools
+
 import numpy as np
 import pytest
-import itertools
-from tensornetwork.block_sparse.utils import (
-    flatten,
-    fuse_stride_arrays,
-    fuse_ndarrays,
-    fuse_degeneracies,
-    _find_best_partition,
-    _get_strides,
-    unique,
-    get_dtype,
-    get_real_dtype,
-    intersect,
-    collapse,
-    expand,
-    _intersect_ndarray,
-)
+
+from tensornetwork.block_sparse.utils import (_find_best_partition,
+                                              _get_strides, _intersect_ndarray,
+                                              collapse, expand, flatten,
+                                              fuse_degeneracies, fuse_ndarrays,
+                                              fuse_stride_arrays, get_dtype,
+                                              get_real_dtype, intersect,
+                                              unique)
 
 np_dtypes = [np.float64, np.complex128]
 np_tensordot_dtypes = [np.float64, np.complex128]

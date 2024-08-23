@@ -12,13 +12,14 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-from typing import Union, Text
-from tensornetwork.backends.tensorflow import tensorflow_backend
-from tensornetwork.backends.numpy import numpy_backend
+from typing import Text, Union
+
+from tensornetwork.backends import abstract_backend
 from tensornetwork.backends.jax import jax_backend
+from tensornetwork.backends.numpy import numpy_backend
 from tensornetwork.backends.pytorch import pytorch_backend
 from tensornetwork.backends.symmetric import symmetric_backend
-from tensornetwork.backends import abstract_backend
+from tensornetwork.backends.tensorflow import tensorflow_backend
 
 _BACKENDS = {
     "tensorflow": tensorflow_backend.TensorFlowBackend,

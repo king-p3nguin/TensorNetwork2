@@ -12,27 +12,22 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-import numpy as np
 from functools import reduce
 from operator import mul
-from tensornetwork.block_sparse.index import Index
-from tensornetwork.block_sparse.charge import (
-    fuse_charges,
-    BaseCharge,
-    fuse_ndarray_charges,
-    charge_equal,
-)
-from tensornetwork.block_sparse.utils import (
-    fuse_stride_arrays,
-    unique,
-    fuse_degeneracies,
-    intersect,
-    _find_best_partition,
-    fuse_ndarrays,
-)
+from typing import Any, Callable, List, Optional, Sequence, Tuple, Union
+
+import numpy as np
+
 from tensornetwork.block_sparse.caching import get_cacher
-from typing import List, Union, Any, Tuple, Optional, Sequence, Callable
+from tensornetwork.block_sparse.charge import (BaseCharge, charge_equal,
+                                               fuse_charges,
+                                               fuse_ndarray_charges)
+from tensornetwork.block_sparse.index import Index
 from tensornetwork.block_sparse.sizetypes import SIZE_T
+from tensornetwork.block_sparse.utils import (_find_best_partition,
+                                              fuse_degeneracies, fuse_ndarrays,
+                                              fuse_stride_arrays, intersect,
+                                              unique)
 
 Tensor = Any
 

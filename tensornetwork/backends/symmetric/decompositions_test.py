@@ -11,14 +11,15 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-from tensornetwork.block_sparse.blocksparsetensor import BlockSparseTensor
-from tensornetwork.block_sparse.charge import U1Charge, BaseCharge
-from tensornetwork.block_sparse.index import Index
+import numpy as np
+import pytest
+
+import tensornetwork.backends.numpy.decompositions as np_decompositions
 import tensornetwork.block_sparse as bs
 from tensornetwork.backends.symmetric import decompositions
-import tensornetwork.backends.numpy.decompositions as np_decompositions
-import pytest
-import numpy as np
+from tensornetwork.block_sparse.blocksparsetensor import BlockSparseTensor
+from tensornetwork.block_sparse.charge import BaseCharge, U1Charge
+from tensornetwork.block_sparse.index import Index
 
 np_dtypes = [np.float64, np.complex128]
 

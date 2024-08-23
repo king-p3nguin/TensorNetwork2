@@ -11,15 +11,16 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-import numpy as np
 import functools
+from typing import Any, Dict, List, Optional, Sequence, Text, Type, Union
 
-from tensornetwork.network_components import Node, contract_between
+import numpy as np
+
 from tensornetwork.backends import backend_factory
-from tensornetwork.linalg.node_linalg import conj
-from typing import Any, List, Optional, Text, Type, Union, Dict, Sequence
-from tensornetwork.matrixproductstates.base_mps import BaseMPS
 from tensornetwork.backends.abstract_backend import AbstractBackend
+from tensornetwork.linalg.node_linalg import conj
+from tensornetwork.matrixproductstates.base_mps import BaseMPS
+from tensornetwork.network_components import Node, contract_between
 
 Tensor = Any
 

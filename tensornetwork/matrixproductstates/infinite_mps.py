@@ -11,14 +11,16 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-import numpy as np
 import functools
-from tensornetwork.network_components import contract, contract_between
+from typing import Any, Dict, List, Optional, Sequence, Text, Type, Union
+
+import numpy as np
+
 from tensornetwork.backends import backend_factory
-from typing import Any, List, Optional, Text, Type, Union, Dict, Sequence
+from tensornetwork.backends.abstract_backend import AbstractBackend
 from tensornetwork.matrixproductstates.base_mps import BaseMPS
 from tensornetwork.ncon_interface import ncon
-from tensornetwork.backends.abstract_backend import AbstractBackend
+from tensornetwork.network_components import contract, contract_between
 
 Tensor = Any
 # TODO (mganahl): add jit

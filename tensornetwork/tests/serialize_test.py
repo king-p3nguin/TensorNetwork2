@@ -12,9 +12,10 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-import tensornetwork as tn
-import pytest
 import numpy as np
+import pytest
+
+import tensornetwork as tn
 
 
 def assert_nodes_eq(a, b):

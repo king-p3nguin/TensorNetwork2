@@ -12,13 +12,15 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-import math
 import copy
+import math
 import warnings
-from typing import Any, Union, Text, Optional, List, Sequence
+from typing import Any, List, Optional, Sequence, Text, Union
+
 import numpy as np
+
+from tensornetwork import backend_contextmanager, backends
 from tensornetwork.backends import abstract_backend
-from tensornetwork import backends, backend_contextmanager
 
 BaseBackend = abstract_backend.AbstractBackend
 

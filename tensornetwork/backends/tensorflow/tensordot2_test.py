@@ -29,9 +29,10 @@
 """Tests for tensornetwork.backends.tensorflow.tensordot2."""
 
 import numpy as np
-import tensorflow as tf
-from tensornetwork.backends.tensorflow import tensordot2
 import pytest
+import tensorflow as tf
+
+from tensornetwork.backends.tensorflow import tensordot2
 
 _MAXDIM = 5
 

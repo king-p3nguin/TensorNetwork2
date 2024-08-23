@@ -11,13 +11,15 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
+from sys import stdout
+from typing import Any, Text, Union
+
 import numpy as np
+
 from tensornetwork.matrixproductstates.base_mps import BaseMPS
 from tensornetwork.matrixproductstates.finite_mps import FiniteMPS
 from tensornetwork.matrixproductstates.mpo import BaseMPO, FiniteMPO
 from tensornetwork.ncon_interface import ncon
-from sys import stdout
-from typing import Any, Text, Union
 
 Tensor = Any
 

@@ -13,7 +13,8 @@
 # limitations under the License.
 """A modified version of TensorFlow's tensordot operation."""
 
-from typing import Any, Optional, Union, Text, Sequence, Tuple, List
+from typing import Any, List, Optional, Sequence, Text, Tuple, Union
+
 import numpy as np
 
 Tensor = Any

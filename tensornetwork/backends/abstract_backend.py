@@ -11,7 +11,9 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-from typing import Optional, Sequence, Tuple, Any, Union, Type, Callable, List, Text
+from typing import (Any, Callable, List, Optional, Sequence, Text, Tuple, Type,
+                    Union)
+
 import numpy as np
 
 # This might seem bad, but pytype treats tf.Tensor as Any anyway, so

@@ -12,11 +12,13 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 """implementation of different Matrix Product Operators."""
+from typing import Any, List, Optional, Text, Type, Union
+
 import numpy as np
-from tensornetwork.backends import backend_factory
+
 from tensornetwork.backend_contextmanager import get_default_backend
+from tensornetwork.backends import backend_factory
 from tensornetwork.backends.abstract_backend import AbstractBackend
-from typing import List, Union, Text, Optional, Any, Type
 
 Tensor = Any
 

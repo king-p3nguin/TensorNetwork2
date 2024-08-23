@@ -1,7 +1,10 @@
 import numpy as np
-from tensornetwork.block_sparse.index import Index, fuse_index_pair, fuse_indices
-from tensornetwork.block_sparse.charge import U1Charge, BaseCharge, fuse_charges
 import pytest
+
+from tensornetwork.block_sparse.charge import (BaseCharge, U1Charge,
+                                               fuse_charges)
+from tensornetwork.block_sparse.index import (Index, fuse_index_pair,
+                                              fuse_indices)
 
 
 def test_index():

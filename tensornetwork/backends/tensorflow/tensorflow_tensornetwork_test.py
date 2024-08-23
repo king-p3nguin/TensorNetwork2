@@ -1,15 +1,11 @@
 """Tests for graphmode_tensornetwork."""
 
 import numpy as np
-import tensorflow as tf
-from tensornetwork import (
-    contract,
-    connect,
-    flatten_edges_between,
-    contract_between,
-    Node,
-)
 import pytest
+import tensorflow as tf
+
+from tensornetwork import (Node, connect, contract, contract_between,
+                           flatten_edges_between)
 
 
 class GraphmodeTensorNetworkTest(tf.test.TestCase):

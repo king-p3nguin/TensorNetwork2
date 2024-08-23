@@ -12,10 +12,12 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+from typing import Any, List, Tuple, Type, Union
+
 import numpy as np
-from tensornetwork.block_sparse.sizetypes import SIZE_T
+
 from tensornetwork.block_sparse.caching import get_cacher
-from typing import List, Union, Any, Type, Tuple
+from tensornetwork.block_sparse.sizetypes import SIZE_T
 
 
 def _randn(size: int, dtype: Type[np.number] = np.float64) -> np.ndarray:

@@ -11,8 +11,9 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
+from typing import Any, List, Optional, Sequence, Tuple, Union
+
 import numpy as np
-from typing import List, Union, Any, Tuple, Optional, Sequence
 
 # currently there is only one global cacher that does caching.
 # this could be changed later on to having stacks of cachers,

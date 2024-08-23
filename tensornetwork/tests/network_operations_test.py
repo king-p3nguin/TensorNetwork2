@@ -12,12 +12,13 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-import tensornetwork as tn
-import pytest
 import numpy as np
-from tensornetwork.backends.abstract_backend import AbstractBackend
+import pytest
+
+import tensornetwork as tn
 import tensornetwork.linalg
 import tensornetwork.linalg.node_linalg
+from tensornetwork.backends.abstract_backend import AbstractBackend
 
 
 def test_replicate_nodes(backend):

@@ -14,18 +14,19 @@
 
 
 import numpy as np
-from jax import config
 import pytest
+from jax import config
+
 import tensornetwork
-from tensornetwork.linalg import linalg
 import tensornetwork.linalg.initialization
-from tensornetwork import backends, backend_contextmanager
-from tensornetwork.tests import testing_utils
-from tensornetwork.block_sparse.index import Index
-from tensornetwork.block_sparse.charge import U1Charge
-from tensornetwork.block_sparse.blocksparsetensor import BlockSparseTensor
-from tensornetwork.tensor import Tensor
+from tensornetwork import backend_contextmanager, backends
 from tensornetwork.backends.backend_factory import get_backend
+from tensornetwork.block_sparse.blocksparsetensor import BlockSparseTensor
+from tensornetwork.block_sparse.charge import U1Charge
+from tensornetwork.block_sparse.index import Index
+from tensornetwork.linalg import linalg
+from tensornetwork.tensor import Tensor
+from tensornetwork.tests import testing_utils
 
 # pylint: disable=no-member
 config.update("jax_enable_x64", True)

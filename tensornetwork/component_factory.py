@@ -1,4 +1,4 @@
-from tensornetwork.network_components import Node, CopyNode, Edge
+from tensornetwork.network_components import CopyNode, Edge, Node
 
 _COMPONENTS = {
     "Node": Node,

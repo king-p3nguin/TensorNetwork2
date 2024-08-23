@@ -14,34 +14,19 @@
 """Implementation of TensorNetwork structure."""
 
 import collections
-from typing import (
-    Any,
-    Dict,
-    List,
-    Optional,
-    Set,
-    Text,
-    Tuple,
-    Union,
-    Sequence,
-    Iterable,
-    Type,
-)
-import numpy as np
 import json
+from typing import (Any, Dict, Iterable, List, Optional, Sequence, Set, Text,
+                    Tuple, Type, Union)
 
-# pylint: disable=useless-import-alias
-from tensornetwork.network_components import (
-    AbstractNode,
-    Node,
-    CopyNode,
-    Edge,
-    disconnect,
-    outer_product_final_nodes,
-)
+import numpy as np
+
 from tensornetwork.backends import backend_factory
 from tensornetwork.backends.abstract_backend import AbstractBackend
-from tensornetwork.network_components import connect, contract_parallel
+# pylint: disable=useless-import-alias
+from tensornetwork.network_components import (AbstractNode, CopyNode, Edge,
+                                              Node, connect, contract_parallel,
+                                              disconnect,
+                                              outer_product_final_nodes)
 
 Tensor = Any
 

@@ -14,15 +14,16 @@
 
 
 import numpy as np
-from jax import config
 import pytest
+from jax import config
+
 import tensornetwork
 import tensornetwork.linalg.operations
-from tensornetwork.linalg.operations import kron
-from tensornetwork.linalg.initialization import random_uniform
-from tensornetwork.tensor import Tensor
-from tensornetwork.ncon_interface import ncon
 from tensornetwork import backends
+from tensornetwork.linalg.initialization import random_uniform
+from tensornetwork.linalg.operations import kron
+from tensornetwork.ncon_interface import ncon
+from tensornetwork.tensor import Tensor
 from tensornetwork.tests import testing_utils
 
 # pylint: disable=no-member

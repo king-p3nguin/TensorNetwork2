@@ -12,8 +12,9 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-import numpy as np
 from typing import Optional
+
+import numpy as np
 
 
 def greedy_size_solve(log_adj_in: np.ndarray):

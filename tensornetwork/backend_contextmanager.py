@@ -1,6 +1,7 @@
 from typing import Text, Union
-from tensornetwork.backends.abstract_backend import AbstractBackend
+
 from tensornetwork.backends import backend_factory
+from tensornetwork.backends.abstract_backend import AbstractBackend
 
 
 class DefaultBackend:

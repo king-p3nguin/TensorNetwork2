@@ -12,14 +12,16 @@
 # limitations under the License.
 """NCON interface to TensorNetwork."""
 
+import time
 import warnings
+from typing import Any, Dict, List, Optional, Sequence, Set, Text, Tuple, Union
+
 import numpy as np
-from typing import Any, Sequence, List, Optional, Union, Text, Tuple, Dict, Set
+
 from tensornetwork import tensor as tn_tensor
 from tensornetwork.backend_contextmanager import get_default_backend
 from tensornetwork.backends import backend_factory
 from tensornetwork.backends.abstract_backend import AbstractBackend
-import time
 
 Tensor = Any
 

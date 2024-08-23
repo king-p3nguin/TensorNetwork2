@@ -14,6 +14,7 @@
 
 import numpy as np
 import pytest
+
 from tensornetwork import Node
 from tensornetwork.contractors import auto
 from tensornetwork.contractors.opt_einsum_paths import path_contractors

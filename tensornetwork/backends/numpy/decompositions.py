@@ -13,7 +13,8 @@
 # limitations under the License.
 """Tensor Decomposition Numpy Implementation."""
 
-from typing import Optional, Any, Tuple
+from typing import Any, Optional, Tuple
+
 import numpy
 
 Tensor = Any

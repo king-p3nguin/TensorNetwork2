@@ -13,18 +13,19 @@
 # limitations under the License.
 
 import math
-import numpy as np
+
 import jax
 import jax.numpy as jnp
-from jax import config
+import numpy as np
+import pytest
 import tensorflow as tf
 import torch
-import pytest
+from jax import config
+
 import tensornetwork
+from tensornetwork import backend_contextmanager, backends, ncon_interface
 from tensornetwork.backends import abstract_backend
-from tensornetwork import backends, backend_contextmanager
 from tensornetwork.tests import testing_utils
-from tensornetwork import ncon_interface
 
 # pylint: disable=no-member
 config.update("jax_enable_x64", True)

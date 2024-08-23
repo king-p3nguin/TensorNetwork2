@@ -13,8 +13,10 @@
 # limitations under the License.
 
 import math
+
 import numpy as np
 import tensorflow as tf
+
 from tensornetwork.backends.numpy import decompositions
 
 

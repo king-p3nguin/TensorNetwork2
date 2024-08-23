@@ -19,6 +19,7 @@ github.com/dgasmith/opt_einsum/blob/master/opt_einsum/tests/test_paths.py
 import numpy as np
 import opt_einsum
 import pytest
+
 from tensornetwork import Node
 from tensornetwork.contractors.opt_einsum_paths import utils
 

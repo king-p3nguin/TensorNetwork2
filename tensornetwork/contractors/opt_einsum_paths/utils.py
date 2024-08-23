@@ -12,10 +12,12 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 """Helper methods for `path_contractors`."""
-# pylint: disable=line-too-long
-from tensornetwork.network_operations import get_all_edges, get_subgraph_dangling
+from typing import Any, Callable, Dict, Iterable, List, Set, Text, Tuple
+
 from tensornetwork.network_components import AbstractNode, Edge
-from typing import Any, Callable, Dict, List, Set, Tuple, Iterable, Text
+# pylint: disable=line-too-long
+from tensornetwork.network_operations import (get_all_edges,
+                                              get_subgraph_dangling)
 
 # `opt_einsum` algorithm method typing
 Algorithm = Callable[
