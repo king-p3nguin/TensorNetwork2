@@ -14,15 +14,16 @@
 """Test of TensorNetwork Graphviz visualization."""
 
 import graphviz
-from tensornetwork.visualization.graphviz import to_graphviz
-from tensornetwork import connect, Node
 import numpy as np
+
+from tensornetwork import Node, connect
+from tensornetwork.visualization.graphviz import to_graphviz
 
 
 def test_sanity_check():
-  a = Node(np.eye(2), backend="tensorflow")
-  b = Node(np.eye(2), backend="tensorflow")
-  connect(a[0], b[0])
-  g = to_graphviz([a, b])
-  #pylint: disable=no-member
-  assert isinstance(g, graphviz.Graph)
+    a = Node(np.eye(2), backend="tensorflow")
+    b = Node(np.eye(2), backend="tensorflow")
+    connect(a[0], b[0])
+    g = to_graphviz([a, b])
+    # pylint: disable=no-member
+    assert isinstance(g, graphviz.Graph)

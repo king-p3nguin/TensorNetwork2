@@ -1,0 +1,8 @@
+tensorflow
+pytest
+pytest-cov
+torch
+jax
+jaxlib
+pylint
+black
