@@ -2,8 +2,7 @@ import numpy as np
 import pytest
 
 import tensornetwork as tn
-from tensornetwork.block_sparse import (BaseCharge, BlockSparseTensor, Index,
-                                        U1Charge)
+from tensornetwork.block_sparse import BaseCharge, BlockSparseTensor, Index, U1Charge
 
 
 @pytest.mark.parametrize("num_charges", [1, 2])

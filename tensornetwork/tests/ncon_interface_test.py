@@ -18,8 +18,10 @@ from tensornetwork import ncon_interface
 from tensornetwork.backends.backend_factory import get_backend
 from tensornetwork.backends.jax.jax_backend import JaxBackend
 from tensornetwork.contractors import greedy
-from tensornetwork.ncon_interface import (_canonicalize_network_structure,
-                                          _get_cont_out_labels)
+from tensornetwork.ncon_interface import (
+    _canonicalize_network_structure,
+    _get_cont_out_labels,
+)
 from tensornetwork.tensor import Tensor
 
 

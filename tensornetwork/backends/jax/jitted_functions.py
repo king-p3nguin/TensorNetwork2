@@ -12,7 +12,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-import collections
 import functools
 import types
 from typing import Any, Callable, List, Sequence, Text, Tuple

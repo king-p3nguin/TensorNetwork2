@@ -17,7 +17,11 @@ import pytest
 
 # pylint: disable=line-too-long
 from tensornetwork.contractors.custom_path_solvers.nconinterface import (
-    ncon_cost_check, ncon_solver, ncon_to_adj, ord_to_ncon)
+    ncon_cost_check,
+    ncon_solver,
+    ncon_to_adj,
+    ord_to_ncon,
+)
 
 
 @pytest.mark.parametrize("chi", range(2, 6))

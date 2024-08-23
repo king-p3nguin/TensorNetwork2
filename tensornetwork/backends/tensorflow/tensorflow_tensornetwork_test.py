@@ -4,8 +4,13 @@ import numpy as np
 import pytest
 import tensorflow as tf
 
-from tensornetwork import (Node, connect, contract, contract_between,
-                           flatten_edges_between)
+from tensornetwork import (
+    Node,
+    connect,
+    contract,
+    contract_between,
+    flatten_edges_between,
+)
 
 
 class GraphmodeTensorNetworkTest(tf.test.TestCase):

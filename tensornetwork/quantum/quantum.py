@@ -20,17 +20,31 @@ these spaces. Hence we provide some simple abstractions to ease linear
 algebra operations in which the vectors and operators are represented by
 tensor networks.
 """
-from typing import (Any, Callable, Collection, List, Optional, Sequence, Set,
-                    Text, Tuple, Type, Union)
+from typing import (
+    Any,
+    Callable,
+    Collection,
+    List,
+    Optional,
+    Sequence,
+    Set,
+    Text,
+    Tuple,
+    Type,
+    Union,
+)
 
 import numpy as np
 
 from tensornetwork.contractors import greedy
-from tensornetwork.network_components import (AbstractNode, CopyNode, Edge,
-                                              Node, connect)
-from tensornetwork.network_operations import (copy, get_all_nodes,
-                                              get_subgraph_dangling, reachable,
-                                              remove_node)
+from tensornetwork.network_components import AbstractNode, CopyNode, Edge, Node, connect
+from tensornetwork.network_operations import (
+    copy,
+    get_all_nodes,
+    get_subgraph_dangling,
+    reachable,
+    remove_node,
+)
 
 Tensor = Any
 

@@ -14,8 +14,7 @@
 """Functions to initialize Tensor using a NumPy-like syntax."""
 
 import warnings
-from typing import (Any, Callable, List, Optional, Sequence, Text, Tuple, Type,
-                    Union)
+from typing import Any, Callable, List, Optional, Sequence, Text, Tuple, Type, Union
 
 import numpy as np
 

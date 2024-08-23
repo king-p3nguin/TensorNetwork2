@@ -1,11 +1,7 @@
-# pylint: disable=no-name-in-module
-import math
-from typing import List, Optional, Text, Tuple
+from typing import Optional, Tuple
 
-import numpy as np
 import tensorflow as tf
-from tensorflow.keras import activations, initializers
-from tensorflow.keras.layers import Layer  # type: ignore
+from keras import Layer, activations, initializers
 
 import tensornetwork as tn
 from tensornetwork.network_components import Node
@@ -71,9 +67,9 @@ class DenseEntangler(Layer):
         num_legs: int,
         num_levels: int,
         use_bias: Optional[bool] = True,
-        activation: Optional[Text] = None,
-        kernel_initializer: Optional[Text] = "glorot_uniform",
-        bias_initializer: Optional[Text] = "zeros",
+        activation: Optional[str] = None,
+        kernel_initializer: Optional[str] = "glorot_uniform",
+        bias_initializer: Optional[str] = "zeros",
         **kwargs,
     ) -> None:
 
@@ -98,7 +94,7 @@ class DenseEntangler(Layer):
         self.kernel_initializer = initializers.get(kernel_initializer)
         self.bias_initializer = initializers.get(bias_initializer)
 
-    def build(self, input_shape: List[int]) -> None:
+    def build(self, input_shape: list[int]) -> None:
         # Disable the attribute-defined-outside-init violations in this function
         # pylint: disable=attribute-defined-outside-init
         if input_shape[-1] is None:
@@ -163,7 +159,7 @@ class DenseEntangler(Layer):
 
         def f(
             x: tf.Tensor,
-            nodes: List[Node],
+            nodes: list[Node],
             num_nodes: int,
             num_legs: int,
             leg_dim: int,
@@ -226,7 +222,7 @@ class DenseEntangler(Layer):
         )
         return result
 
-    def compute_output_shape(self, input_shape: List[int]) -> Tuple[int, int]:
+    def compute_output_shape(self, input_shape: list[int]) -> Tuple[int, int]:
         return tuple(input_shape[0:-1]) + (self.output_dim,)
 
     def get_config(self) -> dict:

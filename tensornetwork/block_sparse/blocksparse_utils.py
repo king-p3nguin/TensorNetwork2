@@ -19,15 +19,20 @@ from typing import Any, Callable, List, Optional, Sequence, Tuple, Union
 import numpy as np
 
 from tensornetwork.block_sparse.caching import get_cacher
-from tensornetwork.block_sparse.charge import (BaseCharge, charge_equal,
-                                               fuse_charges,
-                                               fuse_ndarray_charges)
+from tensornetwork.block_sparse.charge import (
+    BaseCharge,
+    fuse_charges,
+    fuse_ndarray_charges,
+)
 from tensornetwork.block_sparse.index import Index
 from tensornetwork.block_sparse.sizetypes import SIZE_T
-from tensornetwork.block_sparse.utils import (_find_best_partition,
-                                              fuse_degeneracies, fuse_ndarrays,
-                                              fuse_stride_arrays, intersect,
-                                              unique)
+from tensornetwork.block_sparse.utils import (
+    _find_best_partition,
+    fuse_degeneracies,
+    fuse_stride_arrays,
+    intersect,
+    unique,
+)
 
 Tensor = Any
 
@@ -733,10 +738,10 @@ def _to_string(
       str: The string representation of the input
     """
     return "".join(
-        [str(c.charges.tostring()) for c in charges]
+        [str(c.charges.tobytes()) for c in charges]
         + [
-            str(np.array(flows).tostring()),
+            str(np.array(flows).tobytes()),
             str(tr_partition),
-            str(np.array(order, dtype=np.int16).tostring()),
+            str(np.array(order, dtype=np.int16).tobytes()),
         ]
     )

@@ -13,7 +13,7 @@
 # limitations under the License.
 """Implementation of TensorNetwork Graphviz visualization."""
 
-from typing import Iterable, Optional, Text
+from typing import Iterable, Optional
 
 import graphviz
 
@@ -25,7 +25,7 @@ def to_graphviz(
     nodes: Iterable[AbstractNode],
     graph: Optional[graphviz.Graph] = None,
     include_all_names: bool = False,
-    engine: Text = "neato",
+    engine: str = "neato",
 ) -> graphviz.Graph:
     """Create a graphviz Graph that is isomorphic to the given TensorNetwork.
 

@@ -14,16 +14,19 @@
 """Functions to initialize Node using a NumPy-like syntax."""
 
 import warnings
-from typing import (Any, Callable, List, Optional, Sequence, Text, Tuple, Type,
-                    Union)
+from typing import Any, Callable, List, Optional, Sequence, Text, Tuple, Type, Union
 
 import numpy as np
 
 from tensornetwork import backend_contextmanager, backends, network_components
 from tensornetwork.backends import abstract_backend
+
 # pylint: disable=line-too-long
-from tensornetwork.network_components import (AbstractNode, Node,
-                                              outer_product_final_nodes)
+from tensornetwork.network_components import (
+    AbstractNode,
+    Node,
+    outer_product_final_nodes,
+)
 
 Tensor = Any
 BaseBackend = abstract_backend.AbstractBackend

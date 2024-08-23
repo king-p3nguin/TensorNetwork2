@@ -1,11 +1,15 @@
 import numpy as np
 import pytest
 
-from tensornetwork.block_sparse.charge import (BaseCharge, U1Charge, Z2Charge,
-                                               ZNCharge, charge_equal,
-                                               fuse_charges)
-from tensornetwork.block_sparse.utils import (fuse_degeneracies, fuse_ndarrays,
-                                              unique)
+from tensornetwork.block_sparse.charge import (
+    BaseCharge,
+    U1Charge,
+    Z2Charge,
+    ZNCharge,
+    charge_equal,
+    fuse_charges,
+)
+from tensornetwork.block_sparse.utils import fuse_degeneracies, fuse_ndarrays, unique
 
 
 def test_charge_equal():

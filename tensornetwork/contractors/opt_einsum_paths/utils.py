@@ -15,9 +15,9 @@
 from typing import Any, Callable, Dict, Iterable, List, Set, Text, Tuple
 
 from tensornetwork.network_components import AbstractNode, Edge
+
 # pylint: disable=line-too-long
-from tensornetwork.network_operations import (get_all_edges,
-                                              get_subgraph_dangling)
+from tensornetwork.network_operations import get_all_edges, get_subgraph_dangling
 
 # `opt_einsum` algorithm method typing
 Algorithm = Callable[

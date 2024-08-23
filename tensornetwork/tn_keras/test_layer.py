@@ -9,9 +9,13 @@ import pytest
 import tensorflow as tf
 from tensorflow.keras import backend as K
 
-from tensornetwork.tn_keras.layers import (DenseCondenser, DenseDecomp,
-                                           DenseEntangler, DenseExpander,
-                                           DenseMPO)
+from tensornetwork.tn_keras.layers import (
+    DenseCondenser,
+    DenseDecomp,
+    DenseEntangler,
+    DenseExpander,
+    DenseMPO,
+)
 
 
 @pytest.fixture(params=[512])

@@ -1,13 +1,19 @@
 import numpy as np
 
 from tensornetwork.block_sparse.blocksparse_utils import (
-    _find_transposed_diagonal_sparse_blocks, _to_string)
+    _find_transposed_diagonal_sparse_blocks,
+    _to_string,
+)
 from tensornetwork.block_sparse.blocksparsetensor import BlockSparseTensor
-from tensornetwork.block_sparse.caching import (_INSTANTIATED_CACHERS,
-                                                clear_cache, disable_caching,
-                                                enable_caching, get_cacher,
-                                                get_caching_status,
-                                                set_caching_status)
+from tensornetwork.block_sparse.caching import (
+    _INSTANTIATED_CACHERS,
+    clear_cache,
+    disable_caching,
+    enable_caching,
+    get_cacher,
+    get_caching_status,
+    set_caching_status,
+)
 from tensornetwork.block_sparse.charge import U1Charge, charge_equal
 from tensornetwork.block_sparse.index import Index
 from tensornetwork.ncon_interface import ncon

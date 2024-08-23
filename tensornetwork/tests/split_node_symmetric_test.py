@@ -17,10 +17,10 @@ import pytest
 
 import tensornetwork as tn
 from tensornetwork.block_sparse import BlockSparseTensor, Index
-from tensornetwork.block_sparse.blocksparse_utils import \
-    _find_diagonal_sparse_blocks  # pylint: disable=line-too-long
-from tensornetwork.block_sparse.charge import (BaseCharge, U1Charge,
-                                               charge_equal)
+from tensornetwork.block_sparse.blocksparse_utils import (
+    _find_diagonal_sparse_blocks,
+)  # pylint: disable=line-too-long
+from tensornetwork.block_sparse.charge import BaseCharge, U1Charge, charge_equal
 
 
 def get_random(shape, num_charges, dtype=np.float64):

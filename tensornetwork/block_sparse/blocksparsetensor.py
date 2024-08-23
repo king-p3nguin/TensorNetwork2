@@ -21,14 +21,22 @@ from typing import Any, List, Optional, Sequence, Tuple, Type, Union
 import numpy as np
 
 from tensornetwork.block_sparse.blocksparse_utils import (
-    _data_initializer, _find_diagonal_sparse_blocks,
-    _find_transposed_diagonal_sparse_blocks, compute_num_nonzero,
-    get_flat_meta_data, reduce_charges)
-from tensornetwork.block_sparse.charge import (BaseCharge, charge_equal,
-                                               fuse_charges)
+    _data_initializer,
+    _find_diagonal_sparse_blocks,
+    _find_transposed_diagonal_sparse_blocks,
+    compute_num_nonzero,
+    get_flat_meta_data,
+    reduce_charges,
+)
+from tensornetwork.block_sparse.charge import BaseCharge, charge_equal, fuse_charges
 from tensornetwork.block_sparse.index import Index
-from tensornetwork.block_sparse.utils import (_find_best_partition, _randn,
-                                              _random, flatten, intersect)
+from tensornetwork.block_sparse.utils import (
+    _find_best_partition,
+    _randn,
+    _random,
+    flatten,
+    intersect,
+)
 
 Tensor = Any
 

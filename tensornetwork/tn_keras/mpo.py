@@ -1,11 +1,9 @@
 # pylint: disable=no-name-in-module
 import math
-from typing import List, Optional, Text, Tuple
+from typing import List, Optional, Tuple
 
-import numpy as np
 import tensorflow as tf
-from tensorflow.keras import activations, initializers
-from tensorflow.keras.layers import Layer  # type: ignore
+from keras import Layer, activations, initializers
 
 import tensornetwork as tn
 from tensornetwork.network_components import Node
@@ -63,9 +61,9 @@ class DenseMPO(Layer):
         num_nodes: int,
         bond_dim: int,
         use_bias: Optional[bool] = True,
-        activation: Optional[Text] = None,
-        kernel_initializer: Optional[Text] = "glorot_uniform",
-        bias_initializer: Optional[Text] = "zeros",
+        activation: Optional[str] = None,
+        kernel_initializer: Optional[str] = "glorot_uniform",
+        bias_initializer: Optional[str] = "zeros",
         **kwargs,
     ) -> None:
 

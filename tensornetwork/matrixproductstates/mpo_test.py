@@ -7,10 +7,14 @@ import torch
 from tensornetwork.backends import backend_factory
 from tensornetwork.matrixproductstates.dmrg import FiniteDMRG
 from tensornetwork.matrixproductstates.finite_mps import FiniteMPS
+
 # pylint: disable=line-too-long
-from tensornetwork.matrixproductstates.mpo import (BaseMPO,
-                                                   FiniteFreeFermion2D,
-                                                   FiniteMPO, InfiniteMPO)
+from tensornetwork.matrixproductstates.mpo import (
+    BaseMPO,
+    FiniteFreeFermion2D,
+    FiniteMPO,
+    InfiniteMPO,
+)
 
 
 @pytest.fixture(

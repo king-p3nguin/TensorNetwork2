@@ -14,8 +14,20 @@
 """Implementation of Network Components."""
 
 from abc import ABC, abstractmethod
-from typing import (Any, Dict, Iterable, List, Optional, Sequence, Set, Text,
-                    Tuple, Type, Union, overload)
+from typing import (
+    Any,
+    Dict,
+    Iterable,
+    List,
+    Optional,
+    Sequence,
+    Set,
+    Text,
+    Tuple,
+    Type,
+    Union,
+    overload,
+)
 
 import h5py
 import numpy as np

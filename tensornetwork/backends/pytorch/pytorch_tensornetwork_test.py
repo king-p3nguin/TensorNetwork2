@@ -3,8 +3,13 @@
 import numpy as np
 import torch
 
-from tensornetwork import (Node, connect, contract, contract_between,
-                           flatten_edges_between)
+from tensornetwork import (
+    Node,
+    connect,
+    contract,
+    contract_between,
+    flatten_edges_between,
+)
 
 
 def test_basic_graphmode():

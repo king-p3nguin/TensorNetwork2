@@ -11,8 +11,7 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-from typing import (Any, Callable, List, Optional, Sequence, Text, Tuple, Type,
-                    Union)
+from typing import Any, Callable, List, Optional, Sequence, Text, Tuple, Type, Union
 
 import numpy as np
 

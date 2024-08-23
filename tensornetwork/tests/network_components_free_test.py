@@ -13,10 +13,15 @@ import torch
 import tensornetwork as tn
 import tensornetwork.network_components as network_components
 from tensornetwork.backends.abstract_backend import AbstractBackend
-from tensornetwork.network_components import (AbstractNode, CopyNode, Edge,
-                                              Node, NodeCollection,
-                                              _remove_edges,
-                                              _remove_trace_edge)
+from tensornetwork.network_components import (
+    AbstractNode,
+    CopyNode,
+    Edge,
+    Node,
+    NodeCollection,
+    _remove_edges,
+    _remove_trace_edge,
+)
 
 string_type = network_components.string_type
 ENCODING = network_components.STRING_ENCODING

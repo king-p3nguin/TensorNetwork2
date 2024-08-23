@@ -45,8 +45,7 @@ def test_backend_pytorch_missing_cannot_initialize_backend():
     # pylint: disable=import-outside-toplevel
     with pytest.raises(ImportError):
         # pylint: disable=import-outside-toplevel
-        from tensornetwork.backends.pytorch.pytorch_backend import \
-            PyTorchBackend
+        from tensornetwork.backends.pytorch.pytorch_backend import PyTorchBackend
 
         PyTorchBackend()
 
@@ -56,8 +55,9 @@ def test_backend_tensorflow_missing_cannot_initialize_backend():
     # pylint: disable=import-outside-toplevel
     with pytest.raises(ImportError):
         # pylint: disable=import-outside-toplevel
-        from tensornetwork.backends.tensorflow.tensorflow_backend import \
-            TensorFlowBackend
+        from tensornetwork.backends.tensorflow.tensorflow_backend import (
+            TensorFlowBackend,
+        )
 
         TensorFlowBackend()
 
@@ -99,12 +99,16 @@ def test_import_tensornetwork_without_backends():
     # pylint: disable=unused-variable
     # pylint: disable=reimported
     import tensornetwork
+
     # pylint: disable=import-outside-toplevel
     import tensornetwork.backends.jax.jax_backend
+
     # pylint: disable=import-outside-toplevel
     import tensornetwork.backends.numpy.numpy_backend
+
     # pylint: disable=import-outside-toplevel
     import tensornetwork.backends.pytorch.pytorch_backend
+
     # pylint: disable=import-outside-toplevel
     import tensornetwork.backends.tensorflow.tensorflow_backend
 

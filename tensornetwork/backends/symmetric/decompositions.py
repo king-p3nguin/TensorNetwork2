@@ -17,10 +17,10 @@ from typing import Any, Optional, Tuple
 
 import numpy as np
 
-from tensornetwork.block_sparse.blocksparse_utils import \
-    _find_transposed_diagonal_sparse_blocks
-from tensornetwork.block_sparse.blocksparsetensor import (BlockSparseTensor,
-                                                          ChargeArray)
+from tensornetwork.block_sparse.blocksparse_utils import (
+    _find_transposed_diagonal_sparse_blocks,
+)
+from tensornetwork.block_sparse.blocksparsetensor import BlockSparseTensor, ChargeArray
 from tensornetwork.block_sparse.sizetypes import SIZE_T
 from tensornetwork.block_sparse.utils import get_real_dtype
 

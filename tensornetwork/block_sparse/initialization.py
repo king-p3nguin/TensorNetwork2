@@ -16,8 +16,11 @@ from typing import Optional, Sequence, Tuple, Type
 
 import numpy as np
 
-from tensornetwork.block_sparse.blocksparsetensor import (BlockSparseTensor,
-                                                          _randn, _random)
+from tensornetwork.block_sparse.blocksparsetensor import (
+    BlockSparseTensor,
+    _randn,
+    _random,
+)
 from tensornetwork.block_sparse.index import Index
 
 

@@ -17,15 +17,25 @@ from typing import Any, List, Optional, Sequence, Text, Tuple, Type, Union
 import numpy as np
 
 from tensornetwork.block_sparse.blocksparse_utils import (
-    _find_diagonal_sparse_blocks, _find_transposed_diagonal_sparse_blocks,
-    compute_num_nonzero, compute_sparse_lookup)
-from tensornetwork.block_sparse.blocksparsetensor import (BlockSparseTensor,
-                                                          ChargeArray,
-                                                          tensordot)
+    _find_diagonal_sparse_blocks,
+    _find_transposed_diagonal_sparse_blocks,
+    compute_num_nonzero,
+    compute_sparse_lookup,
+)
+from tensornetwork.block_sparse.blocksparsetensor import (
+    BlockSparseTensor,
+    ChargeArray,
+    tensordot,
+)
 from tensornetwork.block_sparse.index import Index
 from tensornetwork.block_sparse.initialization import empty_like
-from tensornetwork.block_sparse.utils import (_randn, _random, flatten,
-                                              get_real_dtype, intersect)
+from tensornetwork.block_sparse.utils import (
+    _randn,
+    _random,
+    flatten,
+    get_real_dtype,
+    intersect,
+)
 
 
 def norm(tensor: BlockSparseTensor) -> float:

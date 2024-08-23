@@ -20,15 +20,20 @@ from typing import Any, Iterable, List, Optional, Sequence, Text, Tuple
 import opt_einsum
 
 from tensornetwork.contractors.opt_einsum_paths import utils
-from tensornetwork.network_components import (AbstractNode, Edge,
-                                              contract_between,
-                                              contract_parallel,
-                                              get_all_nondangling)
-from tensornetwork.network_operations import (check_connected,
-                                              contract_trace_edges,
-                                              get_all_edges,
-                                              get_subgraph_dangling,
-                                              redirect_edge)
+from tensornetwork.network_components import (
+    AbstractNode,
+    Edge,
+    contract_between,
+    contract_parallel,
+    get_all_nondangling,
+)
+from tensornetwork.network_operations import (
+    check_connected,
+    contract_trace_edges,
+    get_all_edges,
+    get_subgraph_dangling,
+    redirect_edge,
+)
 
 # TODO (martin): add return types of functions back once TensorNetwork is gone
 #               remove _base_network

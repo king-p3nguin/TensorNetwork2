@@ -15,18 +15,36 @@
 
 import collections
 import json
-from typing import (Any, Dict, Iterable, List, Optional, Sequence, Set, Text,
-                    Tuple, Type, Union)
+from typing import (
+    Any,
+    Dict,
+    Iterable,
+    List,
+    Optional,
+    Sequence,
+    Set,
+    Text,
+    Tuple,
+    Type,
+    Union,
+)
 
 import numpy as np
 
 from tensornetwork.backends import backend_factory
 from tensornetwork.backends.abstract_backend import AbstractBackend
+
 # pylint: disable=useless-import-alias
-from tensornetwork.network_components import (AbstractNode, CopyNode, Edge,
-                                              Node, connect, contract_parallel,
-                                              disconnect,
-                                              outer_product_final_nodes)
+from tensornetwork.network_components import (
+    AbstractNode,
+    CopyNode,
+    Edge,
+    Node,
+    connect,
+    contract_parallel,
+    disconnect,
+    outer_product_final_nodes,
+)
 
 Tensor = Any
 

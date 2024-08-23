@@ -13,8 +13,7 @@
 # limitations under the License.
 # pyling: disable=line-too-long
 import warnings
-from typing import (Any, Callable, List, Optional, Sequence, Text, Tuple, Type,
-                    Union)
+from typing import Any, Callable, List, Optional, Sequence, Text, Tuple, Type, Union
 
 import numpy
 import scipy as sp
@@ -23,8 +22,7 @@ import scipy.sparse.linalg
 import tensornetwork.block_sparse as bs
 from tensornetwork.backends import abstract_backend
 from tensornetwork.backends.symmetric import decompositions
-from tensornetwork.block_sparse.blocksparsetensor import (BlockSparseTensor,
-                                                          ChargeArray)
+from tensornetwork.block_sparse.blocksparsetensor import BlockSparseTensor, ChargeArray
 from tensornetwork.block_sparse.index import Index
 
 Tensor = Any

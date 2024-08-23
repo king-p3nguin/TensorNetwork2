@@ -17,7 +17,10 @@ import pytest
 
 # pylint: disable=line-too-long
 from tensornetwork.contractors.custom_path_solvers.pathsolvers import (
-    full_solve_complete, greedy_cost_solve, greedy_size_solve)
+    full_solve_complete,
+    greedy_cost_solve,
+    greedy_size_solve,
+)
 
 
 @pytest.mark.parametrize("N", range(2, 20))
