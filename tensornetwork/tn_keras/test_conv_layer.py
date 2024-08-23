@@ -1,14 +1,14 @@
 # pylint: disable=no-name-in-module
-import pytest
 import math
 import os
 import shutil
+
+import keras
 import numpy as np
+import pytest
 import tensorflow as tf
-import tensorflow.keras
 from tensorflow.keras import backend as K
-from tensorflow.keras.models import Sequential, load_model
-from tensorflow.keras.layers import Conv2D, Dense, Flatten
+
 from tensornetwork.tn_keras.layers import Conv2DMPO
 
 LAYER_NAME = "conv_layer"
@@ -26,7 +26,8 @@ def dummy_data(request):
 def make_model(dummy_data):
     # pylint: disable=redefined-outer-name
     data, _ = dummy_data
-    model = Sequential()
+    model = keras.models.Sequential()
+    model.add(keras.layers.Input(batch_shape=data.shape))
     model.add(
         Conv2DMPO(
             filters=4,
@@ -34,12 +35,11 @@ def make_model(dummy_data):
             num_nodes=2,
             bond_dim=10,
             padding="same",
-            input_shape=data.shape[1:],
             name=LAYER_NAME,
         )
     )
-    model.add(Flatten())
-    model.add(Dense(1, activation="sigmoid"))
+    model.add(keras.layers.Flatten())
+    model.add(keras.layers.Dense(1, activation="sigmoid"))
     return model
 
 
@@ -112,7 +112,7 @@ def test_config(make_model):
     new_model = Conv2DMPO.from_config(layer_config)
 
     # Build the layer so we can count params below
-    new_model.build(layer_config["batch_input_shape"])
+    new_model.build(model.input_shape)
 
     np.testing.assert_equal(expected_num_parameters, new_model.count_params())
     assert layer_config == new_model.get_config()
@@ -127,11 +127,11 @@ def test_model_save(dummy_data, make_model, tmp_path):
     # Train the model for 5 epochs
     model.fit(data, labels, epochs=5)
 
-    for save_path in [tmp_path / "test_model", tmp_path / "test_model.h5"]:
+    for save_path in [tmp_path / "test_model.keras", tmp_path / "test_model.h5"]:
         # Save model to a SavedModel folder or h5 file, then load model
         print("save_path: ", save_path)
         model.save(save_path)
-        loaded_model = load_model(save_path)
+        loaded_model = keras.saving.load_model(save_path)
 
         # Clean up SavedModel folder
         if os.path.isdir(save_path):

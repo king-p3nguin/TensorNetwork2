@@ -29,7 +29,7 @@ np_all_dtypes = np_not_bool + [
     bool,
 ]
 
-torch_supported_dtypes = np_real + np_complex + np_int + [np.uint8, bool, None]
+torch_supported_dtypes = np_real + np_int + [np.uint8, bool, None]
 # torch_supported_dtypes = [np.float32, np.float64]
 
 

@@ -1,11 +1,12 @@
 # pylint: disable=no-name-in-module
 import itertools
-from tensornetwork.tn_keras.layers import DenseMPO
-import tensorflow as tf
-from tensorflow.keras.models import Sequential
-from tensorflow.keras import Input
+
 import numpy as np
 import pytest
+import tensorflow as tf
+from keras import Input, Sequential
+
+from tensornetwork.tn_keras.layers import DenseMPO
 
 
 @pytest.mark.parametrize(
@@ -15,7 +16,7 @@ import pytest
 def test_shape_sanity_check(in_dim_base, dim1, dim2, num_nodes, bond_dim):
     model = Sequential(
         [
-            Input(in_dim_base**num_nodes),
+            Input(shape=(in_dim_base**num_nodes,)),
             DenseMPO(dim1**num_nodes, num_nodes=num_nodes, bond_dim=bond_dim),
             DenseMPO(dim2**num_nodes, num_nodes=num_nodes, bond_dim=bond_dim),
         ]

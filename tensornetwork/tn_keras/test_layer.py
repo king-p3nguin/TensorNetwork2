@@ -1,18 +1,21 @@
 # pylint: disable=no-name-in-module
-import pytest
-import numpy as np
 import math
 import os
 import shutil
-from tensorflow.keras import backend as K
-from tensorflow.keras.models import Sequential, load_model  # type: ignore
+
+import keras
+import numpy as np
+import pytest
 import tensorflow as tf
-from tensornetwork.tn_keras.layers import DenseDecomp
-from tensornetwork.tn_keras.layers import DenseMPO
-from tensornetwork.tn_keras.layers import DenseCondenser
-from tensornetwork.tn_keras.layers import DenseExpander
-from tensornetwork.tn_keras.layers import DenseEntangler
-from tensorflow.keras.layers import Dense  # type: ignore
+from tensorflow.keras import backend as K
+
+from tensornetwork.tn_keras.layers import (
+    DenseCondenser,
+    DenseDecomp,
+    DenseEntangler,
+    DenseExpander,
+    DenseMPO,
+)
 
 
 @pytest.fixture(params=[512])
@@ -40,7 +43,8 @@ def make_model(dummy_data, request):
     data, _ = dummy_data
 
     if request.param == "DenseMPO":
-        model = Sequential()
+        model = keras.models.Sequential()
+        model.add(keras.layers.Input(shape=(data.shape[1],)))
         model.add(
             DenseMPO(
                 data.shape[1],
@@ -48,52 +52,52 @@ def make_model(dummy_data, request):
                 bond_dim=8,
                 use_bias=True,
                 activation="relu",
-                input_shape=(data.shape[1],),
             )
         )
-        model.add(Dense(1, activation="sigmoid"))
+        model.add(keras.layers.Dense(1, activation="sigmoid"))
     elif request.param == "DenseDecomp":
-        model = Sequential()
+        model = keras.models.Sequential()
+        model.add(keras.layers.Input(shape=(data.shape[1],)))
         model.add(
             DenseDecomp(
                 512,
                 decomp_size=128,
                 use_bias=True,
                 activation="relu",
-                input_shape=(data.shape[1],),
             )
         )
-        model.add(Dense(1, activation="sigmoid"))
+        model.add(keras.layers.Dense(1, activation="sigmoid"))
     elif request.param == "DenseCondenser":
-        model = Sequential()
+        model = keras.models.Sequential()
+        model.add(keras.layers.Input(shape=(data.shape[1],)))
         model.add(
             DenseCondenser(
                 exp_base=2,
                 num_nodes=3,
                 use_bias=True,
                 activation="relu",
-                input_shape=(data.shape[1],),
             )
         )
-        model.add(Dense(1, activation="sigmoid"))
+        model.add(keras.layers.Dense(1, activation="sigmoid"))
     elif request.param == "DenseExpander":
-        model = Sequential()
+        model = keras.models.Sequential()
+        model.add(keras.layers.Input(shape=(data.shape[-1],)))
         model.add(
             DenseExpander(
                 exp_base=2,
                 num_nodes=3,
                 use_bias=True,
                 activation="relu",
-                input_shape=(data.shape[-1],),
             )
         )
-        model.add(Dense(1, activation="sigmoid"))
+        model.add(keras.layers.Dense(1, activation="sigmoid"))
     elif request.param == "DenseEntangler":
         num_legs = 3
         leg_dim = round(data.shape[-1] ** (1.0 / num_legs))
         assert leg_dim**num_legs == data.shape[-1]
 
-        model = Sequential()
+        model = keras.models.Sequential()
+        model.add(keras.layers.Input(shape=(data.shape[1],)))
         model.add(
             DenseEntangler(
                 leg_dim**num_legs,
@@ -101,16 +105,16 @@ def make_model(dummy_data, request):
                 num_levels=3,
                 use_bias=True,
                 activation="relu",
-                input_shape=(data.shape[1],),
             )
         )
-        model.add(Dense(1, activation="sigmoid"))
+        model.add(keras.layers.Dense(1, activation="sigmoid"))
     elif request.param == "DenseEntanglerAsymmetric":
         num_legs = 3
         leg_dim = round(data.shape[-1] ** (1.0 / num_legs))
         assert leg_dim**num_legs == data.shape[-1]
 
-        model = Sequential()
+        model = keras.models.Sequential()
+        model.add(keras.layers.Input(shape=(data.shape[1],)))
         model.add(
             DenseEntangler(
                 (leg_dim * 2) ** num_legs,
@@ -118,10 +122,9 @@ def make_model(dummy_data, request):
                 num_levels=3,
                 use_bias=True,
                 activation="relu",
-                input_shape=(data.shape[1],),
             )
         )
-        model.add(Dense(1, activation="sigmoid"))
+        model.add(keras.layers.Dense(1, activation="sigmoid"))
 
     return model
 
@@ -199,7 +202,8 @@ def make_high_dim_model(high_dim_data, request):
     data = high_dim_data
 
     if request.param == "DenseMPO":
-        model = Sequential()
+        model = keras.models.Sequential()
+        model.add(keras.layers.Input(batch_shape=data.shape))
         model.add(
             DenseMPO(
                 data.shape[-1],
@@ -207,40 +211,39 @@ def make_high_dim_model(high_dim_data, request):
                 bond_dim=8,
                 use_bias=True,
                 activation="relu",
-                input_shape=(data.shape[-1],),
             )
         )
     elif request.param == "DenseDecomp":
-        model = Sequential()
+        model = keras.models.Sequential()
+        model.add(keras.layers.Input(batch_shape=data.shape))
         model.add(
             DenseDecomp(
                 512,
                 decomp_size=128,
                 use_bias=True,
                 activation="relu",
-                input_shape=(data.shape[-1],),
             )
         )
     elif request.param == "DenseCondenser":
-        model = Sequential()
+        model = keras.models.Sequential()
+        model.add(keras.layers.Input(batch_shape=data.shape))
         model.add(
             DenseCondenser(
                 exp_base=2,
                 num_nodes=3,
                 use_bias=True,
                 activation="relu",
-                input_shape=(data.shape[-1],),
             )
         )
     elif request.param == "DenseExpander":
-        model = Sequential()
+        model = keras.models.Sequential()
+        model.add(keras.layers.Input(batch_shape=data.shape))
         model.add(
             DenseExpander(
                 exp_base=2,
                 num_nodes=3,
                 use_bias=True,
                 activation="relu",
-                input_shape=(data.shape[-1],),
             )
         )
     elif request.param == "DenseEntangler":
@@ -248,7 +251,8 @@ def make_high_dim_model(high_dim_data, request):
         leg_dim = round(data.shape[-1] ** (1.0 / num_legs))
         assert leg_dim**num_legs == data.shape[-1]
 
-        model = Sequential()
+        model = keras.models.Sequential()
+        model.add(keras.layers.Input(batch_shape=data.shape))
         model.add(
             DenseEntangler(
                 leg_dim**num_legs,
@@ -256,7 +260,6 @@ def make_high_dim_model(high_dim_data, request):
                 num_levels=3,
                 use_bias=True,
                 activation="relu",
-                input_shape=(data.shape[-1],),
             )
         )
 
@@ -280,14 +283,14 @@ def test_decomp_num_parameters(dummy_data):
     output_dim = 256
     decomp_size = 128
 
-    model = Sequential()
+    model = keras.models.Sequential()
+    model.add(keras.layers.Input(shape=(data.shape[1],)))
     model.add(
         DenseDecomp(
             output_dim,
             decomp_size=decomp_size,
             use_bias=True,
             activation="relu",
-            input_shape=(data.shape[1],),
         )
     )
 
@@ -307,7 +310,8 @@ def test_mpo_num_parameters(dummy_data):
     num_nodes = int(math.log(data.shape[1], 8))
     bond_dim = 8
 
-    model = Sequential()
+    model = keras.models.Sequential()
+    model.add(keras.layers.Input(shape=(data.shape[1],)))
     model.add(
         DenseMPO(
             output_dim,
@@ -315,7 +319,6 @@ def test_mpo_num_parameters(dummy_data):
             bond_dim=bond_dim,
             use_bias=True,
             activation="relu",
-            input_shape=(data.shape[1],),
         )
     )
 
@@ -338,14 +341,14 @@ def test_condenser_num_parameters(dummy_data):
     data, _ = dummy_data
     exp_base = 2
     num_nodes = 3
-    model = Sequential()
+    model = keras.models.Sequential()
+    model.add(keras.layers.Input(shape=(data.shape[1],)))
     model.add(
         DenseCondenser(
             exp_base=exp_base,
             num_nodes=num_nodes,
             use_bias=True,
             activation="relu",
-            input_shape=(data.shape[1],),
         )
     )
 
@@ -365,14 +368,14 @@ def test_expander_num_parameters(dummy_data):
     data, _ = dummy_data
     exp_base = 2
     num_nodes = 3
-    model = Sequential()
+    model = keras.models.Sequential()
+    model.add(keras.layers.Input(shape=(data.shape[-1],)))
     model.add(
         DenseExpander(
             exp_base=exp_base,
             num_nodes=num_nodes,
             use_bias=True,
             activation="relu",
-            input_shape=(data.shape[-1],),
         )
     )
 
@@ -396,7 +399,8 @@ def test_entangler_num_parameters(dummy_data):
     leg_dim = round(data.shape[-1] ** (1.0 / num_legs))
     assert leg_dim**num_legs == data.shape[-1]
 
-    model = Sequential()
+    model = keras.models.Sequential()
+    model.add(keras.layers.Input(shape=(data.shape[1],)))
     model.add(
         DenseEntangler(
             leg_dim**num_legs,
@@ -404,7 +408,6 @@ def test_entangler_num_parameters(dummy_data):
             num_levels=num_levels,
             use_bias=True,
             activation="relu",
-            input_shape=(data.shape[1],),
         )
     )
 
@@ -424,7 +427,8 @@ def test_entangler_asymmetric_num_parameters_output_shape(
 ):
     leg_dim, out_leg_dim = leg_dims
     data_shape = (leg_dim**num_legs,)
-    model = Sequential()
+    model = keras.models.Sequential()
+    model.add(keras.layers.Input(shape=data_shape))
     model.add(
         DenseEntangler(
             out_leg_dim**num_legs,
@@ -432,7 +436,6 @@ def test_entangler_asymmetric_num_parameters_output_shape(
             num_levels=num_levels,
             use_bias=True,
             activation="relu",
-            input_shape=data_shape,
         )
     )
 
@@ -476,7 +479,7 @@ def test_config(make_model):
         new_model = DenseEntangler.from_config(layer_config)
 
     # Build the layer so we can count params below
-    new_model.build(layer_config["batch_input_shape"])
+    new_model.build(model.input_shape)
 
     # Check that original layer had same num params as layer built from config
     np.testing.assert_equal(expected_num_parameters, new_model.count_params())
@@ -492,11 +495,11 @@ def test_model_save(dummy_data, make_model, tmp_path):
     # Train the model for 5 epochs
     model.fit(data, labels, epochs=5, batch_size=32)
 
-    for save_path in ["test_model", "test_model.h5"]:
+    for save_path in ["test_model.keras", "test_model.h5"]:
         # Save model to a SavedModel folder or h5 file, then load model
         save_path = tmp_path / save_path
         model.save(save_path)
-        loaded_model = load_model(save_path)
+        loaded_model = keras.saving.load_model(save_path)
 
         # Clean up SavedModel folder
         if os.path.isdir(save_path):

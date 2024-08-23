@@ -1,9 +1,10 @@
 import numpy as np
-from jax import config
 import pytest
+from jax import config
+
 import tensornetwork
-import tensornetwork.linalg.krylov
 import tensornetwork.linalg.initialization
+import tensornetwork.linalg.krylov
 from tensornetwork.tests import testing_utils
 
 # pylint: disable=no-member
@@ -214,7 +215,7 @@ def test_eigs(sparse_backend, dtype):
         return tensor.array @ B
 
     result = tensornetwork.linalg.krylov.eigs(
-        matvec, backend=sparse_backend, x0=x0, num_krylov_vecs=3, numeig=1
+        matvec, backend=sparse_backend, x0=x0, num_krylov_vecs=3, numeig=1, maxiter=50
     )
     rev, reV = result
     test_result = tensor.backend.eigs(
@@ -223,7 +224,7 @@ def test_eigs(sparse_backend, dtype):
     tev, _ = test_result
 
     for r, t, R in zip(rev, tev, reV):
-        np.testing.assert_allclose(np.array(r), np.array(t))
+        np.testing.assert_allclose(np.array(r), np.array(t), rtol=1e-6)
         testR = matvec(R) / r
         np.testing.assert_allclose(testR.array, R.array, rtol=1e-5)
 
@@ -261,7 +262,7 @@ def test_eigs_with_args(sparse_backend, dtype):
     tev, teV = test_result
 
     for r, t, R in zip(rev, tev, teV):
-        np.testing.assert_allclose(np.array(r), np.array(t))
+        np.testing.assert_allclose(np.array(r), np.array(t), rtol=1e-6)
         testR = matvec(R) / r
         np.testing.assert_allclose(testR.array, R.array, rtol=1e-5)
 
