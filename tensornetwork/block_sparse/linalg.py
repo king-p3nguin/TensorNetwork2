@@ -12,14 +12,13 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-from typing import Any, List, Optional, Sequence, Text, Tuple, Type, Union
+from typing import Any, Optional, Sequence, Tuple, Type, Union
 
 import numpy as np
 
 from tensornetwork.block_sparse.blocksparse_utils import (
     _find_diagonal_sparse_blocks,
     _find_transposed_diagonal_sparse_blocks,
-    compute_num_nonzero,
     compute_sparse_lookup,
 )
 from tensornetwork.block_sparse.blocksparsetensor import (
@@ -29,13 +28,7 @@ from tensornetwork.block_sparse.blocksparsetensor import (
 )
 from tensornetwork.block_sparse.index import Index
 from tensornetwork.block_sparse.initialization import empty_like
-from tensornetwork.block_sparse.utils import (
-    _randn,
-    _random,
-    flatten,
-    get_real_dtype,
-    intersect,
-)
+from tensornetwork.block_sparse.utils import flatten, get_real_dtype
 
 
 def norm(tensor: BlockSparseTensor) -> float:
@@ -333,7 +326,7 @@ def svd(
     return S
 
 
-def qr(matrix: BlockSparseTensor, mode: Text = "reduced") -> Any:
+def qr(matrix: BlockSparseTensor, mode: str = "reduced") -> Any:
     """
     Compute the qr decomposition of an `M` by `N` matrix `matrix`.
     The matrix is factorized into `q*r`, with
@@ -435,7 +428,7 @@ def qr(matrix: BlockSparseTensor, mode: Text = "reduced") -> Any:
 
 
 def eigh(
-    matrix: BlockSparseTensor, UPLO: Optional[Text] = "L"
+    matrix: BlockSparseTensor, UPLO: Optional[str] = "L"
 ) -> Tuple[ChargeArray, BlockSparseTensor]:
     """
     Compute the eigen decomposition of a hermitian `M` by `M` matrix `matrix`.

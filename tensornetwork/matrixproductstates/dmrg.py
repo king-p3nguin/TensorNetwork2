@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 from sys import stdout
-from typing import Any, Text, Union
+from typing import Any
 
 import numpy as np
 
@@ -36,7 +36,7 @@ class BaseDMRG:
         mpo: BaseMPO,
         left_boundary: Tensor,
         right_boundary: Tensor,
-        name: Text,
+        name: str,
     ):
         """
         Base class for DMRG simulations.
@@ -79,15 +79,13 @@ class BaseDMRG:
         self.right_envs = {len(mps) - 1: self.backend.convert_to_tensor(right_boundary)}
         if self.left_envs[0].dtype != self.dtype:
             raise TypeError(
-                "left_boundary.dtype = {} is different from BaseDMRG.dtype = {}".format(
-                    self.left_envs[0].dtype.dtype, self.dtype
-                )
+                f"left_boundary.dtype = {self.left_envs[0].dtype.dtype} is different "
+                f"from BaseDMRG.dtype = {self.dtype}"
             )
         if self.right_envs[len(mps) - 1].dtype != self.dtype:
             raise TypeError(
-                "right_boundary.dtype = {} is different from BaseDMRG.dtype = {}".format(
-                    self.right_envs[0].dtype, self.dtype
-                )
+                f"right_boundary.dtype = {self.right_envs[0].dtype} is different "
+                f"from BaseDMRG.dtype = {self.dtype}"
             )
 
         self.name = name
@@ -103,9 +101,8 @@ class BaseDMRG:
         """
         if not self.mps.dtype == self.mpo.dtype:
             raise TypeError(
-                "mps.dtype = {} is different from mpo.dtype = {}".format(
-                    self.mps.dtype, self.mpo.dtype
-                )
+                f"mps.dtype = {self.mps.dtype} is different "
+                f"from mpo.dtype = {self.mpo.dtype}"
             )
         return self.mps.dtype
 
@@ -647,7 +644,7 @@ class FiniteDMRG(BaseDMRG):
     """
 
     def __init__(
-        self, mps: FiniteMPS, mpo: FiniteMPO, name: Text = "FiniteDMRG"
+        self, mps: FiniteMPS, mpo: FiniteMPO, name: str = "FiniteDMRG"
     ) -> None:
         """
         Initialize a finite DRMG simulation.

@@ -1,11 +1,8 @@
 import numpy as np
 import pytest
 
-import tensornetwork.block_sparse.linalg as linalg
-from tensornetwork import ncon
-from tensornetwork.block_sparse.blocksparse_utils import (
-    _find_diagonal_sparse_blocks,
-)  # pylint: disable=line-too-long
+from tensornetwork.block_sparse import linalg
+from tensornetwork.block_sparse.blocksparse_utils import _find_diagonal_sparse_blocks
 from tensornetwork.block_sparse.blocksparsetensor import BlockSparseTensor, ChargeArray
 from tensornetwork.block_sparse.charge import (
     BaseCharge,

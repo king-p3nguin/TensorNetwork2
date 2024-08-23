@@ -1,6 +1,6 @@
 # pylint: disable=no-name-in-module
 import math
-from typing import List, Optional, Tuple
+from typing import Optional, Tuple
 
 import tensorflow as tf
 from keras import Layer, activations, initializers
@@ -10,9 +10,9 @@ from tensornetwork.network_components import Node
 
 
 # pytype: disable=module-attr
-@tf.keras.utils.register_keras_serializable(
+@tf.keras.utils.register_keras_serializable(  # pylint: disable=no-member
     package="tensornetwork"
-)  # pylint: disable=no-member
+)
 # pytype: enable=module-attr
 class DenseMPO(Layer):
     """Matrix Product Operator (MPO) TN layer.
@@ -85,7 +85,7 @@ class DenseMPO(Layer):
         self.kernel_initializer = initializers.get(kernel_initializer)
         self.bias_initializer = initializers.get(bias_initializer)
 
-    def build(self, input_shape: List[int]) -> None:
+    def build(self, input_shape: list[int]) -> None:
         # Disable the attribute-defined-outside-init violations in this function
         # pylint: disable=attribute-defined-outside-init
         if input_shape[-1] is None:
@@ -166,7 +166,7 @@ class DenseMPO(Layer):
 
         def f(
             x: tf.Tensor,
-            nodes: List[Node],
+            nodes: list[Node],
             num_nodes: int,
             in_leg_dim: int,
             output_dim: int,
@@ -233,7 +233,7 @@ class DenseMPO(Layer):
         )
         return result
 
-    def compute_output_shape(self, input_shape: List[int]) -> Tuple[int, int]:
+    def compute_output_shape(self, input_shape: list[int]) -> Tuple[int, int]:
         return tuple(input_shape[0:-1]) + (self.output_dim,)
 
     def get_config(self) -> dict:

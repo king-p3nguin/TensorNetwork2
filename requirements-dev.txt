@@ -1,7 +1,8 @@
 tensorflow
 pytest
-pytest-xdist
+pytest-cov
 torch
 jax
 jaxlib
 pylint
+black

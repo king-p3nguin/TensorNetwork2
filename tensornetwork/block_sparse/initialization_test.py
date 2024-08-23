@@ -1,7 +1,6 @@
 import numpy as np
 import pytest
 
-from tensornetwork.block_sparse.blocksparsetensor import BlockSparseTensor
 from tensornetwork.block_sparse.charge import BaseCharge, U1Charge, charge_equal
 from tensornetwork.block_sparse.index import Index
 from tensornetwork.block_sparse.initialization import (

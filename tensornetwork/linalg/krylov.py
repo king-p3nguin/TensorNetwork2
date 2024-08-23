@@ -11,17 +11,15 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-from typing import Any, Callable, List, Optional, Text, Tuple, Type, Union
+from typing import Any, Callable, Optional, Tuple, Type, Union
 
 import numpy as np
 
-import tensornetwork.backends.abstract_backend as abstract_backend
-import tensornetwork.tensor
 from tensornetwork import backends
+from tensornetwork.backends.abstract_backend import AbstractBackend
+from tensornetwork.tensor import Tensor
 
-AbstractBackend = abstract_backend.AbstractBackend
 Array = Any
-Tensor = tensornetwork.tensor.Tensor
 
 
 class MatvecCache:
@@ -39,7 +37,7 @@ class MatvecCache:
     def clear(self):
         self.cache = {}
 
-    def retrieve(self, backend_name: Text, matvec: Callable):
+    def retrieve(self, backend_name: str, matvec: Callable):
         if backend_name not in self.cache:
             self.cache[backend_name] = {}
         if matvec not in self.cache[backend_name]:
@@ -58,9 +56,9 @@ KRYLOV_MATVEC_CACHE = MatvecCache()
 
 
 def krylov_error_checks(
-    backend: Union[Text, AbstractBackend, None],
+    backend: Union[str, AbstractBackend, None],
     x0: Union[Tensor, None],
-    args: Union[List[Tensor], None],
+    args: Union[list[Tensor], None],
 ):
     """
     Checks that at least one of backend and x0 are not None; that backend
@@ -121,8 +119,8 @@ def krylov_error_checks(
 
 def eigsh_lanczos(
     A: Callable,
-    backend: Optional[Union[Text, AbstractBackend]] = None,
-    args: Optional[List[Tensor]] = None,
+    backend: Optional[Union[str, AbstractBackend]] = None,
+    args: Optional[list[Tensor]] = None,
     x0: Optional[Tensor] = None,
     shape: Optional[Tuple[int, ...]] = None,
     dtype: Optional[Type[np.number]] = None,
@@ -132,7 +130,7 @@ def eigsh_lanczos(
     delta: float = 1e-8,
     ndiag: int = 20,
     reorthogonalize: bool = False,
-) -> Tuple[Tensor, List]:
+) -> Tuple[Tensor, list]:
     """
     Lanczos method for finding the lowest eigenvector-eigenvalue pairs
     of `A`.
@@ -193,17 +191,17 @@ def eigsh_lanczos(
 
 def eigs(
     A: Callable,
-    backend: Optional[Union[Text, AbstractBackend]] = None,
-    args: Optional[List[Tensor]] = None,
+    backend: Optional[Union[str, AbstractBackend]] = None,
+    args: Optional[list[Tensor]] = None,
     x0: Optional[Tensor] = None,
     shape: Optional[Tuple[int, ...]] = None,
     dtype: Optional[Type[np.number]] = None,
     num_krylov_vecs: int = 20,
     numeig: int = 1,
     tol: float = 1e-8,
-    which: Text = "LR",
+    which: str = "LR",
     maxiter: int = 20,
-) -> Tuple[Tensor, List]:
+) -> Tuple[Tensor, list]:
     """
     Implicitly restarted Arnoldi method for finding the lowest
     eigenvector-eigenvalue pairs of a linear operator `A`.
@@ -292,7 +290,7 @@ def eigs(
 def gmres(
     A_mv: Callable,
     b: Tensor,
-    A_args: Optional[List] = None,
+    A_args: Optional[list] = None,
     x0: Optional[Tensor] = None,
     tol: float = 1e-05,
     atol: Optional[float] = None,

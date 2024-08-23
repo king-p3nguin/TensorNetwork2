@@ -37,7 +37,7 @@ def no_backend_dependency(monkeypatch):
 
     monkeypatch.setattr(builtins, "__import__", mocked_import)
     # Nuke the cache.
-    backend_factory._INSTANTIATED_BACKENDS = dict()
+    backend_factory._INSTANTIATED_BACKENDS = {}
 
 
 @pytest.mark.usefixtures("no_backend_dependency")

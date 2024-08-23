@@ -3,7 +3,6 @@ import itertools
 
 import numpy as np
 import pytest
-import tensorflow as tf
 from keras import Input, Sequential
 
 from tensornetwork.tn_keras.layers import DenseMPO

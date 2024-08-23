@@ -12,9 +12,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-from typing import Optional, Sequence, Text, Tuple, Union
+from typing import Optional, Sequence, Tuple, Union
 
-from tensornetwork import ncon_interface
 from tensornetwork.tensor import Tensor
 
 
@@ -131,7 +130,7 @@ def outer(tensor1: Tensor, tensor2: Tensor) -> Tensor:
     return Tensor(out_data, backend=tensor1.backend)
 
 
-def einsum(expression: Text, *tensors: Tensor, optimize: bool) -> Tensor:
+def einsum(expression: str, *tensors: Tensor, optimize: bool) -> Tensor:
     """Calculate sum of products of Tensors according to expression."""
     all_backends_same, errstr = _check_backends(tensors, "einsum")
     if not all_backends_same:

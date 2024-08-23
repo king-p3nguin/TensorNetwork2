@@ -20,19 +20,7 @@ these spaces. Hence we provide some simple abstractions to ease linear
 algebra operations in which the vectors and operators are represented by
 tensor networks.
 """
-from typing import (
-    Any,
-    Callable,
-    Collection,
-    List,
-    Optional,
-    Sequence,
-    Set,
-    Text,
-    Tuple,
-    Type,
-    Union,
-)
+from typing import Any, Callable, Collection, Optional, Sequence, Tuple, Type, Union
 
 import numpy as np
 
@@ -82,7 +70,7 @@ def quantum_constructor(
 
 def identity(
     space: Sequence[int],
-    backend: Optional[Text] = None,
+    backend: Optional[str] = None,
     dtype: Type[np.number] = np.float64,
 ) -> "QuOperator":
     """Construct a `QuOperator` representing the identity on a given space.
@@ -233,7 +221,7 @@ class QuOperator:
         tensor: Tensor,
         out_axes: Sequence[int],
         in_axes: Sequence[int],
-        backend: Optional[Text] = None,
+        backend: Optional[str] = None,
     ) -> "QuOperator":
         """Construct a `QuOperator` directly from a single tensor.
 
@@ -254,16 +242,16 @@ class QuOperator:
         return cls(out_edges, in_edges, set([n]))
 
     @property
-    def nodes(self) -> Set[AbstractNode]:
+    def nodes(self) -> set[AbstractNode]:
         """All tensor-network nodes involved in the operator."""
         return reachable(get_all_nodes(self.out_edges + self.in_edges) | self.ref_nodes)
 
     @property
-    def in_space(self) -> List[int]:
+    def in_space(self) -> list[int]:
         return [e.dimension for e in self.in_edges]
 
     @property
-    def out_space(self) -> List[int]:
+    def out_space(self) -> list[int]:
         return [e.dimension for e in self.out_edges]
 
     def is_scalar(self) -> bool:
@@ -568,7 +556,7 @@ class QuVector(QuOperator):
         cls,
         tensor: Tensor,
         subsystem_axes: Optional[Sequence[int]] = None,
-        backend: Optional[Text] = None,
+        backend: Optional[str] = None,
     ) -> "QuVector":
         """Construct a `QuVector` directly from a single tensor.
 
@@ -592,11 +580,11 @@ class QuVector(QuOperator):
         return cls(subsystem_edges)
 
     @property
-    def subsystem_edges(self) -> List[Edge]:
+    def subsystem_edges(self) -> list[Edge]:
         return self.out_edges
 
     @property
-    def space(self) -> List[int]:
+    def space(self) -> list[int]:
         return self.out_space
 
     def projector(self) -> "QuOperator":
@@ -636,7 +624,7 @@ class QuAdjointVector(QuOperator):
         cls,
         tensor: Tensor,
         subsystem_axes: Optional[Sequence[int]] = None,
-        backend: Optional[Text] = None,
+        backend: Optional[str] = None,
     ) -> "QuAdjointVector":
         """Construct a `QuAdjointVector` directly from a single tensor.
 
@@ -660,11 +648,11 @@ class QuAdjointVector(QuOperator):
         return cls(subsystem_edges)
 
     @property
-    def subsystem_edges(self) -> List[Edge]:
+    def subsystem_edges(self) -> list[Edge]:
         return self.in_edges
 
     @property
-    def space(self) -> List[int]:
+    def space(self) -> list[int]:
         return self.in_space
 
     def projector(self) -> "QuOperator":
@@ -696,7 +684,7 @@ class QuScalar(QuOperator):
         super().__init__([], [], ref_nodes, ignore_edges)
 
     @classmethod
-    def from_tensor(cls, tensor: Tensor, backend: Optional[Text] = None) -> "QuScalar":
+    def from_tensor(cls, tensor: Tensor, backend: Optional[str] = None) -> "QuScalar":
         """Construct a `QuScalar` directly from a single tensor.
 
         This first wraps the tensor in a `Node`, then constructs the

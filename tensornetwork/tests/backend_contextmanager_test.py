@@ -56,6 +56,6 @@ def test_set_default_backend_value_error():
     tn.set_default_backend("pytorch")
     with pytest.raises(
         ValueError,
-        match="Item passed to set_default_backend " "must be Text or BaseBackend",
+        match="Item passed to set_default_backend must be str or BaseBackend",
     ):
         tn.set_default_backend(-1)  # pytype: disable=wrong-arg-types

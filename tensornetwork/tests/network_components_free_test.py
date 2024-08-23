@@ -1,7 +1,6 @@
 # pylint: disable=no-member
 import re
 from collections import namedtuple
-from typing import Dict
 from unittest.mock import patch
 
 import h5py
@@ -11,7 +10,7 @@ import tensorflow as tf
 import torch
 
 import tensornetwork as tn
-import tensornetwork.network_components as network_components
+from tensornetwork import network_components
 from tensornetwork.backends.abstract_backend import AbstractBackend
 from tensornetwork.network_components import (
     AbstractNode,
@@ -49,6 +48,7 @@ op_backend_dtype_values = [
 
 
 class TestNode(AbstractNode):
+    __test__ = False
 
     def get_tensor(self):  # pylint: disable=useless-super-delegation
         return super().get_tensor()
@@ -78,7 +78,7 @@ class TestNode(AbstractNode):
     def copy(self, conjugate: bool = False) -> "TestNode":
         return TestNode()
 
-    def to_serial_dict(self) -> Dict:
+    def to_serial_dict(self) -> dict:
         return {}
 
     @classmethod

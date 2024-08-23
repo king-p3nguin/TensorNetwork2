@@ -12,27 +12,25 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 """Helper methods for `path_contractors`."""
-from typing import Any, Callable, Dict, Iterable, List, Set, Text, Tuple
+from typing import Any, Callable, Iterable, Tuple
 
 from tensornetwork.network_components import AbstractNode, Edge
-
-# pylint: disable=line-too-long
 from tensornetwork.network_operations import get_all_edges, get_subgraph_dangling
 
 # `opt_einsum` algorithm method typing
 Algorithm = Callable[
-    [List[Set[Edge]], Set[Edge], Dict[Edge, Any]], List[Tuple[int, int]]
+    [list[set[Edge]], set[Edge], dict[Edge, Any]], list[Tuple[int, int]]
 ]
 
 
-def multi_remove(elems: List[Any], indices: List[int]) -> List[Any]:
+def multi_remove(elems: list[Any], indices: list[int]) -> list[Any]:
     """Remove multiple indicies in a list at once."""
     return [i for j, i in enumerate(elems) if j not in indices]
 
 
 def get_path(
     nodes: Iterable[AbstractNode], algorithm: Algorithm
-) -> Tuple[List[Tuple[int, int]], List[AbstractNode]]:
+) -> Tuple[list[Tuple[int, int]], list[AbstractNode]]:
     """Calculates the contraction paths using `opt_einsum` methods.
 
     Args:

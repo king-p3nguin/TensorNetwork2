@@ -3,9 +3,7 @@ import pytest
 
 from tensornetwork.backends.numpy import numpy_backend
 from tensornetwork.backends.symmetric import symmetric_backend
-from tensornetwork.block_sparse.blocksparse_utils import (
-    _find_diagonal_sparse_blocks,
-)  # pylint: disable=line-too-long
+from tensornetwork.block_sparse.blocksparse_utils import _find_diagonal_sparse_blocks
 from tensornetwork.block_sparse.blocksparsetensor import (
     BlockSparseTensor,
     ChargeArray,

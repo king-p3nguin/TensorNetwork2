@@ -16,7 +16,7 @@
 import copy
 from functools import reduce
 from operator import mul
-from typing import Any, List, Optional, Sequence, Tuple, Type, Union
+from typing import Any, Optional, Sequence, Tuple, Type, Union
 
 import numpy as np
 
@@ -25,7 +25,6 @@ from tensornetwork.block_sparse.blocksparse_utils import (
     _find_diagonal_sparse_blocks,
     _find_transposed_diagonal_sparse_blocks,
     compute_num_nonzero,
-    get_flat_meta_data,
     reduce_charges,
 )
 from tensornetwork.block_sparse.charge import BaseCharge, charge_equal, fuse_charges
@@ -58,9 +57,9 @@ class ChargeArray:
     def __init__(
         self,
         data: np.ndarray,
-        charges: List[BaseCharge],
-        flows: Union[np.ndarray, List[bool]],
-        order: Optional[List[List[int]]] = None,
+        charges: list[BaseCharge],
+        flows: Union[np.ndarray, list[bool]],
+        order: Optional[list[list[int]]] = None,
         check_consistency: Optional[bool] = False,
     ) -> None:
         """
@@ -102,7 +101,7 @@ class ChargeArray:
     @classmethod
     def random(
         cls,
-        indices: Union[Tuple[Index], List[Index]],
+        indices: Union[Tuple[Index], list[Index]],
         boundaries: Optional[Tuple[float, float]] = (0.0, 1.0),
         dtype: Optional[Type[np.number]] = None,
     ) -> "ChargeArray":
@@ -162,34 +161,34 @@ class ChargeArray:
         return reduce(mul, [self._charges[n].dim for s in self._order for n in s])
 
     @property
-    def charges(self) -> List[List[BaseCharge]]:
+    def charges(self) -> list[list[BaseCharge]]:
         """
         A list of list of `BaseCharge`.
         The charges, in the current shape and index order as determined
         by `ChargeArray._order`.
         Returns:
-          List of List of BaseCharge
+          List of list of BaseCharge
         """
         return [[self._charges[n] for n in o] for o in self._order]
 
     @property
-    def flows(self) -> List[List]:
+    def flows(self) -> list[list]:
         """
         A list of list of `bool`.
         The flows, in the current shape and index order as determined by
         `ChargeArray._order`.
         Returns:
-          List of List of bool
+          List of list of bool
         """
 
         return [[self._flows[n] for n in o] for o in self._order]
 
     @property
-    def flat_charges(self) -> List[BaseCharge]:
+    def flat_charges(self) -> list[BaseCharge]:
         return list(self._charges[o] for o in self.flat_order)
 
     @property
-    def flat_flows(self) -> List:
+    def flat_flows(self) -> list:
         return list(self._flows[o] for o in self.flat_order)
 
     @property
@@ -540,9 +539,9 @@ class BlockSparseTensor(ChargeArray):
     def __init__(
         self,
         data: np.ndarray,
-        charges: List[BaseCharge],
-        flows: Union[np.ndarray, List[bool]],
-        order: Optional[List[Union[List, np.ndarray]]] = None,
+        charges: list[BaseCharge],
+        flows: Union[np.ndarray, list[bool]],
+        order: Optional[list[Union[list, np.ndarray]]] = None,
         check_consistency: Optional[bool] = False,
     ) -> None:
         """
@@ -587,7 +586,7 @@ class BlockSparseTensor(ChargeArray):
         )
 
     @classmethod
-    def fromdense(cls, indices: List[Index], array: np.ndarray) -> "BlockSparseTensor":
+    def fromdense(cls, indices: list[Index], array: np.ndarray) -> "BlockSparseTensor":
         """
         Initialize a BlockSparseTensor from a dense array.
         Args:
@@ -828,9 +827,8 @@ class BlockSparseTensor(ChargeArray):
     def __mul__(self, number: np.number) -> "BlockSparseTensor":
         if not np.isscalar(number):
             raise TypeError(
-                "Can only multiply BlockSparseTensor by a number. Found type {}".format(
-                    type(number)
-                )
+                "Can only multiply BlockSparseTensor by a number. "
+                f"Found type {type(number)}"
             )
         return BlockSparseTensor(
             data=self.data * number,
@@ -843,9 +841,8 @@ class BlockSparseTensor(ChargeArray):
     def __rmul__(self, number: np.number) -> "BlockSparseTensor":
         if not np.isscalar(number):
             raise TypeError(
-                "Can only right-multiply BlockSparseTensor by a number. Found type {}".format(
-                    type(number)
-                )
+                "Can only right-multiply BlockSparseTensor by a number. "
+                f"Found type {type(number)}"
             )
         return BlockSparseTensor(
             data=self.data * number,
@@ -858,9 +855,8 @@ class BlockSparseTensor(ChargeArray):
     def __truediv__(self, number: np.number) -> "BlockSparseTensor":
         if not np.isscalar(number):
             raise TypeError(
-                "Can only divide BlockSparseTensor by a number. Found type {}".format(
-                    type(number)
-                )
+                "Can only divide BlockSparseTensor by a number. "
+                f"Found type {type(number)}"
             )
 
         return BlockSparseTensor(
@@ -874,9 +870,8 @@ class BlockSparseTensor(ChargeArray):
     def __pow__(self, number: np.number) -> "BlockSparseTensor":
         if not np.isscalar(number):
             raise TypeError(
-                "Can only exponentiate BlockSparseTensor by a number. Found type {}".format(
-                    type(number)
-                )
+                "Can only exponentiate BlockSparseTensor by a number. "
+                f"Found type {type(number)}"
             )
         return BlockSparseTensor(
             data=self.data**number,
@@ -889,7 +884,7 @@ class BlockSparseTensor(ChargeArray):
     # pylint: disable=arguments-differ
     def contiguous(
         self,
-        permutation: Optional[Union[Tuple, List, np.ndarray]] = None,
+        permutation: Optional[Union[Tuple, list, np.ndarray]] = None,
         inplace: Optional[bool] = False,
     ) -> Any:
         """

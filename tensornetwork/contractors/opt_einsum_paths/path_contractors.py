@@ -15,7 +15,7 @@
 """Contractors based on `opt_einsum`'s path algorithms."""
 
 import functools
-from typing import Any, Iterable, List, Optional, Sequence, Text, Tuple
+from typing import Any, Iterable, Optional, Sequence, Tuple
 
 import opt_einsum
 
@@ -28,7 +28,6 @@ from tensornetwork.network_components import (
     get_all_nondangling,
 )
 from tensornetwork.network_operations import (
-    check_connected,
     contract_trace_edges,
     get_all_edges,
     get_subgraph_dangling,
@@ -327,11 +326,11 @@ def custom(
 
 
 def path_solver(
-    algorithm: Text,
+    algorithm: str,
     nodes: Iterable[AbstractNode],
     memory_limit: Optional[int] = None,
     nbranch: Optional[int] = None,
-) -> Tuple[List[Tuple[int, int]], List[AbstractNode]]:
+) -> Tuple[list[Tuple[int, int]], list[AbstractNode]]:
     """Calculates the contraction paths using `opt_einsum` methods.
 
     Args:
@@ -387,7 +386,7 @@ def path_solver(
 
 
 def contract_path(
-    path: Tuple[List[Tuple[int, int]]],
+    path: Tuple[list[Tuple[int, int]]],
     nodes: Iterable[AbstractNode],
     output_edge_order: Sequence[Edge],
 ) -> AbstractNode:

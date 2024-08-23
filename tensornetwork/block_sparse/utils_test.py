@@ -67,10 +67,8 @@ def test_find_best_partition_raises():
     assert p == 3
 
 
-# pylint: disable=too-many-return-statements
-def get_index(
-    return_index, return_inverse, return_counts, which
-):  # pylint: disable=inconsistent-return-statements
+# pylint: disable=too-many-return-statements,inconsistent-return-statements
+def get_index(return_index, return_inverse, return_counts, which):
     if which == "index":
         return 1 if return_index else -1
     if which == "inverse":

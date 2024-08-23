@@ -7,7 +7,7 @@ import keras
 import numpy as np
 import pytest
 import tensorflow as tf
-from tensorflow.keras import backend as K
+from tensorflow.keras import backend as K  # pylint: disable=no-member
 
 from tensornetwork.tn_keras.layers import Conv2DMPO
 

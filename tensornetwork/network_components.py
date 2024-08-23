@@ -14,20 +14,7 @@
 """Implementation of Network Components."""
 
 from abc import ABC, abstractmethod
-from typing import (
-    Any,
-    Dict,
-    Iterable,
-    List,
-    Optional,
-    Sequence,
-    Set,
-    Text,
-    Tuple,
-    Type,
-    Union,
-    overload,
-)
+from typing import Any, Iterable, Optional, Sequence, Tuple, Type, Union, overload
 
 import h5py
 import numpy as np
@@ -65,8 +52,8 @@ class AbstractNode(ABC):
 
     def __init__(
         self,
-        name: Optional[Text] = None,
-        axis_names: Optional[List[Text]] = None,
+        name: Optional[str] = None,
+        axis_names: Optional[list[str]] = None,
         backend: Optional[AbstractBackend] = None,
         shape: Optional[Tuple[int]] = None,
     ) -> None:
@@ -135,7 +122,7 @@ class AbstractNode(ABC):
         # any derived instance of AbstractNode always has to have a tensor
         return self.tensor.dtype
 
-    def add_axis_names(self, axis_names: List[Text]) -> None:
+    def add_axis_names(self, axis_names: list[str]) -> None:
         """Add axis names to a Node.
 
         Args:
@@ -160,7 +147,7 @@ class AbstractNode(ABC):
         self.axis_names = axis_names[:]
 
     def add_edge(
-        self, edge: "Edge", axis: Union[int, Text], override: bool = False
+        self, edge: "Edge", axis: Union[int, str], override: bool = False
     ) -> None:
         """Add an edge to the node on the given axis.
 
@@ -216,7 +203,7 @@ class AbstractNode(ABC):
         """Return rank of tensor represented by self."""
         return len(self.shape)
 
-    def reorder_edges(self, edge_order: List["Edge"]) -> "AbstractNode":
+    def reorder_edges(self, edge_order: list["Edge"]) -> "AbstractNode":
         """Reorder the edges for this given Node.
 
         This will reorder the node's edges and transpose the underlying tensor
@@ -275,7 +262,7 @@ class AbstractNode(ABC):
             self.axis_names = tmp_axis_names
         return self
 
-    def reorder_axes(self, perm: List[int]) -> "AbstractNode":
+    def reorder_axes(self, perm: list[int]) -> "AbstractNode":
         """Reorder axes of the node's tensor.
 
         This will also update all of the node's edges.
@@ -312,7 +299,7 @@ class AbstractNode(ABC):
             self.axis_names = tmp_axis_names
         return self
 
-    def tensor_from_edge_order(self, perm: List["Edge"]) -> "AbstractNode":
+    def tensor_from_edge_order(self, perm: list["Edge"]) -> "AbstractNode":
         order = []
         for edge in perm:
             if edge.node1 is self:
@@ -325,7 +312,7 @@ class AbstractNode(ABC):
                 )
         return self.backend.transpose(self.tensor, order)
 
-    def get_axis_number(self, axis: Union[Text, int]) -> int:
+    def get_axis_number(self, axis: Union[str, int]) -> int:
         """Get the axis number for a given axis name or value."""
         if isinstance(axis, int):
             return axis
@@ -336,7 +323,7 @@ class AbstractNode(ABC):
                 "Axis name '{}' not found for node '{}'".format(axis, self)
             ) from err
 
-    def get_dimension(self, axis: Union[Text, int]) -> Optional[int]:
+    def get_dimension(self, axis: Union[str, int]) -> Optional[int]:
         """Get the dimension of the given axis.
 
         Args:
@@ -353,19 +340,19 @@ class AbstractNode(ABC):
             raise ValueError("Axis must be positive and less than rank of the tensor")
         return self.shape[axis_num]
 
-    def get_edge(self, axis: Union[int, Text]) -> "Edge":
+    def get_edge(self, axis: Union[int, str]) -> "Edge":
         axis_num = self.get_axis_number(axis)
         return self.edges[axis_num]
 
-    def get_all_edges(self) -> List["Edge"]:
+    def get_all_edges(self) -> list["Edge"]:
         # Copy to prevent overwriting.
         return self.edges[:]
 
-    def get_all_nondangling(self) -> Set["Edge"]:
+    def get_all_nondangling(self) -> set["Edge"]:
         """Return the set of nondangling edges connected to this node."""
         return {edge for edge in self.edges if not edge.is_dangling()}
 
-    def get_all_dangling(self) -> List["Edge"]:
+    def get_all_dangling(self) -> list["Edge"]:
         """Return the set of dangling edges connected to this node."""
         return [edge for edge in self.edges if edge.is_dangling()]
 
@@ -387,19 +374,19 @@ class AbstractNode(ABC):
         return False
 
     @overload
-    def __getitem__(self, key: slice) -> List["Edge"]:
+    def __getitem__(self, key: slice) -> list["Edge"]:
         pass
 
     @overload
-    def __getitem__(self, key: Union[int, Text]) -> "Edge":
+    def __getitem__(self, key: Union[int, str]) -> "Edge":
         pass
 
-    def __getitem__(self, key: Union[int, Text, slice]) -> Union["Edge", List["Edge"]]:
+    def __getitem__(self, key: Union[int, str, slice]) -> Union["Edge", list["Edge"]]:
         if isinstance(key, slice):
             return self.edges[key]
         return self.get_edge(key)
 
-    def __str__(self) -> Text:
+    def __str__(self) -> str:
         return self.name
 
     def __lt__(self, other) -> bool:
@@ -417,7 +404,7 @@ class AbstractNode(ABC):
         return contract_between(self, other)
 
     @property
-    def edges(self) -> List["Edge"]:
+    def edges(self) -> list["Edge"]:
         if self.is_disabled:
             raise ValueError(
                 "Node {} has been disabled. "
@@ -426,7 +413,7 @@ class AbstractNode(ABC):
         return self._edges
 
     @edges.setter
-    def edges(self, edges: List) -> None:
+    def edges(self, edges: list) -> None:
         if self.is_disabled:
             raise ValueError(
                 "Node {} has been disabled."
@@ -435,7 +422,7 @@ class AbstractNode(ABC):
         self._edges = edges
 
     @property
-    def name(self) -> Text:
+    def name(self) -> str:
         return self._name
 
     @name.setter
@@ -445,11 +432,11 @@ class AbstractNode(ABC):
         self._name = name
 
     @property
-    def axis_names(self) -> List[Text]:
+    def axis_names(self) -> list[str]:
         return self._axis_names
 
     @axis_names.setter
-    def axis_names(self, axis_names: List[Text]) -> None:
+    def axis_names(self, axis_names: list[str]) -> None:
         if len(axis_names) != len(self.shape):
             raise ValueError(
                 "Expected {} names, only got {}.".format(
@@ -524,7 +511,7 @@ class AbstractNode(ABC):
         )
 
     @abstractmethod
-    def to_serial_dict(self) -> Dict:
+    def to_serial_dict(self) -> dict:
         """Return a serializable dict representing the node.
 
         Returns: A dict object.
@@ -553,7 +540,7 @@ class AbstractNode(ABC):
     def copy(self, conjugate: bool = False) -> "AbstractNode":
         return
 
-    def fresh_edges(self, axis_names: Optional[List[Text]] = None) -> None:
+    def fresh_edges(self, axis_names: Optional[list[str]] = None) -> None:
         if not axis_names:
             axis_names = self.axis_names
         if not axis_names:
@@ -581,9 +568,9 @@ class Node(AbstractNode):
     def __init__(
         self,
         tensor: Union[Tensor, AbstractNode],
-        name: Optional[Text] = None,
-        axis_names: Optional[List[Text]] = None,
-        backend: Optional[Union[Text, AbstractBackend]] = None,
+        name: Optional[str] = None,
+        axis_names: Optional[list[str]] = None,
+        backend: Optional[Union[str, AbstractBackend]] = None,
     ) -> None:
         """Create a node.
 
@@ -711,7 +698,7 @@ class Node(AbstractNode):
                 new_node.add_edge(Edge(new_node, i, name=edge.name), i)
         return new_node
 
-    def to_serial_dict(self) -> Dict:
+    def to_serial_dict(self) -> dict:
         """Return a serializable dict representing the node.
 
         Returns: A dict object.
@@ -779,7 +766,7 @@ class Node(AbstractNode):
         )
         return node
 
-    def __repr__(self) -> Text:
+    def __repr__(self) -> str:
         edges = self.get_all_edges()
         return (
             f"{self.__class__.__name__}\n(\n"
@@ -795,9 +782,9 @@ class CopyNode(AbstractNode):
         self,
         rank: int,
         dimension: int,
-        name: Optional[Text] = None,
-        axis_names: Optional[List[Text]] = None,
-        backend: Optional[Text] = None,
+        name: Optional[str] = None,
+        axis_names: Optional[list[str]] = None,
+        backend: Optional[str] = None,
         dtype: Type[np.number] = np.float64,
     ) -> None:
         """Initialize a CopyNode:
@@ -914,8 +901,8 @@ class CopyNode(AbstractNode):
         assert edge.node2 is self
         return edge.node1, edge.axis1
 
-    def get_partners(self) -> Dict[AbstractNode, Set[int]]:
-        partners = {}  # type: Dict[AbstractNode, Set[int]]
+    def get_partners(self) -> dict[AbstractNode, set[int]]:
+        partners = {}  # type: dict[AbstractNode, set[int]]
         for edge in self.edges:
             if edge.is_dangling():
                 raise ValueError("Cannot contract copy tensor with dangling edges")
@@ -932,7 +919,7 @@ class CopyNode(AbstractNode):
     )
 
     def _make_einsum_input_term(
-        self, node: AbstractNode, shared_axes: Set[int], next_index: int
+        self, node: AbstractNode, shared_axes: set[int], next_index: int
     ) -> Tuple[str, int]:
         indices = []
         for axis in range(node.get_rank()):
@@ -947,7 +934,7 @@ class CopyNode(AbstractNode):
     def _make_einsum_output_term(self, next_index: int) -> str:
         return "".join(self._VALID_SUBSCRIPTS[i] for i in range(1, next_index))
 
-    def _make_einsum_expression(self, partners: Dict[AbstractNode, Set[int]]) -> str:
+    def _make_einsum_expression(self, partners: dict[AbstractNode, set[int]]) -> str:
         next_index = 1  # zero is reserved for the shared index
         einsum_input_terms = []
         for partner_node, shared_axes in partners.items():
@@ -1006,7 +993,7 @@ class CopyNode(AbstractNode):
 
         return node
 
-    def to_serial_dict(self) -> Dict:
+    def to_serial_dict(self) -> dict:
         """Return a serializable dict representing the node.
 
         Returns: A dict object.
@@ -1056,7 +1043,7 @@ class Edge:
         self,
         node1: AbstractNode,
         axis1: int,
-        name: Optional[Text] = None,
+        name: Optional[str] = None,
         node2: Optional[AbstractNode] = None,
         axis2: Optional[int] = None,
     ) -> None:
@@ -1102,7 +1089,7 @@ class Edge:
         self.is_disabled = True
 
     @property
-    def name(self) -> Text:
+    def name(self) -> str:
         if self.is_disabled:
             raise ValueError(
                 "Edge has been disabled, accessing its name is no longer possible"
@@ -1151,7 +1138,7 @@ class Edge:
             )
         self._axes[1] = axis2
 
-    def get_nodes(self) -> List[Optional[AbstractNode]]:
+    def get_nodes(self) -> list[Optional[AbstractNode]]:
         """Get the nodes of the edge."""
         return self._nodes[:]
 
@@ -1261,7 +1248,7 @@ class Edge:
             result = result and self is self.node2[self.axis2]
         return result
 
-    def set_name(self, name: Text) -> None:
+    def set_name(self, name: str) -> None:
         if not isinstance(name, str):
             raise TypeError("Edge name should be str type")
         self.name = name
@@ -1280,7 +1267,7 @@ class Edge:
         edge_group.create_dataset("name", dtype=string_type, data=self.name)
 
     @classmethod
-    def _load_edge(cls, edge_data: h5py.Group, nodes_dict: Dict[Text, AbstractNode]):
+    def _load_edge(cls, edge_data: h5py.Group, nodes_dict: dict[str, AbstractNode]):
         """load an edge based on hdf5 data.
 
         Args:
@@ -1308,12 +1295,12 @@ class Edge:
     def __xor__(self, other: "Edge") -> "Edge":
         return connect(self, other, self.name)
 
-    def __str__(self) -> Optional[Text]:
+    def __str__(self) -> Optional[str]:
         if self.name:
             return self.name
         return "__unnamed_edge__"
 
-    def __repr__(self) -> Text:
+    def __repr__(self) -> str:
         if self.node1 is not None and self.node2 is not None:
             return (
                 f"\n{self.__class__.__name__}("
@@ -1323,7 +1310,7 @@ class Edge:
         return f"\n{self.__class__.__name__}(Dangling Edge)[{self.axis1}] \n"
 
     def disconnect(
-        self, edge1_name: Optional[Text] = None, edge2_name: Optional[Text] = None
+        self, edge1_name: Optional[str] = None, edge2_name: Optional[str] = None
     ) -> Tuple["Edge", "Edge"]:
         """Break an existing non-dangling edge.
 
@@ -1359,7 +1346,7 @@ class Edge:
             raise ValueError("Cannot break two unconnected edges")
         return self.disconnect()
 
-    def to_serial_dict(self) -> Dict:
+    def to_serial_dict(self) -> dict:
         """Return a serializable dict representing the edge.
 
         Returns: A dict object.
@@ -1371,7 +1358,7 @@ class Edge:
         return edge_dict
 
 
-def get_shared_edges(node1: AbstractNode, node2: AbstractNode) -> Set[Edge]:
+def get_shared_edges(node1: AbstractNode, node2: AbstractNode) -> set[Edge]:
     """Get all edges shared between two nodes.
 
     Args:
@@ -1392,7 +1379,7 @@ def get_shared_edges(node1: AbstractNode, node2: AbstractNode) -> Set[Edge]:
     return shared_edges
 
 
-def get_parallel_edges(edge: Edge) -> Set[Edge]:
+def get_parallel_edges(edge: Edge) -> set[Edge]:
     """
     Get all of the edges parallel to the given `edge`.
     Args:
@@ -1405,7 +1392,7 @@ def get_parallel_edges(edge: Edge) -> Set[Edge]:
     return get_shared_edges(edge.node1, edge.node2)
 
 
-def get_all_nondangling(nodes: Iterable[AbstractNode]) -> Set[Edge]:
+def get_all_nondangling(nodes: Iterable[AbstractNode]) -> set[Edge]:
     """Return the set of all non-dangling edges."""
     edges = set()
     for node in nodes:
@@ -1413,7 +1400,7 @@ def get_all_nondangling(nodes: Iterable[AbstractNode]) -> Set[Edge]:
     return edges
 
 
-def get_all_dangling(nodes: Iterable[AbstractNode]) -> List[Edge]:
+def get_all_dangling(nodes: Iterable[AbstractNode]) -> list[Edge]:
     """Return the set of all dangling edges."""
     edges = []
     for node in nodes:
@@ -1422,7 +1409,7 @@ def get_all_dangling(nodes: Iterable[AbstractNode]) -> List[Edge]:
 
 
 def _flatten_trace_edges(
-    edges: List[Edge], new_edge_name: Optional[Text] = None
+    edges: list[Edge], new_edge_name: Optional[str] = None
 ) -> Edge:
     """Flatten trace edges into single edge.
 
@@ -1457,7 +1444,7 @@ def _flatten_trace_edges(
     return new_edge
 
 
-def flatten_edges(edges: List[Edge], new_edge_name: Optional[Text] = None) -> Edge:
+def flatten_edges(edges: list[Edge], new_edge_name: Optional[str] = None) -> Edge:
     """Flatten edges into single edge.
 
     If two nodes have multiple edges connecting them, it may be
@@ -1492,7 +1479,7 @@ def flatten_edges(edges: List[Edge], new_edge_name: Optional[Text] = None) -> Ed
     backend = backends[0]
     if len(edges) == 1:
         return edges[0]  # Don't bother with reshaping.
-    # Set equality is transitive (a=b, b=c, therefore a=c) so it is only
+    # set equality is transitive (a=b, b=c, therefore a=c) so it is only
     # necessary to compare the first edge against the rest.
     expected_nodes = set(edges[0].get_nodes())
     for edge in edges:
@@ -1545,7 +1532,7 @@ def flatten_edges(edges: List[Edge], new_edge_name: Optional[Text] = None) -> Ed
             node.axis_names = [str(n) for n in range(len(node.edges))]
 
     node1, node2 = tuple(expected_nodes)
-    # Sets are returned in a random order, so this is how we deal with
+    # sets are returned in a random order, so this is how we deal with
     # dangling edges.
     # pylint: disable=expression-not-assigned
     [edge.disable() for edge in edges]  # disable edges!
@@ -1576,7 +1563,7 @@ def flatten_edges_between(
     return None
 
 
-def flatten_all_edges(nodes: Iterable[AbstractNode]) -> List[Edge]:
+def flatten_all_edges(nodes: Iterable[AbstractNode]) -> list[Edge]:
     """Flatten all edges that belong to the nodes.
 
     Returns:
@@ -1594,8 +1581,8 @@ def flatten_all_edges(nodes: Iterable[AbstractNode]) -> List[Edge]:
 def _split_trace_edge(
     edge: Edge,
     shape: Tuple[int, ...],
-    new_edge_names: Optional[List[Text]] = None,
-) -> List[Edge]:
+    new_edge_names: Optional[list[str]] = None,
+) -> list[Edge]:
     """Split trace edges into single edge.
 
     Args:
@@ -1640,8 +1627,8 @@ def _split_trace_edge(
 
 
 def split_edge(
-    edge: Edge, shape: Tuple[int, ...], new_edge_names: Optional[List[Text]] = None
-) -> List[Edge]:
+    edge: Edge, shape: Tuple[int, ...], new_edge_names: Optional[list[str]] = None
+) -> list[Edge]:
     """Split an `Edge` into multiple edges according to `shape`. Reshapes
     the underlying tensors connected to the edge accordingly.
 
@@ -1845,7 +1832,7 @@ def _remove_trace_edge(edge: Edge, new_node: AbstractNode) -> None:
 
 
 def _remove_edges(
-    edges: Set[Edge], node1: AbstractNode, node2: AbstractNode, new_node: AbstractNode
+    edges: set[Edge], node1: AbstractNode, node2: AbstractNode, new_node: AbstractNode
 ) -> None:
     """Takes a set of `edges` shared between `node1` and `node2` to be contracted
     over, and moves all other uncontracted edges from `node1` and `node2` to
@@ -1919,7 +1906,7 @@ def _remove_edges(
     [edge.disable() for edge in edges]  # disabled edges!
 
 
-def _contract_trace(edge: Edge, name: Optional[Text] = None) -> AbstractNode:
+def _contract_trace(edge: Edge, name: Optional[str] = None) -> AbstractNode:
     """Contract a trace edge.
     `edge` is disabled before returning.
     Args:
@@ -1952,7 +1939,7 @@ def _contract_trace(edge: Edge, name: Optional[Text] = None) -> AbstractNode:
 
 
 def contract(
-    edge: Edge, name: Optional[Text] = None, axis_names: Optional[List[Text]] = None
+    edge: Edge, name: Optional[str] = None, axis_names: Optional[list[str]] = None
 ) -> AbstractNode:
     """Contract an edge connecting two nodes.
 
@@ -2012,9 +1999,7 @@ def contract(
     return new_node
 
 
-def contract_copy_node(
-    copy_node: CopyNode, name: Optional[Text] = None
-) -> AbstractNode:
+def contract_copy_node(copy_node: CopyNode, name: Optional[str] = None) -> AbstractNode:
     """Contract all edges incident on given copy node.
 
     Args:
@@ -2066,7 +2051,7 @@ def contract_parallel(edge: Edge) -> AbstractNode:
     return contract_between(edge.node1, edge.node2)
 
 
-def connect(edge1: Edge, edge2: Edge, name: Optional[Text] = None) -> Edge:
+def connect(edge1: Edge, edge2: Edge, name: Optional[str] = None) -> Edge:
     for edge in [edge1, edge2]:
         if not edge.is_dangling():
             raise ValueError(
@@ -2103,7 +2088,7 @@ def connect(edge1: Edge, edge2: Edge, name: Optional[Text] = None) -> Edge:
 
 
 def disconnect(
-    edge, edge1_name: Optional[Text] = None, edge2_name: Optional[Text] = None
+    edge, edge1_name: Optional[str] = None, edge2_name: Optional[str] = None
 ) -> Tuple[Edge, Edge]:
     """Break an existing non-dangling edge.
 
@@ -2118,10 +2103,10 @@ def disconnect(
 def contract_between(
     node1: AbstractNode,
     node2: AbstractNode,
-    name: Optional[Text] = None,
+    name: Optional[str] = None,
     allow_outer_product: bool = False,
     output_edge_order: Optional[Sequence[Edge]] = None,
-    axis_names: Optional[List[Text]] = None,
+    axis_names: Optional[list[str]] = None,
 ) -> AbstractNode:
     """Contract all of the edges between the two given nodes.
 
@@ -2204,8 +2189,8 @@ def contract_between(
             for i, edge in enumerate(output_edge_order):
                 if edge in shared_edges:
                     raise ValueError(
-                        "Edge '{}' in output_edge_order is shared by the nodes to be "
-                        "contracted: '{}' and '{}'.".format(edge, node1, node2)
+                        f"Edge '{edge}' in output_edge_order is shared by the nodes "
+                        f"to be contracted: '{node1}' and '{node2}'."
                     )
                 edge_nodes = set(edge.get_nodes())
                 if node1 in edge_nodes:
@@ -2214,8 +2199,8 @@ def contract_between(
                     node2_output_axes.append(i)
                 else:
                     raise ValueError(
-                        "Edge '{}' in output_edge_order is not connected to node '{}' or "
-                        "node '{}'".format(edge, node1, node2)
+                        f"Edge '{edge}' in output_edge_order is not connected to "
+                        f"node '{node1}' or node '{node2}'"
                     )
             if (
                 node1_output_axes
@@ -2242,7 +2227,7 @@ def contract_between(
 
 
 def outer_product_final_nodes(
-    nodes: Iterable[AbstractNode], edge_order: List[Edge]
+    nodes: Iterable[AbstractNode], edge_order: list[Edge]
 ) -> AbstractNode:
     """Get the outer product of `nodes`
 
@@ -2274,8 +2259,8 @@ def outer_product_final_nodes(
 def outer_product(
     node1: AbstractNode,
     node2: AbstractNode,
-    name: Optional[Text] = None,
-    axis_names: Optional[List[Text]] = None,
+    name: Optional[str] = None,
+    axis_names: Optional[list[str]] = None,
 ) -> AbstractNode:
     """Calculates an outer product of the two nodes.
 
@@ -2358,7 +2343,7 @@ class NodeCollection:
 
     """
 
-    def __init__(self, container: Union[Set[AbstractNode], List[AbstractNode]]):
+    def __init__(self, container: Union[set[AbstractNode], list[AbstractNode]]):
         """Initialize the NodeCollection context manager.
 
         Args:

@@ -13,9 +13,7 @@
 # limitations under the License.
 
 import copy
-import math
-import warnings
-from typing import Any, List, Optional, Sequence, Text, Union
+from typing import Any, Optional, Sequence, Union
 
 import numpy as np
 
@@ -27,7 +25,7 @@ BaseBackend = abstract_backend.AbstractBackend
 
 class Tensor:
     def __init__(
-        self, array: Any, backend: Optional[Union[Text, BaseBackend]] = None
+        self, array: Any, backend: Optional[Union[str, BaseBackend]] = None
     ) -> None:
         if backend is None:
             backend = backend_contextmanager.get_default_backend()

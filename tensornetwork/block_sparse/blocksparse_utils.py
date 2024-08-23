@@ -14,7 +14,7 @@
 
 from functools import reduce
 from operator import mul
-from typing import Any, Callable, List, Optional, Sequence, Tuple, Union
+from typing import Any, Callable, Optional, Sequence, Tuple, Union
 
 import numpy as np
 
@@ -43,7 +43,7 @@ def _data_initializer(
     indices: Sequence[Index],
     *args,
     **kwargs
-) -> Tuple[np.ndarray, List[BaseCharge], List[bool], List[List[int]]]:
+) -> Tuple[np.ndarray, list[BaseCharge], list[bool], list[list[int]]]:
     """
     Initialize a 1d np.ndarray using `numpy_initializer` function.
 
@@ -57,9 +57,9 @@ def _data_initializer(
 
     Returns:
       np.ndarray: An initialized numpy array.
-      List[BaseCharge]: A list containing the flattened charges in `indices`
-      List[bool]: The flattened flows of `indices`.
-      List[List]: A list of list of int, the order information needed to
+      list[BaseCharge]: A list containing the flattened charges in `indices`
+      list[bool]: The flattened flows of `indices`.
+      list[list]: A list of list of int, the order information needed to
         initialize a BlockSparseTensor.
     """
     charges, flows = get_flat_meta_data(indices)
@@ -70,14 +70,14 @@ def _data_initializer(
     return data, charges, flows, order
 
 
-def get_flat_meta_data(indices: Sequence[Index]) -> Tuple[List, List]:
+def get_flat_meta_data(indices: Sequence[Index]) -> Tuple[list, list]:
     """
     Return charges and flows of flattened `indices`.
     Args:
       indices: A list of `Index` objects.
     Returns:
-      List[BaseCharge]: The flattened charges.
-      List[bool]: The flattened flows.
+      list[BaseCharge]: The flattened charges.
+      list[bool]: The flattened flows.
     """
     charges = []
     flows = []
@@ -88,8 +88,8 @@ def get_flat_meta_data(indices: Sequence[Index]) -> Tuple[List, List]:
 
 
 def compute_sparse_lookup(
-    charges: List[BaseCharge],
-    flows: Union[np.ndarray, List[bool]],
+    charges: list[BaseCharge],
+    flows: Union[np.ndarray, list[bool]],
     target_charges: BaseCharge,
 ) -> Tuple[np.ndarray, BaseCharge, np.ndarray]:
     """
@@ -130,7 +130,7 @@ def compute_sparse_lookup(
 
 
 def compute_fused_charge_degeneracies(
-    charges: List[BaseCharge], flows: Union[np.ndarray, List[bool]]
+    charges: list[BaseCharge], flows: Union[np.ndarray, list[bool]]
 ) -> Tuple[BaseCharge, np.ndarray]:
     """
     For a list of charges, computes all possible fused charges resulting
@@ -172,7 +172,7 @@ def compute_fused_charge_degeneracies(
 
 
 def compute_unique_fused_charges(
-    charges: List[BaseCharge], flows: Union[np.ndarray, List[bool]]
+    charges: list[BaseCharge], flows: Union[np.ndarray, list[bool]]
 ) -> BaseCharge:
     """
     For a list of charges, compute all possible fused charges resulting
@@ -199,7 +199,7 @@ def compute_unique_fused_charges(
 
 
 def compute_num_nonzero(
-    charges: List[BaseCharge], flows: Union[np.ndarray, List[bool]]
+    charges: list[BaseCharge], flows: Union[np.ndarray, list[bool]]
 ) -> int:
     """
     Compute the number of non-zero elements, given the meta-data of
@@ -228,8 +228,8 @@ def compute_num_nonzero(
 
 
 def reduce_charges(
-    charges: List[BaseCharge],
-    flows: Union[np.ndarray, List[bool]],
+    charges: list[BaseCharge],
+    flows: Union[np.ndarray, list[bool]],
     target_charges: np.ndarray,
     return_locations: Optional[bool] = False,
     strides: Optional[np.ndarray] = None,
@@ -360,8 +360,8 @@ def reduce_charges(
 
 
 def _find_diagonal_sparse_blocks(
-    charges: List[BaseCharge], flows: Union[np.ndarray, List[bool]], partition: int
-) -> Tuple[List, BaseCharge, np.ndarray]:
+    charges: list[BaseCharge], flows: Union[np.ndarray, list[bool]], partition: int
+) -> Tuple[list, BaseCharge, np.ndarray]:
     """
     Find the location of all non-trivial symmetry blocks from the data vector of
     of BlockSparseTensor (when viewed as a matrix across some prescribed index
@@ -375,7 +375,7 @@ def _find_diagonal_sparse_blocks(
         tensor is viewed as a matrix between `charges[:partition]` and
         the remaining charges).
     Returns:
-      block_maps (List[np.ndarray]): list of integer arrays, which each
+      block_maps (list[np.ndarray]): list of integer arrays, which each
         containing the location of a symmetry block in the data vector.
       block_qnums (BaseCharge): The charges of the corresponding blocks.n
         block, with 'n' the number of symmetries and 'm' the number of blocks.
@@ -476,11 +476,11 @@ def _find_diagonal_sparse_blocks(
 
 
 def _find_transposed_diagonal_sparse_blocks(
-    charges: List[BaseCharge],
-    flows: Union[np.ndarray, List[bool]],
+    charges: list[BaseCharge],
+    flows: Union[np.ndarray, list[bool]],
     tr_partition: int,
-    order: Optional[Union[List, np.ndarray]] = None,
-) -> Tuple[List, BaseCharge, np.ndarray]:
+    order: Optional[Union[list, np.ndarray]] = None,
+) -> Tuple[list, BaseCharge, np.ndarray]:
     """
     Find the diagonal blocks of a transposed tensor with
     meta-data `charges` and `flows`. `charges` and `flows`
@@ -498,7 +498,7 @@ def _find_transposed_diagonal_sparse_blocks(
       `charges[order[:partition]]` and `charges[order[partition:]]`).
       order: Order with which to permute the tensor axes.
     Returns:
-      block_maps (List[np.ndarray]): list of integer arrays, which each
+      block_maps (list[np.ndarray]): list of integer arrays, which each
         containing the location of a symmetry block in the data vector.
       block_qnums (BaseCharge): The charges of the corresponding blocks.
       block_dims (np.ndarray): 2-by-m array of matrix dimensions of each block.
@@ -717,10 +717,10 @@ def _find_transposed_diagonal_sparse_blocks(
 
 
 def _to_string(
-    charges: List[BaseCharge],
-    flows: Union[np.ndarray, List],
+    charges: list[BaseCharge],
+    flows: Union[np.ndarray, list],
     tr_partition: int,
-    order: List[int],
+    order: list[int],
 ) -> str:
     """
     map the input arguments of _find_transposed_diagonal_sparse_blocks

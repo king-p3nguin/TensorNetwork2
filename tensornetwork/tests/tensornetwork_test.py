@@ -605,13 +605,13 @@ def test_copy_tensor(backend):
     edge4 = tn.connect(d[0], cn[3])
 
     result = cn.compute_contracted_tensor()
-    assert list(result.shape) == []
+    assert not list(result.shape)
     np.testing.assert_allclose(result, 50 - 240 + 630)
 
     for edge in [edge1, edge2, edge3, edge4]:
         val = tn.contract(edge)
     result = val.tensor
-    assert list(result.shape) == []
+    assert not list(result.shape)
     np.testing.assert_allclose(result, 50 - 240 + 630)
 
 
@@ -626,13 +626,13 @@ def test_copy_tensor_parallel_edges(backend):
     edge3 = tn.connect(b[0], cn[2])
 
     result = cn.compute_contracted_tensor()
-    assert list(result.shape) == []
+    assert not list(result.shape)
     np.testing.assert_allclose(result, 10 + 40 + 90)
 
     for edge in [edge1, edge2, edge3]:
         val = tn.contract(edge)
     result = val.tensor
-    assert list(result.shape) == []
+    assert not list(result.shape)
     np.testing.assert_allclose(result, 10 + 40 + 90)
 
 
@@ -653,7 +653,7 @@ def test_contract_copy_node_connected_neighbors(backend):
 
     val = tn.contract_parallel(n.edges[0])
     result = val.tensor
-    assert list(result.shape) == []
+    assert not list(result.shape)
     np.testing.assert_allclose(result, 26 + 460)
 
 

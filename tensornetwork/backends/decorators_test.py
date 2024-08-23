@@ -7,8 +7,6 @@ import pytest
 
 import tensornetwork
 from tensornetwork import backends
-from tensornetwork.backends import backend_factory
-from tensornetwork.backends.abstract_backend import AbstractBackend
 
 
 def jittest_init(backend):

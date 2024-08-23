@@ -11,8 +11,7 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-import functools
-from typing import Any, Dict, List, Optional, Sequence, Text, Type, Union
+from typing import Any, Optional, Sequence, Type, Union
 
 import numpy as np
 
@@ -20,7 +19,6 @@ from tensornetwork.backends import backend_factory
 from tensornetwork.backends.abstract_backend import AbstractBackend
 from tensornetwork.matrixproductstates.base_mps import BaseMPS
 from tensornetwork.ncon_interface import ncon
-from tensornetwork.network_components import contract, contract_between
 
 Tensor = Any
 # TODO (mganahl): add jit
@@ -41,10 +39,10 @@ class InfiniteMPS(BaseMPS):
 
     def __init__(
         self,
-        tensors: List[Tensor],
+        tensors: list[Tensor],
         center_position: Optional[int] = None,
         connector_matrix: Optional[Tensor] = None,
-        backend: Optional[Union[AbstractBackend, Text]] = None,
+        backend: Optional[Union[AbstractBackend, str]] = None,
     ) -> None:
         """Initialize a InfiniteMPS.
 
@@ -69,10 +67,10 @@ class InfiniteMPS(BaseMPS):
     @classmethod
     def random(
         cls,
-        d: List[int],
-        D: List[int],
+        d: list[int],
+        D: list[int],
         dtype: Type[np.number],
-        backend: Optional[Union[AbstractBackend, Text]] = None,
+        backend: Optional[Union[AbstractBackend, str]] = None,
     ) -> "InfiniteMPS":
         """Initialize a random `InfiniteMPS`. The resulting state is normalized.
         Its center-position is at 0.
@@ -100,7 +98,7 @@ class InfiniteMPS(BaseMPS):
         return cls(tensors=tensors, center_position=0, backend=backend)
 
     def unit_cell_transfer_operator(
-        self, direction: Union[Text, int], matrix: Tensor
+        self, direction: Union[str, int], matrix: Tensor
     ) -> Tensor:
         sites = range(len(self))
         if direction in (-1, "r", "right"):
@@ -112,7 +110,7 @@ class InfiniteMPS(BaseMPS):
 
     def transfer_matrix_eigs(
         self,
-        direction: Union[Text, int],
+        direction: Union[str, int],
         initial_state: Optional[Tensor] = None,
         precision: Optional[float] = 1e-10,
         num_krylov_vecs: Optional[int] = 30,
@@ -182,10 +180,10 @@ class InfiniteMPS(BaseMPS):
         )
         return eta[0], result
 
-    def right_envs(self, sites: Sequence[int]) -> Dict:
+    def right_envs(self, sites: Sequence[int]) -> dict:
         raise NotImplementedError()
 
-    def left_envs(self, sites: Sequence[int]) -> Dict:
+    def left_envs(self, sites: Sequence[int]) -> dict:
         raise NotImplementedError()
 
     def save(self, path: str):

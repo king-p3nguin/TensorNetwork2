@@ -20,7 +20,6 @@ import scipy as sp
 import tensorflow as tf
 from jax import config
 
-import tensornetwork.backends.jax.jitted_functions as jitted_functions
 from tensornetwork.backends.jax import jax_backend
 
 # pylint: disable=no-member

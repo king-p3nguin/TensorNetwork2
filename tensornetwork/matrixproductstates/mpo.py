@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 """implementation of different Matrix Product Operators."""
-from typing import Any, List, Optional, Text, Type, Union
+from typing import Any, Optional, Type, Union
 
 import numpy as np
 
@@ -32,9 +32,9 @@ class BaseMPO:
 
     def __init__(
         self,
-        tensors: List[Tensor],
-        backend: Optional[Union[AbstractBackend, Text]] = None,
-        name: Optional[Text] = None,
+        tensors: list[Tensor],
+        backend: Optional[Union[AbstractBackend, str]] = None,
+        name: Optional[str] = None,
     ) -> None:
         """
         Initialize a BaseMPO.
@@ -72,7 +72,7 @@ class BaseMPO:
         return self.tensors[0].dtype
 
     @property
-    def bond_dimensions(self) -> List[int]:
+    def bond_dimensions(self) -> list[int]:
         """Returns a vector of all bond dimensions.
         The vector will have length `N+1`, where `N == num_sites`."""
         return [self.tensors[0].shape[0]] + [tensor.shape[1] for tensor in self.tensors]
@@ -86,9 +86,9 @@ class InfiniteMPO(BaseMPO):
 
     def __init__(
         self,
-        tensors: List[Tensor],
-        backend: Optional[Union[AbstractBackend, Text]] = None,
-        name: Optional[Text] = None,
+        tensors: list[Tensor],
+        backend: Optional[Union[AbstractBackend, str]] = None,
+        name: Optional[str] = None,
     ) -> None:
         """
         Initialize an infinite MPO object
@@ -117,9 +117,9 @@ class FiniteMPO(BaseMPO):
 
     def __init__(
         self,
-        tensors: List[Tensor],
-        backend: Optional[Union[AbstractBackend, Text]] = None,
-        name: Optional[Text] = None,
+        tensors: list[Tensor],
+        backend: Optional[Union[AbstractBackend, str]] = None,
+        name: Optional[str] = None,
     ) -> None:
         """
         Initialize a finite MPO object
@@ -146,8 +146,8 @@ class FiniteXXZ(FiniteMPO):
         Jxy: np.ndarray,
         Bz: np.ndarray,
         dtype: Type[np.number],
-        backend: Optional[Union[AbstractBackend, Text]] = None,
-        name: Text = "XXZ_MPO",
+        backend: Optional[Union[AbstractBackend, str]] = None,
+        name: str = "XXZ_MPO",
     ) -> None:
         """
         Returns the MPO of the finite XXZ model.
@@ -244,8 +244,8 @@ class FiniteTFI(FiniteMPO):
         Jx: np.ndarray,
         Bz: np.ndarray,
         dtype: Type[np.number],
-        backend: Optional[Union[AbstractBackend, Text]] = None,
-        name: Text = "TFI_MPO",
+        backend: Optional[Union[AbstractBackend, str]] = None,
+        name: str = "TFI_MPO",
     ) -> None:
         """
         Returns the MPO of the finite TFI model.
@@ -314,8 +314,8 @@ class FiniteFreeFermion2D(FiniteMPO):
         N1: int,
         N2: int,
         dtype: Type[np.number],
-        backend: Optional[Union[AbstractBackend, Text]] = None,
-        name: Text = "2DTFI_MPO",
+        backend: Optional[Union[AbstractBackend, str]] = None,
+        name: str = "2DTFI_MPO",
     ):
         """
         Returns the MPO of the free fermions on

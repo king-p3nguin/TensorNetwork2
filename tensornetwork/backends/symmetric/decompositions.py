@@ -110,8 +110,7 @@ def svd(
             # `max_singular_values` (we were filling in 0.0 into singular
             # value blocks to facilitate trunction steps, thus we could end up
             # with more singular values than originally there).
-            if max_singular_values > orig_num_singvals:
-                max_singular_values = orig_num_singvals
+            max_singular_values = min(max_singular_values, orig_num_singvals)
             if max_singular_values < len(inds):
                 discarded_inds = np.append(
                     discarded_inds, inds[: (-1) * max_singular_values]

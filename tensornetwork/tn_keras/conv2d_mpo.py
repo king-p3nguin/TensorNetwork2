@@ -1,23 +1,18 @@
 # pylint: disable=no-name-in-module
 import math
-from typing import List, Optional, Text, Tuple, Union
+from typing import Optional, Tuple, Union
 
-import numpy as np
 import tensorflow as tf
-from tensorflow import keras
-from tensorflow.keras import activations, initializers, regularizers
-from tensorflow.keras.layers import Layer
-from tensorflow.python.keras.utils import (
-    conv_utils,
-)  # pylint: disable=no-name-in-module
+from keras import Layer, activations, initializers, regularizers
+from tensorflow.python.keras.utils import conv_utils
 
 import tensornetwork as tn
 
 
 # pytype: disable=module-attr
-@tf.keras.utils.register_keras_serializable(
+@tf.keras.utils.register_keras_serializable(  # pylint: disable=no-member
     package="tensornetwork"
-)  # pylint: disable=no-member
+)
 # pytype: enable=module-attr
 class Conv2DMPO(Layer):
     """2D Convolutional Matrix Product Operator (MPO) TN layer.
@@ -104,15 +99,15 @@ class Conv2DMPO(Layer):
         num_nodes: int,
         bond_dim: int,
         strides: Union[int, Tuple[int, int]] = 1,
-        padding: Text = "same",
-        data_format: Optional[Text] = "channels_last",
+        padding: str = "same",
+        data_format: Optional[str] = "channels_last",
         dilation_rate: Union[int, Tuple[int, int]] = (1, 1),
-        activation: Optional[Text] = None,
+        activation: Optional[str] = None,
         use_bias: bool = True,
-        kernel_initializer: Text = "glorot_uniform",
-        bias_initializer: Text = "zeros",
-        kernel_regularizer: Optional[Text] = None,
-        bias_regularizer: Optional[Text] = None,
+        kernel_initializer: str = "glorot_uniform",
+        bias_initializer: str = "zeros",
+        kernel_regularizer: Optional[str] = None,
+        bias_regularizer: Optional[str] = None,
         **kwargs,
     ) -> None:
         if num_nodes < 2:
@@ -144,7 +139,7 @@ class Conv2DMPO(Layer):
         self.kernel_regularizer = regularizers.get(kernel_regularizer)
         self.bias_regularizer = regularizers.get(bias_regularizer)
 
-    def build(self, input_shape: List[int]) -> None:
+    def build(self, input_shape: list[int]) -> None:
         # Disable the attribute-defined-outside-init violations in this function
         # pylint: disable=attribute-defined-outside-init
         if self.data_format == "channels_first":
@@ -256,7 +251,7 @@ class Conv2DMPO(Layer):
             result = self.activation(result)
         return result
 
-    def compute_output_shape(self, input_shape: List[int]) -> Tuple[int, int, int, int]:
+    def compute_output_shape(self, input_shape: list[int]) -> Tuple[int, int, int, int]:
         if self.data_format == "channels_first":
             space = input_shape[2:]
         else:

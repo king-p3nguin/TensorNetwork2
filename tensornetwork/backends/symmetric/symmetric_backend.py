@@ -13,7 +13,7 @@
 # limitations under the License.
 # pyling: disable=line-too-long
 import warnings
-from typing import Any, Callable, List, Optional, Sequence, Tuple, Type, Union
+from typing import Any, Callable, Optional, Sequence, Tuple, Type, Union
 
 import numpy
 import scipy as sp
@@ -177,7 +177,7 @@ class SymmetricBackend(abstract_backend.AbstractBackend):
     def eigs(
         self,  # pylint: disable=arguments-differ
         A: Callable,
-        args: Optional[List] = None,
+        args: Optional[list] = None,
         initial_state: Optional[Tensor] = None,
         shape: Optional[Tuple[Index, ...]] = None,
         dtype: Optional[Type[numpy.number]] = None,
@@ -187,7 +187,7 @@ class SymmetricBackend(abstract_backend.AbstractBackend):
         which: str = "LR",
         maxiter: Optional[int] = None,
         enable_caching: bool = True,
-    ) -> Tuple[Tensor, List]:
+    ) -> Tuple[Tensor, list]:
         """
         Arnoldi method for finding the lowest eigenvector-eigenvalue pairs
         of a linear operator `A`.
@@ -310,7 +310,7 @@ class SymmetricBackend(abstract_backend.AbstractBackend):
     def eigsh_lanczos(
         self,  # pylint: disable=arguments-differ
         A: Callable,
-        args: Optional[List[Tensor]] = None,
+        args: Optional[list[Tensor]] = None,
         initial_state: Optional[Tensor] = None,
         shape: Optional[Tuple] = None,
         dtype: Optional[Type[numpy.number]] = None,
@@ -321,7 +321,7 @@ class SymmetricBackend(abstract_backend.AbstractBackend):
         ndiag: int = 20,
         reorthogonalize: bool = False,
         enable_caching: bool = True,
-    ) -> Tuple[Tensor, List]:
+    ) -> Tuple[Tensor, list]:
         """
         Lanczos method for finding the lowest eigenvector-eigenvalue pairs
         of a linear operator `A`.
@@ -419,7 +419,8 @@ class SymmetricBackend(abstract_backend.AbstractBackend):
                         v.contiguous(
                             inplace=True
                         )  # make sure storage layouts are matching
-                        # it's save to operate on the tensor data now (pybass some checks)
+                        # it's save to operate on the tensor data now
+                        # (bypass some checks)
                         vector_n.data -= (
                             numpy.dot(numpy.conj(v.data), vector_n.data) * v.data
                         )
@@ -486,7 +487,7 @@ class SymmetricBackend(abstract_backend.AbstractBackend):
         self,  # pylint: disable=arguments-differ
         A_mv: Callable,
         b: BlockSparseTensor,
-        A_args: Optional[List] = None,
+        A_args: Optional[list] = None,
         A_kwargs: Optional[dict] = None,
         x0: Optional[BlockSparseTensor] = None,
         tol: float = 1e-05,
@@ -701,7 +702,7 @@ class SymmetricBackend(abstract_backend.AbstractBackend):
             )
         return self.tensordot(self.diagflat(tensor1), tensor2, ([1], [0]))
 
-    def jit(self, fun: Callable, *args: List, **kwargs: dict) -> Callable:
+    def jit(self, fun: Callable, *args: list, **kwargs: dict) -> Callable:
         return fun
 
     def diagflat(self, tensor: Tensor, k: int = 0) -> Tensor:

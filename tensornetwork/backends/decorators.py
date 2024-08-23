@@ -18,9 +18,8 @@ Decorator functions that depend on the backend.
 import functools
 from typing import Callable, Iterable, Optional, Union
 
-import tensornetwork.backend_contextmanager as backend_contextmanager
-import tensornetwork.backends as backends
-import tensornetwork.backends.abstract_backend as abstract_backend
+from tensornetwork import backend_contextmanager, backends
+from tensornetwork.backends import abstract_backend
 
 AbstractBackend = abstract_backend.AbstractBackend
 

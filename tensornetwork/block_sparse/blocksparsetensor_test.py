@@ -13,10 +13,8 @@ from tensornetwork.block_sparse.charge import (
     Z2Charge,
     charge_equal,
     fuse_charges,
-    fuse_ndarray_charges,
 )
 from tensornetwork.block_sparse.index import Index
-from tensornetwork.block_sparse.utils import fuse_ndarrays
 
 np_dtypes = [np.float64, np.complex128]
 

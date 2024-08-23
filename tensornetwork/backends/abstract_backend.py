@@ -11,7 +11,7 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-from typing import Any, Callable, List, Optional, Sequence, Tuple, Type, Union
+from typing import Any, Callable, Optional, Sequence, Tuple, Type, Union
 
 import numpy as np
 
@@ -363,7 +363,7 @@ class AbstractBackend:
     def eigs(
         self,
         A: Callable,
-        args: Optional[List[Tensor]] = None,
+        args: Optional[list[Tensor]] = None,
         initial_state: Optional[Tensor] = None,
         shape: Optional[Tuple[int, ...]] = None,
         dtype: Optional[Type[np.number]] = None,  # pylint: disable=no-member
@@ -372,7 +372,7 @@ class AbstractBackend:
         tol: float = 1e-8,
         which: str = "LR",
         maxiter: Optional[int] = None,
-    ) -> Tuple[Tensor, List]:
+    ) -> Tuple[Tensor, list]:
         """Arnoldi method for finding the lowest eigenvector-eigenvalue pairs
         of a linear operator `A`. `A` is a callable implementing the
         matrix-vector product. If no `initial_state` is provided then
@@ -413,7 +413,7 @@ class AbstractBackend:
     def eigsh(
         self,
         A: Callable,
-        args: Optional[List[Tensor]] = None,
+        args: Optional[list[Tensor]] = None,
         initial_state: Optional[Tensor] = None,
         shape: Optional[Tuple[int, ...]] = None,
         dtype: Optional[Type[np.number]] = None,  # pylint: disable=no-member
@@ -422,7 +422,7 @@ class AbstractBackend:
         tol: float = 1e-8,
         which: str = "LR",
         maxiter: Optional[int] = None,
-    ) -> Tuple[Tensor, List]:
+    ) -> Tuple[Tensor, list]:
         """Lanczos method for finding the lowest eigenvector-eigenvalue pairs
         of a symmetric (hermitian) linear operator `A`. `A` is a callable
         implementing the matrix-vector product. If no `initial_state` is provided
@@ -463,7 +463,7 @@ class AbstractBackend:
     def eigsh_lanczos(
         self,
         A: Callable,
-        args: Optional[List[Tensor]] = None,
+        args: Optional[list[Tensor]] = None,
         initial_state: Optional[Tensor] = None,
         shape: Optional[Tuple[int, ...]] = None,
         dtype: Optional[Type[np.number]] = None,  # pylint: disable=no-member
@@ -473,7 +473,7 @@ class AbstractBackend:
         delta: float = 1e-8,
         ndiag: int = 20,
         reorthogonalize: bool = False,
-    ) -> Tuple[Tensor, List]:
+    ) -> Tuple[Tensor, list]:
         """
         Lanczos method for finding the lowest eigenvector-eigenvalue pairs
         of `A`.
@@ -517,7 +517,7 @@ class AbstractBackend:
         self,
         A_mv: Callable,
         b: Tensor,
-        A_args: Optional[List] = None,
+        A_args: Optional[list] = None,
         A_kwargs: Optional[dict] = None,
         x0: Optional[Tensor] = None,
         tol: float = 1e-05,
@@ -639,8 +639,7 @@ class AbstractBackend:
 
             x0 = self.reshape(x0, (N,))
 
-        if num_krylov_vectors > N:
-            num_krylov_vectors = N
+        num_krylov_vectors = min(num_krylov_vectors, N)
 
         if tol < 0:
             raise ValueError(f"tol = {tol} must be positive.")
@@ -668,7 +667,7 @@ class AbstractBackend:
         self,
         A_mv: Callable,
         b: Tensor,
-        A_args: List,
+        A_args: list,
         A_kwargs: dict,
         x0: Tensor,
         tol: float,

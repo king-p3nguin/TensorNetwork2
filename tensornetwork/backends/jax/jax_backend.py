@@ -13,7 +13,7 @@
 # limitations under the License.
 
 import warnings
-from typing import Any, Callable, List, Optional, Sequence, Tuple, Type, Union
+from typing import Any, Callable, Optional, Sequence, Tuple, Type, Union
 
 import numpy as np
 
@@ -243,7 +243,7 @@ class JaxBackend(abstract_backend.AbstractBackend):
     def eigs(
         self,  # pylint: disable=arguments-differ
         A: Callable,
-        args: Optional[List] = None,
+        args: Optional[list] = None,
         initial_state: Optional[Tensor] = None,
         shape: Optional[Tuple[int, ...]] = None,
         dtype: Optional[Type[np.number]] = None,
@@ -252,7 +252,7 @@ class JaxBackend(abstract_backend.AbstractBackend):
         tol: float = 1e-8,
         which: str = "LR",
         maxiter: int = 20,
-    ) -> Tuple[Tensor, List]:
+    ) -> Tuple[Tensor, list]:
         """
         Implicitly restarted Arnoldi method for finding the lowest
         eigenvector-eigenvalue pairs of a linear operator `A`.
@@ -369,7 +369,7 @@ class JaxBackend(abstract_backend.AbstractBackend):
     def eigsh(
         self,  # pylint: disable=arguments-differ
         A: Callable,
-        args: Optional[List] = None,
+        args: Optional[list] = None,
         initial_state: Optional[Tensor] = None,
         shape: Optional[Tuple[int, ...]] = None,
         dtype: Optional[Type[np.number]] = None,
@@ -378,7 +378,7 @@ class JaxBackend(abstract_backend.AbstractBackend):
         tol: float = 1e-8,
         which: str = "SA",
         maxiter: int = 20,
-    ) -> Tuple[Tensor, List]:
+    ) -> Tuple[Tensor, list]:
         """
         Implicitly restarted Lanczos method for finding the lowest
         eigenvector-eigenvalue pairs of a symmetric (hermitian) linear operator `A`.
@@ -495,7 +495,7 @@ class JaxBackend(abstract_backend.AbstractBackend):
     def eigsh_lanczos(
         self,
         A: Callable,
-        args: Optional[List[Tensor]] = None,
+        args: Optional[list[Tensor]] = None,
         initial_state: Optional[Tensor] = None,
         shape: Optional[Tuple] = None,
         dtype: Optional[Type[np.number]] = None,
@@ -505,7 +505,7 @@ class JaxBackend(abstract_backend.AbstractBackend):
         delta: float = 1e-8,
         ndiag: int = 10,
         reorthogonalize: Optional[bool] = False,
-    ) -> Tuple[Tensor, List]:
+    ) -> Tuple[Tensor, list]:
         """
         Lanczos method for finding the lowest eigenvector-eigenvalue pairs
         of a hermitian linear operator `A`. `A` is a function implementing
@@ -625,7 +625,7 @@ class JaxBackend(abstract_backend.AbstractBackend):
         self,
         A_mv: Callable,
         b: Tensor,
-        A_args: List,
+        A_args: list,
         A_kwargs: dict,
         x0: Tensor,
         tol: float,
@@ -840,7 +840,7 @@ class JaxBackend(abstract_backend.AbstractBackend):
         # pylint: disable=no-member
         return jsp.linalg.expm(matrix)
 
-    def jit(self, fun: Callable, *args: List, **kwargs: dict) -> Callable:
+    def jit(self, fun: Callable, *args: list, **kwargs: dict) -> Callable:
         return libjax.jit(fun, *args, **kwargs)
 
     def sum(

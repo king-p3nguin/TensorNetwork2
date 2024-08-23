@@ -13,7 +13,7 @@
 # limitations under the License.
 # pyling: disable=line-too-long
 import io
-from typing import Any, Callable, List, Optional, Sequence, Text, Tuple, Type, Union
+from typing import Any, Callable, Optional, Sequence, Tuple, Type, Union
 
 import numpy as np
 import scipy as sp
@@ -177,16 +177,16 @@ class NumPyBackend(abstract_backend.AbstractBackend):
     def eigsh(
         self,
         A: Callable,
-        args: Optional[List[Tensor]] = None,
+        args: Optional[list[Tensor]] = None,
         initial_state: Optional[Tensor] = None,
         shape: Optional[Tuple[int, ...]] = None,
         dtype: Optional[Type[np.number]] = None,  # pylint: disable=no-member
         num_krylov_vecs: int = 50,
         numeig: int = 1,
         tol: float = 1e-8,
-        which: Text = "LR",
+        which: str = "LR",
         maxiter: Optional[int] = None,
-    ) -> Tuple[Tensor, List]:
+    ) -> Tuple[Tensor, list]:
         """Lanczos method for finding the lowest eigenvector-eigenvalue pairs
         of a symmetric (hermitian) linear operator `A`. `A` is a callable
         implementing the matrix-vector product. If no `initial_state` is provided
@@ -227,16 +227,16 @@ class NumPyBackend(abstract_backend.AbstractBackend):
     def eigs(
         self,
         A: Callable,
-        args: Optional[List] = None,
+        args: Optional[list] = None,
         initial_state: Optional[Tensor] = None,
         shape: Optional[Tuple[int, ...]] = None,
         dtype: Optional[Type[np.number]] = None,
         num_krylov_vecs: int = 50,
         numeig: int = 6,
         tol: float = 1e-8,
-        which: Text = "LR",
+        which: str = "LR",
         maxiter: Optional[int] = None,
-    ) -> Tuple[Tensor, List]:
+    ) -> Tuple[Tensor, list]:
         """
         Arnoldi method for finding the lowest eigenvector-eigenvalue pairs
         of a linear operator `A`. If no `initial_state` is provided then
@@ -320,7 +320,7 @@ class NumPyBackend(abstract_backend.AbstractBackend):
         self,
         A_mv: Callable,
         b: Tensor,
-        A_args: List,
+        A_args: list,
         A_kwargs: dict,
         x0: Tensor,
         tol: float,
@@ -439,7 +439,7 @@ class NumPyBackend(abstract_backend.AbstractBackend):
     def eigsh_lanczos(
         self,
         A: Callable,
-        args: Optional[List[Tensor]] = None,
+        args: Optional[list[Tensor]] = None,
         initial_state: Optional[Tensor] = None,
         shape: Optional[Tuple] = None,
         dtype: Optional[Type[np.number]] = None,
@@ -449,7 +449,7 @@ class NumPyBackend(abstract_backend.AbstractBackend):
         delta: float = 1e-8,
         ndiag: int = 20,
         reorthogonalize: bool = False,
-    ) -> Tuple[Tensor, List]:
+    ) -> Tuple[Tensor, list]:
         """
         Lanczos method for finding the lowest eigenvector-eigenvalue pairs
         of a linear operator `A`.
@@ -645,7 +645,7 @@ class NumPyBackend(abstract_backend.AbstractBackend):
         # pylint: disable=no-member
         return sp.linalg.expm(matrix)
 
-    def jit(self, fun: Callable, *args: List, **kwargs: dict) -> Callable:
+    def jit(self, fun: Callable, *args: list, **kwargs: dict) -> Callable:
         return fun
 
     def sum(

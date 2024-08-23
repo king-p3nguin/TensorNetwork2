@@ -12,12 +12,12 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-from typing import BinaryIO, List, Union
+from typing import BinaryIO, Union
 
 import h5py
 import numpy as np
 
-import tensornetwork.network_components as network_components
+from tensornetwork import network_components
 from tensornetwork.component_factory import get_component
 from tensornetwork.network_components import AbstractNode, Edge, Node
 from tensornetwork.network_operations import get_all_edges, reachable
@@ -26,7 +26,7 @@ STRING_ENCODING = network_components.STRING_ENCODING
 string_type = network_components.string_type
 
 
-def save_nodes(nodes: List[AbstractNode], path: Union[str, BinaryIO]) -> None:
+def save_nodes(nodes: list[AbstractNode], path: Union[str, BinaryIO]) -> None:
     """Save an iterable of nodes into hdf5 format.
 
     Args:
@@ -92,7 +92,7 @@ def save_nodes(nodes: List[AbstractNode], path: Union[str, BinaryIO]) -> None:
         edges[n].set_name(old_edge_names[n])
 
 
-def load_nodes(path: str) -> List[AbstractNode]:
+def load_nodes(path: str) -> list[AbstractNode]:
     """Load a set of nodes from disk.
 
     Args:
@@ -104,17 +104,18 @@ def load_nodes(path: str) -> List[AbstractNode]:
     edges_list = []
     with h5py.File(path, "r") as net_file:
         nodes = list(net_file["nodes"].keys())
+        # pylint: disable=no-member
         node_names = {
             "node{}".format(n): v
             for n, v in enumerate(
                 net_file["node_names"]["names"].asstr(STRING_ENCODING)[()]
-            )  # pylint: disable=no-member
+            )
         }
         edge_names = {
             "edge{}".format(n): v
             for n, v in enumerate(
                 net_file["edge_names"]["names"].asstr(STRING_ENCODING)[()]
-            )  # pylint: disable=no-member
+            )
         }
         edges = list(net_file["edges"].keys())
         for node_name in nodes:

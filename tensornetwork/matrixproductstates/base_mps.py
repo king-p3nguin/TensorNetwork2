@@ -13,7 +13,7 @@
 # limitations under the License.
 import warnings
 from functools import partial
-from typing import Any, Dict, List, Optional, Sequence, Text, Type, Union
+from typing import Any, Optional, Sequence, Type, Union
 
 import numpy as np
 
@@ -23,8 +23,7 @@ from tensornetwork.backends import backend_factory
 from tensornetwork.backends.abstract_backend import AbstractBackend
 from tensornetwork.backends.decorators import jit
 from tensornetwork.linalg.node_linalg import conj
-from tensornetwork.network_components import Node, contract_between
-from tensornetwork.network_operations import split_node_full_svd
+from tensornetwork.network_components import Node
 
 Tensor = Any
 
@@ -58,10 +57,10 @@ class BaseMPS:
 
     def __init__(
         self,
-        tensors: List[Tensor],
+        tensors: list[Tensor],
         center_position: Optional[int] = None,
         connector_matrix: Optional[Tensor] = None,
-        backend: Optional[Union[Text, AbstractBackend]] = None,
+        backend: Optional[Union[str, AbstractBackend]] = None,
     ) -> None:
         """Initialize a BaseMPS.
 
@@ -267,7 +266,7 @@ class BaseMPS:
     def save(self, path: str):
         raise NotImplementedError()
 
-    def bond_dimension(self, bond) -> List:
+    def bond_dimension(self, bond) -> list:
         """The bond dimension of `bond`"""
         if bond > len(self):
             raise IndexError(
@@ -278,24 +277,24 @@ class BaseMPS:
         return self.tensors[bond].shape[2]
 
     @property
-    def bond_dimensions(self) -> List:
+    def bond_dimensions(self) -> list:
         """A list of bond dimensions of `BaseMPS`"""
         return [self.tensors[0].shape[0]] + [t.shape[2] for t in self.tensors]
 
     @property
-    def physical_dimensions(self) -> List:
+    def physical_dimensions(self) -> list:
         """A list of physical Hilbert-space dimensions of `BaseMPS`"""
 
         return [t.shape[1] for t in self.tensors]
 
-    def right_envs(self, sites: Sequence[int]) -> Dict:
+    def right_envs(self, sites: Sequence[int]) -> dict:
         raise NotImplementedError()
 
-    def left_envs(self, sites: Sequence[int]) -> Dict:
+    def left_envs(self, sites: Sequence[int]) -> dict:
         raise NotImplementedError()
 
     def apply_transfer_operator(
-        self, site: int, direction: Union[Text, int], matrix: Tensor
+        self, site: int, direction: Union[str, int], matrix: Tensor
     ) -> Tensor:
         """Compute the action of the MPS transfer-operator at site `site`.
 
@@ -320,7 +319,7 @@ class BaseMPS:
             )
         raise ValueError(f"unknown value {direction} for direction")
 
-    def measure_local_operator(self, ops: List[Tensor], sites: Sequence[int]) -> List:
+    def measure_local_operator(self, ops: list[Tensor], sites: Sequence[int]) -> list:
         """Measure the expectation value of local operators `ops` site `sites`.
 
         Args:
@@ -328,7 +327,7 @@ class BaseMPS:
           sites: Sites where `ops` act.
 
         Returns:
-          List: measurements :math:`\\langle` `ops[n]`:math:`\\rangle`
+          list: measurements :math:`\\langle` `ops[n]`:math:`\\rangle`
             for n in `sites`
         Raises:
           ValueError if `len(ops) != len(sites)`
@@ -356,7 +355,7 @@ class BaseMPS:
 
     def measure_two_body_correlator(
         self, op1: Tensor, op2: Tensor, site1: int, sites2: Sequence[int]
-    ) -> List:
+    ) -> list:
         """
         Compute the correlator
         :math:`\\langle` `op1[site1], op2[s]`:math:`\\rangle`
@@ -369,7 +368,7 @@ class BaseMPS:
           site1: The site where `op1`  acts
           sites2: Sites where operator `op2` acts.
         Returns:
-          List: Correlator :math:`\\langle` `op1[site1], op2[s]`:math:`\\rangle`
+          list: Correlator :math:`\\langle` `op1[site1], op2[s]`:math:`\\rangle`
             for `s` :math:`\\in` `sites2`.
         Raises:
           ValueError if `site1` is out of range
@@ -675,7 +674,7 @@ class BaseMPS:
             backend=self.backend.name,
         )
 
-    def check_orthonormality(self, which: Text, site: int) -> Tensor:
+    def check_orthonormality(self, which: str, site: int) -> Tensor:
         """Check orthonormality of tensor at site `site`.
 
         Args:

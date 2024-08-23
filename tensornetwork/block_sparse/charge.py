@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-from typing import Any, Callable, List, Optional, Type, Union
+from typing import Any, Callable, Optional, Type, Union
 
 import numpy as np
 
@@ -50,9 +50,9 @@ class BaseCharge:
 
     def __init__(
         self,
-        charges: Union[List, np.ndarray],
+        charges: Union[list, np.ndarray],
         charge_labels: Optional[np.ndarray] = None,
-        charge_types: Optional[List[Type["BaseCharge"]]] = None,
+        charge_types: Optional[list[Type["BaseCharge"]]] = None,
         charge_dtype: Optional[Type[np.number]] = np.int16,
     ) -> None:
         charges = np.asarray(charges)
@@ -356,8 +356,9 @@ class BaseCharge:
         )
         return obj
 
+    # pylint: disable=inconsistent-return-statements
     def unique(
-        self,  # pylint: disable=inconsistent-return-statements
+        self,
         return_index: bool = False,
         return_inverse: bool = False,
         return_counts: bool = False,
@@ -500,7 +501,7 @@ class BaseCharge:
             return obj, strides * np.flatnonzero(reduced_locs).astype(np.uint32)
         return obj
 
-    def __getitem__(self, n: Union[List[int], np.ndarray, int]) -> "BaseCharge":
+    def __getitem__(self, n: Union[list[int], np.ndarray, int]) -> "BaseCharge":
         """
         Return the charge-element at position `n`, wrapped into a `BaseCharge`
         object.
@@ -556,9 +557,9 @@ class Z2Charge(BaseCharge):
 
     def __init__(
         self,
-        charges: Union[List, np.ndarray],
+        charges: Union[list, np.ndarray],
         charge_labels: Optional[np.ndarray] = None,
-        charge_types: Optional[List[Type["BaseCharge"]]] = None,
+        charge_types: Optional[list[Type["BaseCharge"]]] = None,
         charge_dtype: Optional[Type[np.number]] = np.int16,
     ) -> None:
         # do some checks before calling the base class constructor
@@ -606,9 +607,9 @@ def ZNCharge(n: int) -> Callable:
 
         def __init__(
             self,
-            charges: Union[List, np.ndarray],
+            charges: Union[list, np.ndarray],
             charge_labels: Optional[np.ndarray] = None,
-            charge_types: Optional[List[Type["BaseCharge"]]] = None,
+            charge_types: Optional[list[Type["BaseCharge"]]] = None,
             charge_dtype: Optional[Type[np.number]] = np.int16,
         ) -> None:
             unique_charges = unique(np.ravel(charges))
@@ -649,7 +650,7 @@ def ZNCharge(n: int) -> Callable:
 
 
 def fuse_ndarray_charges(
-    charges_A: np.ndarray, charges_B: np.ndarray, charge_types: List[Type[BaseCharge]]
+    charges_A: np.ndarray, charges_B: np.ndarray, charge_types: list[Type[BaseCharge]]
 ) -> np.ndarray:
     """
     Fuse the quantum numbers of two indices under their kronecker addition.
@@ -667,7 +668,7 @@ def fuse_ndarray_charges(
     return np.concatenate(comb_charges, axis=1)
 
 
-def fuse_charges(charges: List[BaseCharge], flows: List[bool]) -> BaseCharge:
+def fuse_charges(charges: list[BaseCharge], flows: list[bool]) -> BaseCharge:
     """
     Fuse all `charges` into a new charge.
     Charges are fused from "right to left",

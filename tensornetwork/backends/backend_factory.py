@@ -30,7 +30,7 @@ _BACKENDS = {
 }
 
 # we instantiate each backend only once and store it here
-_INSTANTIATED_BACKENDS = dict()
+_INSTANTIATED_BACKENDS = {}
 
 
 def get_backend(
@@ -39,7 +39,7 @@ def get_backend(
     if isinstance(backend, abstract_backend.AbstractBackend):
         return backend
     if backend not in _BACKENDS:
-        raise ValueError("Backend '{}' does not exist".format(backend))
+        raise ValueError(f"Backend '{backend}' does not exist")
 
     if backend in _INSTANTIATED_BACKENDS:
         return _INSTANTIATED_BACKENDS[backend]

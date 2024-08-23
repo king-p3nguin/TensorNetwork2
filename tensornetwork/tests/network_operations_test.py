@@ -16,8 +16,6 @@ import numpy as np
 import pytest
 
 import tensornetwork as tn
-import tensornetwork.linalg
-import tensornetwork.linalg.node_linalg
 from tensornetwork.backends.abstract_backend import AbstractBackend
 
 
@@ -377,7 +375,7 @@ def test_reduced_density(backend):
     assert b[0].is_dangling() & b[2].is_dangling()
     assert c[0].is_dangling() & c[1].is_dangling()
 
-    for node in {a, b, c}:
+    for node in [a, b, c]:
         assert node_dict[node].name == node.name
     for edge in edges:
         assert edge_dict[edge].name == edge.name

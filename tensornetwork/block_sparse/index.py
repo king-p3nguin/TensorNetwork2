@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 import copy
-from typing import List, Union
+from typing import Union
 
 import numpy as np
 
@@ -26,8 +26,8 @@ class Index:
 
     def __init__(
         self,
-        charges: Union[List[BaseCharge], BaseCharge],
-        flow: Union[List[bool], bool],
+        charges: Union[list[BaseCharge], BaseCharge],
+        flow: Union[list[bool], bool],
     ) -> None:
         """
         Initialize an `Index` object.
@@ -85,19 +85,19 @@ class Index:
         return index_copy
 
     @property
-    def flat_charges(self) -> List:
+    def flat_charges(self) -> list:
         """
         Returns:
-        List: A list containing the elementary indices
+        list: A list containing the elementary indices
           of `Index`.
         """
         return self._charges
 
     @property
-    def flat_flows(self) -> List:
+    def flat_flows(self) -> list:
         """
         Returns:
-          List: A list containing the elementary indices
+          list: A list containing the elementary indices
             of `Index`.
         """
         return list(self.flow)
@@ -148,7 +148,7 @@ def fuse_index_pair(left_index: Index, right_index: Index) -> Index:
     )
 
 
-def fuse_indices(indices: List[Index]) -> Index:
+def fuse_indices(indices: list[Index]) -> Index:
     """
     Fuse a list of indices (legs) of a symmetric tensor.
     Args:

@@ -11,8 +11,7 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-import functools
-from typing import Any, Dict, List, Optional, Sequence, Text, Type, Union
+from typing import Any, Optional, Sequence, Type, Union
 
 import numpy as np
 
@@ -50,10 +49,10 @@ class FiniteMPS(BaseMPS):
 
     def __init__(
         self,
-        tensors: List[Tensor],
+        tensors: list[Tensor],
         center_position: Optional[int] = None,
         canonicalize: Optional[bool] = True,
-        backend: Optional[Union[AbstractBackend, Text]] = None,
+        backend: Optional[Union[AbstractBackend, str]] = None,
     ) -> None:
         """Initialize a `FiniteMPS`. If `canonicalize` is `True` the state
            is brought into canonical form, with `BaseMPS.center_position`
@@ -92,11 +91,11 @@ class FiniteMPS(BaseMPS):
     @classmethod
     def random(
         cls,
-        d: List[int],
-        D: List[int],
+        d: list[int],
+        D: list[int],
         dtype: Type[np.number],
         canonicalize: bool = True,
-        backend: Optional[Union[AbstractBackend, Text]] = None,
+        backend: Optional[Union[AbstractBackend, str]] = None,
     ) -> "FiniteMPS":
         """Initialize a random `FiniteMPS`. The resulting state is normalized. Its
         center-position is at 0.
@@ -173,7 +172,7 @@ class FiniteMPS(BaseMPS):
             deviations.append(deviation**2)
         return self.backend.sqrt(sum(deviations[1:], deviations[0]))
 
-    def left_envs(self, sites: Sequence[int]) -> Dict:
+    def left_envs(self, sites: Sequence[int]) -> dict:
         """Compute left reduced density matrices for site `sites`. This returns a
         dict `left_envs` mapping sites (int) to Tensors. `left_envs[site]` is the
         left-reduced density matrix to the left of site `site`.
@@ -253,7 +252,7 @@ class FiniteMPS(BaseMPS):
                     left_envs[site + 1] = left_env
         return {k: v.tensor for k, v in left_envs.items()}
 
-    def right_envs(self, sites: Sequence[int]) -> Dict:
+    def right_envs(self, sites: Sequence[int]) -> dict:
         """Compute right reduced density matrices for site `sites. This returns a
         dict `right_envs` mapping sites (int) to Tensors. `right_envs[site]` is the
         right-reduced density matrix to the right of site `site`.

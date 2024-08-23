@@ -13,15 +13,12 @@
 # limitations under the License.
 """Functions to initialize Node using a NumPy-like syntax."""
 
-import warnings
-from typing import Any, Callable, List, Optional, Sequence, Text, Tuple, Type, Union
+from typing import Any, Optional, Sequence, Tuple, Type, Union
 
 import numpy as np
 
-from tensornetwork import backend_contextmanager, backends, network_components
+from tensornetwork import backend_contextmanager, backends
 from tensornetwork.backends import abstract_backend
-
-# pylint: disable=line-too-long
 from tensornetwork.network_components import (
     AbstractNode,
     Node,
@@ -34,11 +31,11 @@ BaseBackend = abstract_backend.AbstractBackend
 
 # INITIALIZATION
 def initialize_node(
-    fname: Text,
+    fname: str,
     *fargs: Any,
-    name: Optional[Text] = None,
-    axis_names: Optional[List[Text]] = None,
-    backend: Optional[Union[Text, BaseBackend]] = None,
+    name: Optional[str] = None,
+    axis_names: Optional[list[str]] = None,
+    backend: Optional[Union[str, BaseBackend]] = None,
     **fkwargs: Any,
 ) -> Tensor:
     """Return a Node wrapping data obtained by an initialization function
@@ -74,9 +71,9 @@ def eye(
     N: int,
     dtype: Optional[Type[np.number]] = None,
     M: Optional[int] = None,
-    name: Optional[Text] = None,
-    axis_names: Optional[List[Text]] = None,
-    backend: Optional[Union[Text, BaseBackend]] = None,
+    name: Optional[str] = None,
+    axis_names: Optional[list[str]] = None,
+    backend: Optional[Union[str, BaseBackend]] = None,
 ) -> Tensor:
     """Return a Node representing a 2D array with ones on the diagonal and
     zeros elsewhere. The Node has two dangling Edges.
@@ -102,9 +99,9 @@ def eye(
 def zeros(
     shape: Sequence[int],
     dtype: Optional[Type[np.number]] = None,
-    name: Optional[Text] = None,
-    axis_names: Optional[List[Text]] = None,
-    backend: Optional[Union[Text, BaseBackend]] = None,
+    name: Optional[str] = None,
+    axis_names: Optional[list[str]] = None,
+    backend: Optional[Union[str, BaseBackend]] = None,
 ) -> Tensor:
     """Return a Node of shape `shape` of all zeros.
     The Node has one dangling Edge per dimension.
@@ -126,9 +123,9 @@ def zeros(
 def ones(
     shape: Sequence[int],
     dtype: Optional[Type[np.number]] = None,
-    name: Optional[Text] = None,
-    axis_names: Optional[List[Text]] = None,
-    backend: Optional[Union[Text, BaseBackend]] = None,
+    name: Optional[str] = None,
+    axis_names: Optional[list[str]] = None,
+    backend: Optional[Union[str, BaseBackend]] = None,
 ) -> Tensor:
     """Return a Node of shape `shape` of all ones.
     The Node has one dangling Edge per dimension.
@@ -152,9 +149,9 @@ def randn(
     shape: Sequence[int],
     dtype: Optional[Type[np.number]] = None,
     seed: Optional[int] = None,
-    name: Optional[Text] = None,
-    axis_names: Optional[List[Text]] = None,
-    backend: Optional[Union[Text, BaseBackend]] = None,
+    name: Optional[str] = None,
+    axis_names: Optional[list[str]] = None,
+    backend: Optional[Union[str, BaseBackend]] = None,
 ) -> Tensor:
     """Return a Node of shape `shape` of Gaussian random floats.
     The Node has one dangling Edge per dimension.
@@ -185,9 +182,9 @@ def random_uniform(
     dtype: Optional[Type[np.number]] = None,
     seed: Optional[int] = None,
     boundaries: Optional[Tuple[float, float]] = (0.0, 1.0),
-    name: Optional[Text] = None,
-    axis_names: Optional[List[Text]] = None,
-    backend: Optional[Union[Text, BaseBackend]] = None,
+    name: Optional[str] = None,
+    axis_names: Optional[list[str]] = None,
+    backend: Optional[Union[str, BaseBackend]] = None,
 ) -> Tensor:
     """Return a Node of shape `shape` of uniform random floats.
     The Node has one dangling Edge per dimension.
@@ -236,8 +233,8 @@ def norm(node: AbstractNode) -> Tensor:
 
 def conj(
     node: AbstractNode,
-    name: Optional[Text] = None,
-    axis_names: Optional[List[Text]] = None,
+    name: Optional[str] = None,
+    axis_names: Optional[list[str]] = None,
 ) -> AbstractNode:
     """Conjugate a `node`.
 
@@ -267,9 +264,9 @@ def conj(
 
 def transpose(
     node: AbstractNode,
-    permutation: Sequence[Union[Text, int]],
-    name: Optional[Text] = None,
-    axis_names: Optional[List[Text]] = None,
+    permutation: Sequence[Union[str, int]],
+    name: Optional[str] = None,
+    axis_names: Optional[list[str]] = None,
 ) -> AbstractNode:
     """Transpose `node`
 

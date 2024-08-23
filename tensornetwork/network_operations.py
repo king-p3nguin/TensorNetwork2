@@ -15,35 +15,20 @@
 
 import collections
 import json
-from typing import (
-    Any,
-    Dict,
-    Iterable,
-    List,
-    Optional,
-    Sequence,
-    Set,
-    Text,
-    Tuple,
-    Type,
-    Union,
-)
+from typing import Any, Iterable, Optional, Tuple, Union
 
 import numpy as np
 
 from tensornetwork.backends import backend_factory
-from tensornetwork.backends.abstract_backend import AbstractBackend
 
 # pylint: disable=useless-import-alias
 from tensornetwork.network_components import (
     AbstractNode,
-    CopyNode,
     Edge,
     Node,
     connect,
     contract_parallel,
     disconnect,
-    outer_product_final_nodes,
 )
 
 Tensor = Any
@@ -104,14 +89,14 @@ def copy(nodes: Iterable[AbstractNode], conjugate: bool = False) -> Tuple[dict, 
 
 def replicate_nodes(
     nodes: Iterable[AbstractNode], conjugate: bool = False
-) -> List[AbstractNode]:
+) -> list[AbstractNode]:
     """Copy the given nodes and their edges.
 
     If nodes A and B are connected but only A is passed in to be
     copied, the edge between them will become a dangling edge.
 
     Args:
-      nodes: An `Iterable` (Usually a `List` or `Set`) of `Nodes`.
+      nodes: An `Iterable` (Usually a `list` or `set`) of `Nodes`.
       conjugate: Boolean. Whether to conjugate all of the nodes
           (useful for calculating norms and reduced density
           matrices).
@@ -123,7 +108,7 @@ def replicate_nodes(
     return [new_nodes[node] for node in nodes]
 
 
-def remove_node(node: AbstractNode) -> Tuple[Dict[Text, Edge], Dict[int, Edge]]:
+def remove_node(node: AbstractNode) -> Tuple[dict[str, Edge], dict[int, Edge]]:
     """Remove a node from the network.
 
     Args:
@@ -132,9 +117,9 @@ def remove_node(node: AbstractNode) -> Tuple[Dict[Text, Edge], Dict[int, Edge]]:
     Returns:
       A tuple of:
         disconnected_edges_by_name:
-          A Dictionary mapping `node`'s axis names to the newly broken edges.
+          A dictionary mapping `node`'s axis names to the newly broken edges.
         disconnected_edges_by_axis:
-          A Dictionary mapping `node`'s axis numbers to the newly broken edges.
+          A dictionary mapping `node`'s axis numbers to the newly broken edges.
     """
     disconnected_edges_by_name = {}
     disconnected_edges_by_axis = {}
@@ -149,14 +134,14 @@ def remove_node(node: AbstractNode) -> Tuple[Dict[Text, Edge], Dict[int, Edge]]:
 
 def split_node(
     node: AbstractNode,
-    left_edges: List[Edge],
-    right_edges: List[Edge],
+    left_edges: list[Edge],
+    right_edges: list[Edge],
     max_singular_values: Optional[int] = None,
     max_truncation_err: Optional[float] = None,
     relative: Optional[bool] = False,
-    left_name: Optional[Text] = None,
-    right_name: Optional[Text] = None,
-    edge_name: Optional[Text] = None,
+    left_name: Optional[str] = None,
+    right_name: Optional[str] = None,
+    edge_name: Optional[str] = None,
 ) -> Tuple[AbstractNode, AbstractNode, Tensor]:
     """Split a `node` using Singular Value Decomposition.
 
@@ -282,11 +267,11 @@ def split_node(
 
 def split_node_qr(
     node: AbstractNode,
-    left_edges: List[Edge],
-    right_edges: List[Edge],
-    left_name: Optional[Text] = None,
-    right_name: Optional[Text] = None,
-    edge_name: Optional[Text] = None,
+    left_edges: list[Edge],
+    right_edges: list[Edge],
+    left_name: Optional[str] = None,
+    right_name: Optional[str] = None,
+    edge_name: Optional[str] = None,
 ) -> Tuple[AbstractNode, AbstractNode]:
     """Split a `node` using QR decomposition.
 
@@ -376,11 +361,11 @@ def split_node_qr(
 
 def split_node_rq(
     node: AbstractNode,
-    left_edges: List[Edge],
-    right_edges: List[Edge],
-    left_name: Optional[Text] = None,
-    right_name: Optional[Text] = None,
-    edge_name: Optional[Text] = None,
+    left_edges: list[Edge],
+    right_edges: list[Edge],
+    left_name: Optional[str] = None,
+    right_name: Optional[str] = None,
+    edge_name: Optional[str] = None,
 ) -> Tuple[AbstractNode, AbstractNode]:
     """Split a `node` using RQ (reversed QR) decomposition.
 
@@ -472,16 +457,16 @@ def split_node_rq(
 
 def split_node_full_svd(
     node: AbstractNode,
-    left_edges: List[Edge],
-    right_edges: List[Edge],
+    left_edges: list[Edge],
+    right_edges: list[Edge],
     max_singular_values: Optional[int] = None,
     max_truncation_err: Optional[float] = None,
     relative: Optional[bool] = False,
-    left_name: Optional[Text] = None,
-    middle_name: Optional[Text] = None,
-    right_name: Optional[Text] = None,
-    left_edge_name: Optional[Text] = None,
-    right_edge_name: Optional[Text] = None,
+    left_name: Optional[str] = None,
+    middle_name: Optional[str] = None,
+    right_name: Optional[str] = None,
+    left_edge_name: Optional[str] = None,
+    right_edge_name: Optional[str] = None,
 ) -> Tuple[AbstractNode, AbstractNode, AbstractNode, Tensor]:
     """Split a node by doing a full singular value decomposition.
 
@@ -616,7 +601,7 @@ def split_node_full_svd(
     return left_node, singular_values_node, right_node, trun_vals
 
 
-def _reachable(nodes: Set[AbstractNode]) -> Set[AbstractNode]:
+def _reachable(nodes: set[AbstractNode]) -> set[AbstractNode]:
     if not nodes:
         raise ValueError("Reachable requires at least 1 node.")
     node_que = collections.deque(nodes)
@@ -635,7 +620,7 @@ def _reachable(nodes: Set[AbstractNode]) -> Set[AbstractNode]:
 
 def reachable(
     inputs: Union[AbstractNode, Iterable[AbstractNode], Edge, Iterable[Edge]]
-) -> Set[AbstractNode]:
+) -> set[AbstractNode]:
     """Computes all nodes reachable from `node` or `edge.node1` by connected
     edges.
 
@@ -730,7 +715,7 @@ def check_connected(nodes: Iterable[AbstractNode]) -> None:
         raise ValueError("Non-connected graph")
 
 
-def get_all_nodes(edges: Iterable[Edge]) -> Set[AbstractNode]:
+def get_all_nodes(edges: Iterable[Edge]) -> set[AbstractNode]:
     """Return the set of nodes connected to edges."""
     nodes = set()
     for edge in edges:
@@ -742,7 +727,7 @@ def get_all_nodes(edges: Iterable[Edge]) -> Set[AbstractNode]:
     return nodes
 
 
-def get_all_edges(nodes: Iterable[AbstractNode]) -> Set[Edge]:
+def get_all_edges(nodes: Iterable[AbstractNode]) -> set[Edge]:
     """Return the set of edges of all nodes."""
     edges = set()
     for node in nodes:
@@ -750,7 +735,7 @@ def get_all_edges(nodes: Iterable[AbstractNode]) -> Set[Edge]:
     return edges
 
 
-def get_subgraph_dangling(nodes: Iterable[AbstractNode]) -> Set[Edge]:
+def get_subgraph_dangling(nodes: Iterable[AbstractNode]) -> set[Edge]:
     """Get all of the edges that are "relatively dangling" to the given nodes.
 
     A "relatively dangling" edge is an edge that is either actually dangling
@@ -828,7 +813,7 @@ def reduced_density(traced_out_edges: Iterable[Edge]) -> Tuple[dict, dict]:
     return node_dict, edge_dict
 
 
-def switch_backend(nodes: Iterable[AbstractNode], new_backend: Text) -> None:
+def switch_backend(nodes: Iterable[AbstractNode], new_backend: str) -> None:
     """Change the backend of the nodes.
 
     This will convert all `node`'s tensors to the `new_backend`'s Tensor type.
@@ -859,7 +844,7 @@ def switch_backend(nodes: Iterable[AbstractNode], new_backend: Text) -> None:
         node.backend = backend
 
 
-def get_neighbors(node: AbstractNode) -> List[AbstractNode]:
+def get_neighbors(node: AbstractNode) -> list[AbstractNode]:
     """Get all of the neighbors that are directly connected to the given node.
 
     Note: `node` will never be in the returned list, even if `node` has a
@@ -886,8 +871,8 @@ def get_neighbors(node: AbstractNode) -> List[AbstractNode]:
 
 
 def _build_serial_binding(
-    edge_binding: Dict[str, Union[Edge, Iterable[Edge]]], edge_id_dict: Dict[Edge, int]
-) -> Dict[str, Iterable[int]]:
+    edge_binding: dict[str, Union[Edge, Iterable[Edge]]], edge_id_dict: dict[Edge, int]
+) -> dict[str, Iterable[int]]:
     if not edge_binding or not edge_id_dict:
         return {}
     serial_edge_binding = {}
@@ -918,8 +903,8 @@ def _build_serial_binding(
 
 
 def nodes_to_json(
-    nodes: List[AbstractNode],
-    edge_binding: Optional[Dict[str, Union[Edge, Iterable[Edge]]]] = None,
+    nodes: list[AbstractNode],
+    edge_binding: Optional[dict[str, Union[Edge, Iterable[Edge]]]] = None,
 ) -> str:
     """
     Create a JSON string representing the Tensor Network made up of the given
@@ -984,7 +969,7 @@ def nodes_to_json(
     return json.dumps(network_dict)
 
 
-def nodes_from_json(json_str: str) -> Tuple[List[AbstractNode], Dict[str, Tuple[Edge]]]:
+def nodes_from_json(json_str: str) -> Tuple[list[AbstractNode], dict[str, Tuple[Edge]]]:
     """
     Create a tensor network from a JSON string representation of a tensor network.
 
