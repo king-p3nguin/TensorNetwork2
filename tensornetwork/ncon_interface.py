@@ -12,9 +12,7 @@
 # limitations under the License.
 """NCON interface to TensorNetwork."""
 
-import time
-import warnings
-from typing import Any, Dict, List, Optional, Sequence, Set, Text, Tuple, Union
+from typing import Any, Optional, Sequence, Tuple, Union
 
 import numpy as np
 
@@ -72,7 +70,7 @@ def _get_cont_out_labels(network_structure: Sequence[Sequence[Union[int, str]]])
 
 def _canonicalize_network_structure(
     network_structure: Sequence[Sequence[Union[int, str]]]
-) -> Tuple[List[List], Dict]:
+) -> Tuple[list[list], dict]:
     """
     Map `network_structure` to a canonical form.
     The elements in `network_structure` are replaced
@@ -130,9 +128,9 @@ def _canonicalize_network_structure(
 
 def _check_network(
     network_structure: Sequence[Sequence[Union[int, str]]],
-    tensor_dimensions: List[Tuple[int]],
-    con_order: Optional[List[Union[int, str]]] = None,
-    out_order: Optional[List[Union[int, str]]] = None,
+    tensor_dimensions: list[Tuple[int]],
+    con_order: Optional[list[Union[int, str]]] = None,
+    out_order: Optional[list[Union[int, str]]] = None,
 ) -> None:
     """
     Perform checks on `network_structure`.
@@ -276,8 +274,8 @@ def _check_network(
 
 
 def _partial_trace(
-    tensor: Tensor, labels: List, backend_obj: AbstractBackend
-) -> Tuple[Tensor, List, List]:
+    tensor: Tensor, labels: list, backend_obj: AbstractBackend
+) -> Tuple[Tensor, list, list]:
     """
     Perform the partial trace of `tensor`.
     All labels appearing twice in `labels` are traced out.
@@ -321,14 +319,14 @@ def _partial_trace(
 def _batch_cont(
     t1: Tensor,
     t2: Tensor,
-    tensors: List[Tensor],
-    network_structure: List[List],
-    con_order: List,
-    common_batch_labels: Set,
-    labels_t1: List,
-    labels_t2: List,
+    tensors: list[Tensor],
+    network_structure: list[list],
+    con_order: list,
+    common_batch_labels: set,
+    labels_t1: list,
+    labels_t2: list,
     backend_obj: AbstractBackend,
-) -> Tuple[Tensor, List[List], List]:
+) -> Tuple[Tensor, list[list], list]:
     """
     Subroutine for performing a batched contraction of tensors `t1` and `t2`.
     Args:
@@ -342,9 +340,9 @@ def _batch_cont(
       labels_t2: The labels of `t2`
       backend_obj: A backend object.
     Returns:
-      List[Tensor]: Updated list of tensors.
-      List[List]: Updated `network_structure`.
-      List: Updated `con_order` (contraction order).
+      list[Tensor]: Updated list of tensors.
+      list[list]: Updated `network_structure`.
+      list: Updated `con_order` (contraction order).
     """
     common_batch_labels = list(common_batch_labels)
     # find positions of common batch labels
@@ -421,7 +419,7 @@ def label_intersection(labels1, labels2):
 
 
 def _jittable_ncon(
-    tensors: List[Tensor],
+    tensors: list[Tensor],
     flat_labels: Tuple[int],
     sizes: Tuple[int],
     con_order: Tuple[int],
@@ -612,7 +610,7 @@ def ncon(
     con_order: Optional[Sequence] = None,
     out_order: Optional[Sequence] = None,
     check_network: bool = True,
-    backend: Optional[Union[Text, AbstractBackend]] = None,
+    backend: Optional[Union[str, AbstractBackend]] = None,
 ) -> Union[tn_tensor.Tensor, Tensor]:
     r"""Contracts a list of backend-tensors or  `Tensor`s
     according to a tensor network

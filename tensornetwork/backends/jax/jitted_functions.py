@@ -14,7 +14,7 @@
 
 import functools
 import types
-from typing import Any, Callable, List, Sequence, Text, Tuple
+from typing import Any, Callable, Sequence, Tuple
 
 import numpy as np
 
@@ -69,7 +69,7 @@ def _generate_jitted_eigsh_lanczos(jax: types.ModuleType) -> Callable:
     call signature:
     ```
     eigenvalues, eigenvectors = jax_lanczos(matvec:Callable,
-                                       arguments: List[Tensor],
+                                       arguments: list[Tensor],
                                        init: Tensor,
                                        ncv: int,
                                        neig: int,
@@ -98,14 +98,14 @@ def _generate_jitted_eigsh_lanczos(jax: types.ModuleType) -> Callable:
     @functools.partial(jax.jit, static_argnums=(3, 4, 5, 6, 7))
     def jax_lanczos(
         matvec: Callable,
-        arguments: List,
+        arguments: list,
         init: jax.Array,
         ncv: int,
         neig: int,
         landelta: float,
         reortho: bool,
         precision: JaxPrecisionType,
-    ) -> Tuple[jax.Array, List]:
+    ) -> Tuple[jax.Array, list]:
         """
         Lanczos iteration for symmeric eigenvalue problems. If reortho = False,
         the Krylov basis is constructed without explicit re-orthogonalization.
@@ -129,7 +129,7 @@ def _generate_jitted_eigsh_lanczos(jax: types.ModuleType) -> Callable:
 
         Returns:
           jax.Array: Eigenvalues
-          List: Eigenvectors
+          list: Eigenvectors
           int: Number of iterations
         """
         shape = init.shape
@@ -271,7 +271,7 @@ def _generate_lanczos_factorization(jax: types.ModuleType) -> Callable:
     @functools.partial(jax.jit, static_argnums=(6, 7, 8, 9))
     def _lanczos_fact(
         matvec: Callable,
-        args: List,
+        args: list,
         v0: jax.Array,
         Vm: jax.Array,
         alphas: jax.Array,
@@ -438,7 +438,7 @@ def _generate_arnoldi_factorization(jax: types.ModuleType) -> Callable:
     @functools.partial(jax.jit, static_argnums=(5, 6, 7, 8))
     def _arnoldi_fact(
         matvec: Callable,
-        args: List,
+        args: list,
         v0: jax.Array,
         Vm: jax.Array,
         H: jax.Array,
@@ -759,15 +759,15 @@ def _implicitly_restarted_arnoldi(jax: types.ModuleType) -> Callable:
     @functools.partial(jax.jit, static_argnums=(3, 4, 5, 6, 7, 8))
     def implicitly_restarted_arnoldi_method(
         matvec: Callable,
-        args: List,
+        args: list,
         initial_state: jax.Array,
         num_krylov_vecs: int,
         numeig: int,
-        which: Text,
+        which: str,
         tol: float,
         maxiter: int,
         precision: JaxPrecisionType,
-    ) -> Tuple[jax.Array, List[jax.Array], int]:
+    ) -> Tuple[jax.Array, list[jax.Array], int]:
         """
         Implicitly restarted arnoldi factorization of `matvec`. The routine
         finds the lowest `numeig` eigenvector-eigenvalue pairs of `matvec`
@@ -800,7 +800,7 @@ def _implicitly_restarted_arnoldi(jax: types.ModuleType) -> Callable:
 
         Returns:
           jax.Array: Eigenvalues
-          List: Eigenvectors
+          list: Eigenvectors
           int: Number of inner krylov iterations of the last arnoldi
             factorization.
         """
@@ -1024,15 +1024,15 @@ def _implicitly_restarted_lanczos(jax: types.ModuleType) -> Callable:
     @functools.partial(jax.jit, static_argnums=(3, 4, 5, 6, 7, 8))
     def implicitly_restarted_lanczos_method(
         matvec: Callable,
-        args: List,
+        args: list,
         initial_state: jax.Array,
         num_krylov_vecs: int,
         numeig: int,
-        which: Text,
+        which: str,
         tol: float,
         maxiter: int,
         precision: JaxPrecisionType,
-    ) -> Tuple[jax.Array, List[jax.Array], int]:
+    ) -> Tuple[jax.Array, list[jax.Array], int]:
         """
         Implicitly restarted lanczos factorization of `matvec`. The routine
         finds the lowest `numeig` eigenvector-eigenvalue pairs of `matvec`
@@ -1069,7 +1069,7 @@ def _implicitly_restarted_lanczos(jax: types.ModuleType) -> Callable:
 
         Returns:
           jax.Array: Eigenvalues
-          List: Eigenvectors
+          list: Eigenvectors
           int: Number of inner krylov iterations of the last lanczos
             factorization.
         """

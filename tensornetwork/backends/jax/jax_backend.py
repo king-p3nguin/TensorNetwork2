@@ -13,8 +13,7 @@
 # limitations under the License.
 
 import warnings
-from functools import partial
-from typing import Any, Callable, List, Optional, Sequence, Text, Tuple, Type, Union
+from typing import Any, Callable, List, Optional, Sequence, Tuple, Type, Union
 
 import numpy as np
 
@@ -33,7 +32,7 @@ class JaxBackend(abstract_backend.AbstractBackend):
     """See abstract_backend.AbstractBackend for documentation."""
 
     def __init__(
-        self, dtype: Optional[np.dtype] = None, precision: Optional[Text] = None
+        self, dtype: Optional[np.dtype] = None, precision: Optional[str] = None
     ) -> None:
         # pylint: disable=global-variable-undefined
         global libjax  # Jax module
@@ -251,7 +250,7 @@ class JaxBackend(abstract_backend.AbstractBackend):
         num_krylov_vecs: int = 50,
         numeig: int = 6,
         tol: float = 1e-8,
-        which: Text = "LR",
+        which: str = "LR",
         maxiter: int = 20,
     ) -> Tuple[Tensor, List]:
         """
@@ -377,7 +376,7 @@ class JaxBackend(abstract_backend.AbstractBackend):
         num_krylov_vecs: int = 50,
         numeig: int = 6,
         tol: float = 1e-8,
-        which: Text = "SA",
+        which: str = "SA",
         maxiter: int = 20,
     ) -> Tuple[Tensor, List]:
         """

@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-from typing import Text, Union
+from typing import Union
 
 from tensornetwork.backends import abstract_backend
 from tensornetwork.backends.jax import jax_backend
@@ -34,7 +34,7 @@ _INSTANTIATED_BACKENDS = dict()
 
 
 def get_backend(
-    backend: Union[Text, abstract_backend.AbstractBackend]
+    backend: Union[str, abstract_backend.AbstractBackend]
 ) -> abstract_backend.AbstractBackend:
     if isinstance(backend, abstract_backend.AbstractBackend):
         return backend

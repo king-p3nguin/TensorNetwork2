@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 # pylint: disable=line-too-long
-from typing import Any, Callable, List, Optional, Sequence, Tuple, Type, Union
+from typing import Any, Callable, Optional, Sequence, Tuple, Type, Union
 
 import numpy as np
 
@@ -182,7 +182,7 @@ class PyTorchBackend(abstract_backend.AbstractBackend):
     def eigsh_lanczos(
         self,
         A: Callable,
-        args: Optional[List[Tensor]] = None,
+        args: Optional[list[Tensor]] = None,
         initial_state: Optional[Tensor] = None,
         shape: Optional[Tuple] = None,
         dtype: Optional[Type[np.number]] = None,
@@ -192,7 +192,7 @@ class PyTorchBackend(abstract_backend.AbstractBackend):
         delta: float = 1e-8,
         ndiag: int = 20,
         reorthogonalize: bool = False,
-    ) -> Tuple[Tensor, List]:
+    ) -> Tuple[Tensor, list]:
         """
         Lanczos method for finding the lowest eigenvector-eigenvalue pairs
         of a `LinearOperator` `A`.
@@ -365,7 +365,7 @@ class PyTorchBackend(abstract_backend.AbstractBackend):
         )
         return tensor2 * self.reshape(tensor1, t1_broadcast_shape)
 
-    def jit(self, fun: Callable, *args: List, **kwargs: dict) -> Callable:
+    def jit(self, fun: Callable, *args: list, **kwargs: dict) -> Callable:
         return fun
 
     def sum(

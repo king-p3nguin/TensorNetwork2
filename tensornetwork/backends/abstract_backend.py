@@ -11,7 +11,7 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-from typing import Any, Callable, List, Optional, Sequence, Text, Tuple, Type, Union
+from typing import Any, Callable, List, Optional, Sequence, Tuple, Type, Union
 
 import numpy as np
 
@@ -370,7 +370,7 @@ class AbstractBackend:
         num_krylov_vecs: int = 50,
         numeig: int = 1,
         tol: float = 1e-8,
-        which: Text = "LR",
+        which: str = "LR",
         maxiter: Optional[int] = None,
     ) -> Tuple[Tensor, List]:
         """Arnoldi method for finding the lowest eigenvector-eigenvalue pairs
@@ -420,7 +420,7 @@ class AbstractBackend:
         num_krylov_vecs: int = 50,
         numeig: int = 1,
         tol: float = 1e-8,
-        which: Text = "LR",
+        which: str = "LR",
         maxiter: Optional[int] = None,
     ) -> Tuple[Tensor, List]:
         """Lanczos method for finding the lowest eigenvector-eigenvalue pairs

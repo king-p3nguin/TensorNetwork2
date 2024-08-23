@@ -16,7 +16,7 @@
 Decorator functions that depend on the backend.
 """
 import functools
-from typing import Callable, Iterable, Optional, Text, Union
+from typing import Callable, Iterable, Optional, Union
 
 import tensornetwork.backend_contextmanager as backend_contextmanager
 import tensornetwork.backends as backends
@@ -27,7 +27,7 @@ AbstractBackend = abstract_backend.AbstractBackend
 
 def jit(
     fun: Callable,
-    backend: Union[Text, AbstractBackend] = None,
+    backend: Union[str, AbstractBackend] = None,
     backend_argnum: Optional[int] = None,
     static_argnums: Union[int, Iterable[int]] = (),
     device=None,

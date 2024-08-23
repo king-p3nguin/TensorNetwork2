@@ -13,14 +13,14 @@
 # limitations under the License.
 """A modified version of TensorFlow's tensordot operation."""
 
-from typing import Any, List, Optional, Sequence, Text, Tuple, Union
+from typing import Any, Optional, Sequence, Tuple, Union
 
 import numpy as np
 
 Tensor = Any
 
 
-def tensordot(tf, a, b, axes, name: Optional[Text] = None) -> Tensor:
+def tensordot(tf, a, b, axes, name: Optional[str] = None) -> Tensor:
     r"""Tensor contraction of a and b along specified axes.
     Tensordot (also known as tensor contraction) sums the product of elements
     from `a` and `b` over the indices specified by `a_axes` and `b_axes`.
@@ -61,7 +61,7 @@ def tensordot(tf, a, b, axes, name: Optional[Text] = None) -> Tensor:
     """
 
     def _tensordot_should_flip(
-        contraction_axes: List[int], free_axes: List[int]
+        contraction_axes: list[int], free_axes: list[int]
     ) -> bool:
         """Helper method to determine axis ordering.
 
@@ -79,7 +79,7 @@ def tensordot(tf, a, b, axes, name: Optional[Text] = None) -> Tensor:
             return bool(np.mean(contraction_axes) < np.mean(free_axes))
         return False
 
-    def _tranpose_if_necessary(tensor: Tensor, perm: List[int]) -> Tensor:
+    def _tranpose_if_necessary(tensor: Tensor, perm: list[int]) -> Tensor:
         """Like transpose(), but avoids creating a new tensor if possible.
 
         Although the graph optimizer should kill trivial transposes, it is
@@ -89,7 +89,7 @@ def tensordot(tf, a, b, axes, name: Optional[Text] = None) -> Tensor:
             return tensor
         return tf.transpose(tensor, perm)
 
-    def _reshape_if_necessary(tensor: Tensor, new_shape: List[int]) -> Tensor:
+    def _reshape_if_necessary(tensor: Tensor, new_shape: list[int]) -> Tensor:
         """Like reshape(), but avoids creating a new tensor if possible.
 
         Assumes shapes are both fully specified.
@@ -103,7 +103,7 @@ def tensordot(tf, a, b, axes, name: Optional[Text] = None) -> Tensor:
 
     def _tensordot_reshape(
         a: Tensor, axes: Union[Sequence[int], Tensor], is_right_term=False
-    ) -> Tuple[Tensor, Union[List[int], Tensor], Optional[List[int]], bool]:
+    ) -> Tuple[Tensor, Union[list[int], Tensor], Optional[list[int]], bool]:
         """Helper method to perform transpose and reshape for contraction op.
 
         This method is helpful in reducing `math_ops.tensordot` to `math_ops.matmul`

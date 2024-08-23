@@ -13,11 +13,10 @@
 # limitations under the License.
 # pyling: disable=line-too-long
 import warnings
-from typing import Any, Callable, List, Optional, Sequence, Text, Tuple, Type, Union
+from typing import Any, Callable, List, Optional, Sequence, Tuple, Type, Union
 
 import numpy
 import scipy as sp
-import scipy.sparse.linalg
 
 import tensornetwork.block_sparse as bs
 from tensornetwork.backends import abstract_backend
@@ -185,7 +184,7 @@ class SymmetricBackend(abstract_backend.AbstractBackend):
         num_krylov_vecs: int = 50,
         numeig: int = 6,
         tol: float = 1e-8,
-        which: Text = "LR",
+        which: str = "LR",
         maxiter: Optional[int] = None,
         enable_caching: bool = True,
     ) -> Tuple[Tensor, List]:
