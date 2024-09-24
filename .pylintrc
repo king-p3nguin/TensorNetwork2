@@ -97,6 +97,7 @@ disable=
     unnecessary-lambda-assignment,
     unnecessary-list-index-lookup,
     consider-using-generator,
+    too-many-positional-arguments,
 [REPORTS]
 # Set the output format. Available formats are text, parseable, colorized, msvs
 # (visual studio) and html
