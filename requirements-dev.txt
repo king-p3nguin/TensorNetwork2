@@ -1,7 +1,7 @@
 tensorflow
 pytest
 pytest-cov
-torch
+torch<=2.4.0
 jax
 jaxlib
 pylint
