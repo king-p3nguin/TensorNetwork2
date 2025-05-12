@@ -2,7 +2,7 @@ tensorflow
 pytest
 pytest-cov
 torch<=2.4.0
-jax<0.5.0
-jaxlib<0.5.0
+jax
+jaxlib
 pylint
 black

@@ -49,8 +49,6 @@ def test_eigh_vs_backend(backend, dtype):
     dtype = testing_utils.np_dtype_to_backend(backend, dtype)
     tensor = initialize_hermitian_matrix(backend, shape, dtype)
     tn_result = linalg.eigh(tensor)
-    if backend is None:
-        backend = backend_contextmanager.get_default_backend()
     backend_obj = backends.backend_factory.get_backend(backend)
     backend_result = backend_obj.eigh(tensor.array)
     tn_arrays = [t.array for t in tn_result]
