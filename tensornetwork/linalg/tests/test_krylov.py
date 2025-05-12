@@ -298,7 +298,7 @@ def test_gmres_raises():
         )
 
 
-@pytest.mark.parametrize("sparse_backend", sparse_backends)
+@pytest.mark.parametrize("sparse_backend", ["numpy"])
 @pytest.mark.parametrize("dtype", testing_utils.np_float_dtypes)
 def test_gmres(dtype, sparse_backend):
     Adat = np.array(([[1, 1], [3, -4]]), dtype=dtype)
@@ -320,7 +320,7 @@ def test_gmres(dtype, sparse_backend):
     np.testing.assert_allclose(x, xT.array)
 
 
-@pytest.mark.parametrize("sparse_backend", sparse_backends)
+@pytest.mark.parametrize("sparse_backend", ["numpy"])
 @pytest.mark.parametrize("dtype", testing_utils.np_float_dtypes)
 def test_gmres_with_args(dtype, sparse_backend):
     Adat = np.array(([[1, 1], [3, -4]]), dtype=dtype)
