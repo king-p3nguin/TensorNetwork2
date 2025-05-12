@@ -1,10 +1,7 @@
-from tensornetwork import block_sparse, contractors
+from tensornetwork import contractors
 from tensornetwork.backend_contextmanager import DefaultBackend, set_default_backend
 from tensornetwork.backends.abstract_backend import AbstractBackend
 from tensornetwork.backends.decorators import jit
-from tensornetwork.block_sparse.blocksparsetensor import BlockSparseTensor, ChargeArray
-from tensornetwork.block_sparse.charge import BaseCharge, U1Charge, Z2Charge, ZNCharge
-from tensornetwork.block_sparse.index import Index
 from tensornetwork.linalg.initialization import eye, ones, randn, random_uniform, zeros
 from tensornetwork.linalg.linalg import eigh, expm, inv, norm, qr, rq, svd
 

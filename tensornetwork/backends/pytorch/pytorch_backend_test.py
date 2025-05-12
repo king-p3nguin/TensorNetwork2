@@ -330,7 +330,7 @@ def test_eigsh_lanczos_reorthogonalize(numeig):
         tol=10 ** (-12),
         delta=10 ** (-12),
     )
-    eta2, U2 = np.linalg.eigh(H)
+    eta2, U2 = np.linalg.eigh(np.array(H))
 
     np.testing.assert_allclose(eta1[0:numeig], eta2[0:numeig])
     for n in range(numeig):
