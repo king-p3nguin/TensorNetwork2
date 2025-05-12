@@ -69,7 +69,7 @@ def _get_cont_out_labels(network_structure: Sequence[Sequence[Union[int, str]]])
 
 
 def _canonicalize_network_structure(
-    network_structure: Sequence[Sequence[Union[int, str]]]
+    network_structure: Sequence[Sequence[Union[int, str]]],
 ) -> Tuple[list[list], dict]:
     """
     Map `network_structure` to a canonical form.
@@ -449,8 +449,10 @@ def _jittable_ncon(
     out_order = list(out_order)
     con_order = list(con_order)
     # pylint: disable=unnecessary-comprehension
-    init_con_order = [c for c in con_order]
-    init_network_structure = [c for c in network_structure]
+    init_con_order = [int(c) for c in con_order]
+    init_network_structure = [
+        [int(c) for c in sublist] for sublist in network_structure
+    ]
 
     # partial trace
     for n, tensor in enumerate(tensors):
