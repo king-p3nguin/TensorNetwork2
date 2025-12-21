@@ -98,6 +98,7 @@ disable=
     unnecessary-list-index-lookup,
     consider-using-generator,
     too-many-positional-arguments,
+    no-member,
 [REPORTS]
 # Set the output format. Available formats are text, parseable, colorized, msvs
 # (visual studio) and html
